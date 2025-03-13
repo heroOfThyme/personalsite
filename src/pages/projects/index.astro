@@ -1,0 +1,226 @@
+---
+import ProjectLayout from '~/layouts/ProjectLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Header from '~/components/widgets/Header.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'My Projects',
+};
+
+// This would be your projects data
+const projects = [
+  {
+    title: 'Elementii',
+    description: 'A mobile app that helps users learn and interact with the periodic table of elements in an interactive and engaging way.',
+    technologies: ['React Native', 'Firebase', 'Redux'],
+    image: {
+      src: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
+      alt: 'Elementii app interface',
+    },
+    demoUrl: '/projects/elementii',
+    codeUrl: 'https://github.com/yourusername/elementii',
+    featured: true,
+    link: '/projects/elementii',
+  },
+  {
+    title: 'E-commerce Website',
+    description: 'A fully responsive e-commerce platform with product management, cart functionality, and secure checkout process. The site features user authentication, product search with filters, and an admin dashboard for inventory management.',
+    technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'Stripe'],
+    image: {
+      src: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80',
+      alt: 'E-commerce website screenshot',
+    },
+    demoUrl: 'https://demo-site.com',
+    codeUrl: 'https://github.com/yourusername/project',
+  },
+  {
+    title: 'Task Management App',
+    description: 'A productivity application that helps users organize tasks, set deadlines, and track progress. Features include drag-and-drop task prioritization, collaborative workspaces, and detailed analytics on productivity patterns.',
+    technologies: ['Vue.js', 'Firebase', 'Tailwind CSS'],
+    image: {
+      src: 'https://images.unsplash.com/photo-1540350394557-8d14678e7f91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2032&q=80',
+      alt: 'Task management app interface',
+    },
+    demoUrl: 'https://demo-site2.com',
+    codeUrl: 'https://github.com/yourusername/project2',
+  },
+  {
+    title: 'Fitness Tracking Mobile App',
+    description: 'A mobile application designed to help users track their fitness goals, workouts, and nutritional intake. The app provides personalized workout recommendations and progress visualization to keep users motivated.',
+    technologies: ['React Native', 'Redux', 'Node.js', 'MongoDB'],
+    image: {
+      src: 'https://images.unsplash.com/photo-1534682810940-b3d6c190cbb7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80',
+      alt: 'Fitness app on mobile phone',
+    },
+    demoUrl: 'https://demo-site3.com',
+    codeUrl: 'https://github.com/yourusername/project3',
+  },
+];
+
+// Filter featured projects to highlight them
+const featuredProjects = projects.filter(project => project.featured);
+const regularProjects = projects.filter(project => !project.featured);
+---
+
+<ProjectLayout metadata={metadata}>
+  <!-- Header -->
+  <Header
+    links={[
+      { text: 'Home', href: '/' },
+      { text: 'About', href: '/about' },
+      { text: 'Resume', href: '/resume' },
+      { text: 'Contact', href: '/contact' },
+    ]}
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Back to Portfolio',
+        href: '/#projects',
+      },
+    ]}
+    isSticky
+    showToggleTheme
+  />
+  <!-- Hero -->
+  <Hero title="My Projects" tagline="Portfolio">
+    <Fragment slot="subtitle">
+      A showcase of my work, side projects, and contributions. Each project represents different skills and challenges I've tackled.
+    </Fragment>
+  </Hero>
+
+  <!-- Featured Projects -->
+  {featuredProjects.length > 0 && (
+    <div class="py-12 md:py-20 bg-blue-50 dark:bg-slate-800/20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12 text-center">
+          <h2 class="text-3xl font-bold tracking-tight mb-4">Featured Projects</h2>
+          <p class="text-lg text-muted dark:text-slate-400 max-w-3xl mx-auto">
+            These projects showcase my best work and the technologies I'm most passionate about.
+          </p>
+        </div>
+        
+        <div class="space-y-24">
+          {featuredProjects.map((project, index) => (
+            <div class="bg-white dark:bg-slate-900 rounded-xl shadow-xl overflow-hidden">
+              <div class={`md:flex ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+                <div class="md:w-1/2">
+                  <img 
+                    src={project.image.src} 
+                    alt={project.image.alt} 
+                    class="h-full w-full object-cover"
+                  />
+                </div>
+                <div class="p-8 md:w-1/2 flex flex-col justify-center">
+                  <div class="mb-2">
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-primary bg-primary/10">
+                      Featured Project
+                    </span>
+                  </div>
+                  <h3 class="text-2xl font-bold mb-4">{project.title}</h3>
+                  <p class="text-muted dark:text-slate-400 mb-6">{project.description}</p>
+                  
+                  <div class="mb-6">
+                    <div class="flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <span class="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 px-3 py-1 rounded-full text-sm">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div class="flex gap-4">
+                    {project.link && (
+                      <a href={project.link} class="btn btn-primary inline-flex items-center gap-1">
+                        <span>View Project</span>
+                        <Icon name="tabler:arrow-right" class="w-4 h-4" />
+                      </a>
+                    )}
+                    
+                    {project.codeUrl && (
+                      <a href={project.codeUrl} class="btn btn-outline inline-flex items-center gap-1" target="_blank">
+                        <Icon name="tabler:brand-github" class="w-4 h-4" />
+                        <span>Code</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- More Projects Grid -->
+  <div class="py-12 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <h2 class="text-3xl font-bold tracking-tight mb-4">More Projects</h2>
+        <p class="text-lg text-muted dark:text-slate-400 max-w-3xl mx-auto">
+          Explore more of my work across different domains and technologies.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {regularProjects.map((project) => (
+          <div class="bg-white dark:bg-slate-900 rounded-lg shadow-lg overflow-hidden flex flex-col h-full transform hover:-translate-y-2 transition-transform duration-300">
+            <div class="h-48 overflow-hidden">
+              <img 
+                src={project.image.src}
+                alt={project.image.alt}
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6 flex-grow">
+              <h3 class="text-xl font-bold mb-2">{project.title}</h3>
+              <p class="text-muted dark:text-slate-400 mb-4 line-clamp-3">{project.description}</p>
+              
+              <div class="mb-4">
+                <div class="flex flex-wrap gap-1">
+                  {project.technologies.slice(0, 3).map((tech) => (
+                    <span class="text-xs px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded">
+                      {tech}
+                    </span>
+                  ))}
+                  {project.technologies.length > 3 && (
+                    <span class="text-xs px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded">
+                      +{project.technologies.length - 3}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-0 mt-auto">
+              <div class="flex gap-4">
+                {project.demoUrl && (
+                  <a href={project.demoUrl} class="text-primary font-medium inline-flex items-center gap-1">
+                    <span>View Project</span>
+                    <Icon name="tabler:external-link" class="w-4 h-4" />
+                  </a>
+                )}
+                
+                {project.codeUrl && (
+                  <a href={project.codeUrl} class="text-muted dark:text-slate-400 font-medium inline-flex items-center gap-1" target="_blank">
+                    <Icon name="tabler:brand-github" class="w-4 h-4" />
+                    <span>Code</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Portfolio Button -->
+  <div class="text-center py-12">
+    <a href="/#projects" class="btn btn-outline inline-flex items-center gap-2">
+      <Icon name="tabler:arrow-left" class="w-5 h-5" />
+      <span>Back to Portfolio</span>
+    </a>
+  </div>
+</ProjectLayout>

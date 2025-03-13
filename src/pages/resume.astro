@@ -1,0 +1,183 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import SkillsComponent from '~/components/widgets/SkillsComponent.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'Resume - Your Name',
+};
+
+// Experience data
+const experience = [
+  {
+    title: 'Senior Developer <br /> <span class="font-normal">Company Name, City</span> <br /> <span class="text-sm font-normal">Jan 2021 - Present</span>',
+    description: `• Led development of a key product feature that increased user engagement by 35%<br />
+    • Mentored junior developers and implemented code review standards<br />
+    • Optimized database queries resulting in 40% faster load times<br />
+    • Technologies: React, Node.js, MongoDB, AWS`,
+    icon: 'tabler:briefcase',
+  },
+  {
+    title: 'Web Developer <br /> <span class="font-normal">Previous Company, City</span> <br /> <span class="text-sm font-normal">Jun 2018 - Dec 2020</span>',
+    description: `• Developed responsive websites for clients across various industries<br />
+    • Collaborated with design team to implement pixel-perfect designs<br />
+    • Created and maintained documentation for internal tools<br />
+    • Technologies: JavaScript, HTML/CSS, WordPress, PHP`,
+    icon: 'tabler:briefcase',
+  },
+  {
+    title: 'Junior Developer <br /> <span class="font-normal">First Company, City</span> <br /> <span class="text-sm font-normal">Sep 2016 - May 2018</span>',
+    description: `• Built and maintained client websites and web applications<br />
+    • Assisted senior developers with debugging and testing<br />
+    • Worked directly with clients to implement requested features<br />
+    • Technologies: JavaScript, jQuery, HTML/CSS, Bootstrap`,
+    icon: 'tabler:briefcase',
+  },
+];
+
+// Education data
+const education = [
+  {
+    title: `Bachelor of Science in Computer Science <br /> <span class="font-normal">University Name</span> <br /> <span class="text-sm font-normal">2012 - 2016</span>`,
+    description: 'Graduated with honors. Coursework included Software Engineering, Database Systems, Web Development, and Computer Networks.',
+    icon: 'tabler:school',
+  },
+  {
+    title: `Full Stack Web Development Certification <br /> <span class="font-normal">Coding Bootcamp Name</span> <br /> <span class="text-sm font-normal">2016</span>`,
+    description: 'Intensive 12-week program focused on modern web technologies including JavaScript, React, Node.js, and MongoDB.',
+    icon: 'tabler:certificate',
+  },
+];
+
+// Skills data
+const skillCategories = [
+  {
+    name: 'Programming Languages',
+    skills: [
+      { name: 'JavaScript', level: 'Expert', icon: 'tabler:brand-javascript' },
+      { name: 'TypeScript', level: 'Advanced', icon: 'tabler:brand-typescript' },
+      { name: 'Python', level: 'Intermediate', icon: 'tabler:brand-python' },
+      { name: 'PHP', level: 'Intermediate', icon: 'tabler:brand-php' },
+    ],
+  },
+  {
+    name: 'Frontend Development',
+    skills: [
+      { name: 'React', level: 'Expert', icon: 'tabler:brand-react' },
+      { name: 'Vue.js', level: 'Intermediate', icon: 'tabler:brand-vue' },
+      { name: 'HTML5', level: 'Expert', icon: 'tabler:brand-html5' },
+      { name: 'CSS3', level: 'Expert', icon: 'tabler:brand-css3' },
+      { name: 'Tailwind CSS', level: 'Advanced', icon: 'tabler:brand-tailwind' },
+    ],
+  },
+  {
+    name: 'Backend Development',
+    skills: [
+      { name: 'Node.js', level: 'Advanced', icon: 'tabler:brand-nodejs' },
+      { name: 'Express', level: 'Advanced' },
+      { name: 'Django', level: 'Beginner', icon: 'tabler:brand-python' },
+      { name: 'GraphQL', level: 'Intermediate', icon: 'tabler:brand-graphql' },
+    ],
+  },
+  {
+    name: 'Databases & DevOps',
+    skills: [
+      { name: 'MongoDB', level: 'Advanced', icon: 'tabler:brand-mongodb' },
+      { name: 'PostgreSQL', level: 'Intermediate', icon: 'tabler:database' },
+      { name: 'Docker', level: 'Intermediate', icon: 'tabler:brand-docker' },
+      { name: 'AWS', level: 'Intermediate', icon: 'tabler:brand-aws' },
+      { name: 'Git', level: 'Expert', icon: 'tabler:brand-git' },
+    ],
+  },
+];
+
+// Additional skills/awards/certifications
+const additionalItems = [
+  {
+    title: 'Languages',
+    description: 'English (Fluent), Spanish (Intermediate), French (Basic)',
+    icon: 'tabler:language',
+  },
+  {
+    title: 'Certifications',
+    description: 'AWS Certified Developer, Google Cloud Associate Engineer, Scrum Master Certification',
+    icon: 'tabler:certificate',
+  },
+  {
+    title: 'Awards',
+    description: 'Best Web Application - Hackathon 2022, Employee of the Year 2021',
+    icon: 'tabler:award',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+  <Hero title="Resume" tagline="Professional Experience">
+    <Fragment slot="subtitle">
+      A comprehensive overview of my professional experience, education, and skills.
+    </Fragment>
+    <Fragment slot="actions">
+      <a href="/path-to-your-resume.pdf" class="btn btn-primary" target="_blank" download>
+        <Icon name="tabler:download" class="w-5 h-5 mr-1" /> Download Resume
+      </a>
+    </Fragment>
+  </Hero>
+
+  <!-- Work Experience -->
+  <div class="py-12 md:py-20 bg-blue-50 dark:bg-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Steps title="Work Experience" items={experience} classes={{ container: 'max-w-4xl' }} />
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="py-12 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Steps title="Education" items={education} classes={{ container: 'max-w-4xl' }} />
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <div class="py-12 md:py-20 bg-blue-50 dark:bg-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SkillsComponent 
+        title="Skills & Expertise"
+        subtitle="A comprehensive overview of my technical skills and proficiency levels"
+        categories={skillCategories}
+      />
+    </div>
+  </div>
+
+  <!-- Additional Information -->
+  <div class="py-12 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Features3
+        title="Additional Information"
+        columns={3}
+        items={additionalItems}
+      />
+    </div>
+  </div>
+
+  <!-- Call To Action -->
+  <CallToAction
+    title="Let's Work Together"
+    subtitle="Looking for a developer with my skill set? Let's discuss how I can help with your project."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Contact Me',
+        href: '/contact',
+      },
+      {
+        text: 'View Projects',
+        href: '/projects',
+      },
+    ]}
+  />
+</Layout>

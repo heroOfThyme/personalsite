@@ -1,0 +1,272 @@
+---
+// src/pages/projects/elementii/index.astro
+import ProjectLayout from '~/layouts/ProjectLayout.astro';
+import Header from '~/components/widgets/Header.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import Content from '~/components/widgets/Content.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'Elementii - Interactive Periodic Table App',
+  description: 'Explore the periodic table in a fun, interactive way with Elementii',
+};
+
+// Project details - customize these with your actual app information!
+const appInfo = {
+  name: 'Elementii',
+  tagline: 'Interactive Periodic Table',
+  description: 'Learn chemistry through an engaging, interactive experience with the periodic table of elements',
+  googlePlayLink: 'https://play.google.com/store/apps', // Update with your actual link
+  appStoreLink: 'https://apps.apple.com/', // Update with your actual link
+  githubLink: 'https://github.com/yourusername/elementii',
+};
+
+// App screenshots
+const screenshots = [
+  {
+    title: 'Home Screen',
+    description: 'The main dashboard presenting an overview of the periodic table',
+    image: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
+  },
+  {
+    title: 'Element Details',
+    description: 'Detailed view of each element showing properties, history, and applications',
+    image: 'https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
+  },
+  {
+    title: 'Interactive Quizzes',
+    description: 'Test your knowledge with fun, interactive quizzes about the elements',
+    image: 'https://images.unsplash.com/photo-1633167606207-d840b5070fc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80',
+  },
+];
+
+// App features
+const features = [
+  {
+    title: 'Complete Periodic Table',
+    description: 'Access detailed information on all 118 elements, including properties, history, and applications.',
+    icon: 'tabler:table',
+  },
+  {
+    title: 'Interactive 3D Models',
+    description: 'Explore atomic structures in 3D, with interactive visualizations of electron configurations.',
+    icon: 'tabler:3d-cube-sphere',
+  },
+  {
+    title: 'Quiz Mode',
+    description: 'Test your knowledge with fun quizzes covering element properties, symbols, and categories.',
+    icon: 'tabler:bulb',
+  },
+  {
+    title: 'Element Trends',
+    description: 'Visualize trends across the periodic table, including electronegativity, atomic radius, and more.',
+    icon: 'tabler:chart-line',
+  },
+  {
+    title: 'Offline Access',
+    description: 'All content available offline, perfect for studying without an internet connection.',
+    icon: 'tabler:cloud-off',
+  },
+  {
+    title: 'Regular Updates',
+    description: 'New content and features added regularly, keeping the app fresh and up-to-date.',
+    icon: 'tabler:refresh',
+  }
+];
+
+// Stats about the app
+const stats = [
+  { title: 'Elements', amount: '118' },
+  { title: 'Quiz Questions', amount: '500+' },
+  { title: 'User Rating', amount: '4.8' },
+  { title: 'Downloads', amount: '10K+' },
+];
+
+// FAQs
+const faqs = [
+  {
+    title: 'Is Elementii free to download?',
+    description: 'Yes, Elementii is free to download with core features available to all users. Premium features are available through a one-time in-app purchase.',
+  },
+  {
+    title: 'Does Elementii work offline?',
+    description: 'Yes! Once downloaded, all element information and basic features work without an internet connection. Some advanced features may require occasional updates.',
+  },
+  {
+    title: 'Is Elementii suitable for students?',
+    description: 'Absolutely! Elementii was designed with students in mind, from high school to university level. Teachers often recommend it as a study aid.',
+  },
+  {
+    title: 'How often is Elementii updated?',
+    description: 'We update Elementii monthly with new content, features, and improvements based on user feedback and scientific developments.',
+  },
+];
+---
+
+<ProjectLayout metadata={metadata}>
+  <!-- Header -->
+  <Header
+    links={[
+      { text: 'Features', href: '#features' },
+      { text: 'Screenshots', href: '#screenshots' },
+      { text: 'FAQ', href: '#faq' },
+      { text: 'Download', href: '#download' },
+      { text: 'All Projects', href: '/projects' },
+    ]}
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get the App',
+        href: '#download',
+        icon: 'tabler:download',
+      },
+    ]}
+    isSticky
+    showToggleTheme
+  />
+
+  <!-- Hero -->
+  <Hero
+    tagline={appInfo.tagline}
+    title={appInfo.name}
+    subtitle={appInfo.description}
+    image={{
+      src: screenshots[0].image,
+      alt: 'Elementii app screenshot',
+    }}
+  >
+    <Fragment slot="actions">
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href={appInfo.googlePlayLink} class="btn btn-primary" target="_blank">
+          <Icon name="tabler:brand-google-play" class="h-5 w-5 mr-2" />
+          Google Play
+        </a>
+        <a href={appInfo.appStoreLink} class="btn" target="_blank">
+          <Icon name="tabler:brand-apple" class="h-5 w-5 mr-2" />
+          App Store
+        </a>
+        <a href={appInfo.githubLink} class="btn btn-outline" target="_blank">
+          <Icon name="tabler:brand-github" class="h-5 w-5 mr-2" />
+          GitHub
+        </a>
+      </div>
+    </Fragment>
+  </Hero>
+
+  <!-- Features -->
+  <Features
+    id="features"
+    title="App Features"
+    subtitle="Discover what makes Elementii the perfect tool for learning about the periodic table"
+    columns={3}
+    items={features}
+  />
+
+  <!-- Stats -->
+  <Stats
+    title="By the Numbers"
+    stats={stats}
+  />
+
+  <!-- Screenshots -->
+  <section id="screenshots" class="py-16 bg-blue-50 dark:bg-slate-800/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold tracking-tight mb-4">App Screenshots</h2>
+        <p class="text-lg text-muted dark:text-slate-400 max-w-3xl mx-auto">
+          Take a look at Elementii's clean interface and powerful features
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        {screenshots.map((screenshot) => (
+          <div class="rounded-xl overflow-hidden shadow-lg bg-white dark:bg-slate-900 transform hover:scale-105 transition-transform duration-300">
+            <img 
+              src={screenshot.image} 
+              alt={screenshot.title} 
+              class="w-full h-64 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">{screenshot.title}</h3>
+              <p class="text-muted dark:text-slate-400">{screenshot.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Development Story -->
+  <Content
+    isReversed
+    title="The Story Behind Elementii"
+    items={[
+      {
+        title: 'The Challenge',
+        description: 'Chemistry students often struggle with memorizing element properties and understanding periodic trends. Traditional learning methods can be dry and unengaging.',
+      },
+      {
+        title: 'The Solution',
+        description: 'Elementii transforms learning about the periodic table into an interactive, visual experience that makes chemistry concepts more accessible and memorable.',
+      },
+      {
+        title: 'Technical Details',
+        description: 'Built with React Native for cross-platform compatibility, with animations powered by Reanimated, state management with Redux, and a Firebase backend for user data.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
+      alt: 'Chemistry lab',
+    }}
+  >
+    <Fragment slot="content">
+      <p class="text-lg text-muted dark:text-slate-400">
+        Elementii was born from a passion for making science education more accessible and engaging. 
+        As a developer with a background in chemistry education, I wanted to create a tool that would 
+        help students develop a stronger understanding of the periodic table and chemistry fundamentals.
+      </p>
+    </Fragment>
+  </Content>
+
+  <!-- FAQs -->
+  <FAQs
+    id="faq"
+    title="Frequently Asked Questions"
+    subtitle="Find answers to common questions about Elementii"
+    items={faqs}
+    columns={1}
+    classes={{ container: 'max-w-4xl' }}
+  />
+
+  <!-- Download CTA -->
+  <CallToAction
+    id="download"
+    title="Get Elementii Today"
+    subtitle="Start exploring the periodic table in a whole new way"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Google Play',
+        href: appInfo.googlePlayLink,
+        icon: 'tabler:brand-google-play',
+      },
+      {
+        text: 'App Store',
+        href: appInfo.appStoreLink,
+        icon: 'tabler:brand-apple',
+      },
+    ]}
+  />
+
+  <!-- Back to Projects Button -->
+  <div class="text-center py-12">
+    <a href="/projects" class="btn btn-outline inline-flex items-center gap-2">
+      <Icon name="tabler:arrow-left" class="w-5 h-5" />
+      <span>Back to Projects</span>
+    </a>
+  </div>
+</ProjectLayout>
