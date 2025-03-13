@@ -3,7 +3,8 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Header from '~/components/widgets/Header.astro';
 import DevHero from '~/components/widgets/DevHero.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import TrailCTA from '~/components/widgets/CallToAction.astro';
+import Form from '~/components/ui/Form.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import AboutMe from '~/components/widgets/AboutMe.astro';
 import ProjectSection from '~/components/widgets/ProjectSection.astro';
@@ -72,18 +73,28 @@ const metadata = {
 
   <!-- CallToAction Widget *********** -->
 
-  <CallToAction
-    id="contact"
-    title="Let's work together"
-    subtitle="I'm currently available for freelance work or full-time opportunities. If you'd like to talk about a project or job opportunity, get in touch!"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Contact Me',
-        href: 'mailto:your.email@example.com',
-      },
+  <TrailCTA
+  title="Join the Adventure"
+  subtitle="Sign up for our newsletter to get trail updates and hiking tips"
+  tagline="Stay Connected"
+>
+  <Form
+    inputs={[
+      { type: 'text', name: 'name', label: 'Your Name', placeholder: 'John Doe' },
+      { type: 'email', name: 'email', label: 'Email Address', placeholder: 'john@example.com' }
     ]}
+    textarea={{
+      label: 'Your Message',
+      placeholder: 'Tell us about your favorite trails...',
+      rows: 4
+    }}
+    disclaimer={{
+      label: 'I agree to receive updates about new trails and hiking tips.'
+    }}
+    button="Send Message"
+    description="We'll never share your information with anyone else."
   />
+</TrailCTA>
 
 </Layout>
 

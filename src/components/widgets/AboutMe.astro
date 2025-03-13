@@ -1,7 +1,6 @@
 ---
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import { Icon } from 'astro-icon/components';
-import Image from '~/components/common/Image.astro';
 
 const {
   id,
@@ -10,10 +9,6 @@ const {
   bg = await Astro.slots.render('bg'),
   title = "About Me",
   subtitle = "The journey so far",
-  image = {
-    src: "~/assets/images/avataaars.png",
-    alt: "Petar Vidakovic"
-  }
 } = Astro.props;
 
 // Camping-themed skills/interests with matching icons
@@ -96,25 +91,7 @@ const personalTrails = [
         </div>
         
         <!-- Image & Side Interests (Right Side on Desktop) -->
-        <div class="md:col-span-5">
-          <div class="camping-frame">
-            <div class="camp-avatar">
-              {typeof image === 'string' ? (
-                <Fragment set:html={image} />
-              ) : (
-                <Image
-                  class="mx-auto rounded-full"
-                  widths={[300, 400, 500]}
-                  sizes="(max-width: 767px) 300px, (max-width: 1023px) 400px, 500px"
-                  loading="eager"
-                  width={500}
-                  height={500}
-                  {...image}
-                />
-              )}
-            </div>
-          </div>
-          
+        <div class="md:col-span-5">      
           <!-- Personal Interests as Side Trails -->
           <div class="mt-8 side-trails">
             <h4 class="text-xl font-semibold mb-4 flex items-center">

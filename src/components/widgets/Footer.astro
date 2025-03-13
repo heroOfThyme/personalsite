@@ -26,62 +26,80 @@ export interface Props {
 const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
 ---
 
-<footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
-  <div class="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-  <div
-    class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300 intersect-once intersect-quarter intercept-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
-  >
-    <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
+<footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose forest-footer']}>
+  <!-- Forest-themed background decoration -->
+  <div class="forest-footer-bg absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+  
+  <!-- Subtle tree silhouettes on the sides -->
+  <div class="tree-silhouette tree-left"></div>
+  <div class="tree-silhouette tree-right"></div>
+  
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300 pt-12 intersect-once intersect-quarter intercept-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+    <!-- Main Footer Content -->
+    <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 pb-8">
+      <!-- Logo and Secondary Links -->
       <div class="col-span-12 lg:col-span-4">
-        <div class="mb-2">
-          <a class="inline-block font-bold text-xl" href={getHomePermalink()}>{SITE?.name}</a>
+        <div class="footer-brand mb-4">
+          <a class="inline-flex items-center gap-2 text-xl font-bold" href={getHomePermalink()}>
+            <Icon name="tabler:trees" class="w-6 h-6 text-pastel-teal-500" />
+            <span class="gradient-text">{SITE?.name}</span>
+          </a>
         </div>
-        <div class="text-sm text-muted flex gap-1">
-          {
-            secondaryLinks.map(({ text, href }, index) => (
-              <>
-                {index !== 0 ? ' · ' : ''}
-                <a
-                  class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out"
-                  href={href}
-                  set:html={text}
-                />
-              </>
-            ))
-          }
+        
+        <p class="text-muted dark:text-slate-400 mb-4 max-w-xs">
+          Exploring the digital wilderness, crafting beautiful and functional web experiences.
+        </p>
+        
+        <div class="text-sm text-muted flex gap-4 flex-wrap">
+          {secondaryLinks.map(({ text, href }) => (
+            <a 
+              class="text-muted hover:text-pastel-teal-600 dark:hover:text-pastel-teal-400 hover:underline transition duration-150 ease-in-out" 
+              href={href} 
+              set:html={text} 
+            />
+          ))}
         </div>
       </div>
-      {
-        links.map(({ title, links }) => (
-          <div class="col-span-6 md:col-span-3 lg:col-span-2">
-            <div class="dark:text-gray-300 font-medium mb-2">{title}</div>
-            {links && Array.isArray(links) && links.length > 0 && (
-              <ul class="text-sm">
-                {links.map(({ text, href, ariaLabel }) => (
-                  <li class="mb-2">
-                    <a
-                      class="text-muted hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out"
-                      href={href}
-                      aria-label={ariaLabel}
-                    >
-                      <Fragment set:html={text} />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
+      
+      <!-- Footer Navigation Links -->
+      {links.map(({ title, links }) => (
+        <div class="col-span-6 md:col-span-3 lg:col-span-2">
+          <div class="footer-heading relative mb-4 pb-2">
+            {title}
           </div>
-        ))
-      }
+          
+          {links && Array.isArray(links) && links.length > 0 && (
+            <ul class="text-sm space-y-2">
+              {links.map(({ text, href, ariaLabel }) => (
+                <li>
+                  <a
+                    class="footer-link inline-flex items-center text-muted hover:text-pastel-teal-600 dark:hover:text-pastel-teal-400 transition duration-150 ease-in-out"
+                    href={href}
+                    aria-label={ariaLabel}
+                  >
+                    <Icon name="tabler:leaf" class="w-3.5 h-3.5 mr-1 text-pastel-teal-500 opacity-70" />
+                    <span class="hover:translate-x-1 transition-transform duration-150">
+                      <Fragment set:html={text} />
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
     </div>
-    <div class="md:flex md:items-center md:justify-between py-6 md:py-8">
-      {
-        socialLinks?.length ? (
-          <ul class="flex mb-4 md:order-1 -ml-2 md:ml-4 md:mb-0 rtl:ml-0 rtl:-mr-2 rtl:md:ml-0 rtl:md:mr-4">
+    
+    <!-- Bottom Bar with Social Icons and Credits -->
+    <div class="py-6 border-t border-gray-200 dark:border-gray-800">
+      <div class="md:flex md:items-center md:justify-between">
+        <!-- Social Links -->
+        {socialLinks?.length ? (
+          <ul class="footer-social flex gap-3 mb-4 md:mb-0">
             {socialLinks.map(({ ariaLabel, href, text, icon }) => (
               <li>
                 <a
-                  class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+                  class="footer-social-link inline-flex items-center justify-center w-10 h-10 rounded-full bg-pastel-blue-100 text-pastel-teal-600 hover:bg-pastel-teal-500 hover:text-white dark:bg-gray-800 dark:text-pastel-teal-400 dark:hover:bg-pastel-teal-600 dark:hover:text-white transition-colors duration-150"
                   aria-label={ariaLabel}
                   href={href}
                 >
@@ -93,12 +111,109 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
           </ul>
         ) : (
           ''
-        )
-      }
-
-      <div class="text-sm mr-4 dark:text-muted">
-        <Fragment set:html={footNote} />
+        )}
+        
+        <!-- Copyright/Credits -->
+        <div class="text-sm text-muted dark:text-gray-400 mt-4 md:mt-0">
+          <Fragment set:html={footNote} />
+          {!footNote && 
+            <div>
+              &copy; {new Date().getFullYear()} · Crafted with 
+              <Icon name="tabler:heart" class="w-4 h-4 inline-block mx-1 text-pastel-orange-500 animate-pulse" /> 
+              by <span class="text-pastel-teal-600 dark:text-pastel-teal-400">P. Vidakovic</span>
+            </div>
+          }
+        </div>
       </div>
     </div>
   </div>
 </footer>
+
+<style>
+  /* Forest-themed footer styling */
+  .forest-footer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Background decoration */
+  .forest-footer-bg {
+    color: #000;
+  }
+  
+  :global(.dark) .forest-footer-bg {
+    opacity: 1;
+  }
+  
+  /* Tree silhouettes */
+  .tree-silhouette {
+    position: absolute;
+    bottom: 0;
+    width: 180px;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    opacity: 0.05;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  .tree-left {
+    left: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 200' fill='%234db6ac'%3E%3Cpath d='M50,0 L30,40 L45,40 L25,80 L40,80 L20,120 L35,120 L15,160 L85,160 L65,120 L80,120 L60,80 L75,80 L55,40 L70,40 Z M50,160 L50,200 L60,200 L60,160 Z'/%3E%3C/svg%3E");
+  }
+  
+  .tree-right {
+    right: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 200' fill='%234db6ac'%3E%3Cpath d='M50,10 L20,60 L40,60 L10,110 L30,110 L0,160 L100,160 L70,110 L90,110 L60,60 L80,60 Z M45,160 L45,200 L55,200 L55,160 Z'/%3E%3C/svg%3E");
+  }
+  
+  /* Gradient text for logo */
+  .gradient-text {
+    background: linear-gradient(90deg, var(--pastel-blue-500), var(--pastel-teal-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  /* Footer section heading with leaf decoration */
+  .footer-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #374151;
+  }
+  
+  :global(.dark) .footer-heading {
+    color: white;
+  }
+  
+  .footer-heading::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--pastel-teal-500);
+    border-radius: 2px;
+  }
+  
+  /* Social link hover effect */
+  .footer-social-link {
+    transition: all 0.3s ease;
+  }
+  
+  .footer-social-link:hover {
+    transform: translateY(-3px);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .tree-silhouette {
+      width: 100px;
+      height: 120px;
+    }
+  }
+</style>
