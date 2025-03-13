@@ -1,0 +1,129 @@
+---
+// Simple terminal window component to display bio text
+// Place this file in src/components/widgets/TerminalBio.astro
+
+export interface Props {
+  // You can customize the terminal appearance and content
+  windowTitle?: string;
+  prompt?: string;
+  bio: string[];  // Array of text lines to display
+  typingEffect?: boolean;
+}
+
+const {
+  windowTitle = "about_me.sh",
+  prompt = "user@portfolio:~$",
+  bio = [
+    "Hi, I'm P. Vidakovic!",
+    "I'm a full-stack developer passionate about building web applications.",
+    "My expertise includes React, Node.js, and TypeScript.",
+    "When I'm not coding, I enjoy exploring new technologies and contributing to open-source."
+  ],
+  typingEffect = false
+} = Astro.props;
+---
+
+<div class="terminal-container max-w-3xl mx-auto my-8">
+  <div class="terminal-header">
+    <div class="terminal-dot terminal-red"></div>
+    <div class="terminal-dot terminal-yellow"></div>
+    <div class="terminal-dot terminal-green"></div>
+    <div class="ml-4 text-sm text-gray-300">{windowTitle}</div>
+  </div>
+  <div class="terminal-body p-4">
+    <div class="whitespace-pre-line">
+      <!-- Command with prompt -->
+      <div class="mb-2">
+        <span class="terminal-prompt">{prompt}</span>
+        <span class="terminal-command"> cat about_me.txt</span>
+      </div>
+      
+      <!-- Bio text output -->
+      {bio.map((line) => (
+        <p class={`terminal-output my-2 ${typingEffect ? 'typing-effect' : ''}`}>{line}</p>
+      ))}
+      
+      <!-- New command prompt with blinking cursor -->
+      <div class="mt-4">
+        <span class="terminal-prompt">{prompt}</span>
+        <span class="cursor-blink">▋</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Terminal styling */
+  .terminal-container {
+    font-family: 'Fira Code', monospace;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #333;
+  }
+
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    border-bottom: 1px solid #444;
+  }
+
+  .terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+
+  .terminal-red { background-color: #ff5f56; }
+  .terminal-yellow { background-color: #ffbd2e; }
+  .terminal-green { background-color: #27c93f; }
+
+  .terminal-body {
+    min-height: 150px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .terminal-prompt {
+    color: #5af78e;
+    font-weight: 500;
+  }
+
+  .terminal-command {
+    color: #ffffff;
+  }
+
+  .terminal-output {
+    color: #ddd;
+    margin-left: 0.5rem;
+  }
+
+  /* Blinking cursor animation */
+  .cursor-blink {
+    display: inline-block;
+    animation: blink 1s step-end infinite;
+    color: #f0f0f0;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Optional typing effect - only applies if typingEffect is true */
+  .typing-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end);
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+</style>

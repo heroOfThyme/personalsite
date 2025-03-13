@@ -1,0 +1,328 @@
+---
+import WidgetWrapper from '../ui/WidgetWrapper.astro';
+import { Icon } from 'astro-icon/components';
+
+const {
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+// Sample projects data - you can replace with your actual projects
+const projects = [
+  {
+    title: "Project 1",
+    description: "Description of this amazing project. What technologies you used, challenges you faced, and outcomes achieved.",
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    tags: ["React", "Node.js", "MongoDB"],
+    projectUrl: "#",
+    githubUrl: "#",
+    icon: "tabler:campfire" // Camping-themed icon
+  },
+  {
+    title: "Project 2",
+    description: "Description of another impressive project. Be sure to highlight your role and the impact of the work.",
+    image: "https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+    tags: ["Vue.js", "Firebase", "Tailwind"],
+    projectUrl: "#",
+    githubUrl: "#",
+    icon: "tabler:tent" // Camping-themed icon
+  },
+  {
+    title: "Project 3",
+    description: "Description of a third project that shows the breadth of your skills and experience.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80",
+    tags: ["Express", "PostgreSQL", "Docker"],
+    projectUrl: "#",
+    githubUrl: "#",
+    icon: "tabler:map" // Camping-themed icon
+  }
+];
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <div class="py-16 projects-section">
+    <div class="container mx-auto px-4">
+      <!-- Section header with campsite marker styling -->
+      <div class="mb-12 text-center">
+        <div class="flex items-center justify-center mb-2">
+          <div class="campsite-marker"></div>
+          <h2 class="text-3xl md:text-4xl font-bold">Adventure Projects</h2>
+          <div class="campsite-marker"></div>
+        </div>
+        <p class="text-pastel-blue-700 dark:text-pastel-blue-300 mt-2">Explore the trails I've blazed in code</p>
+      </div>
+
+      <!-- Project Cards Grid - Styled as adventure maps -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map((project,) => (
+          <div class="adventure-card">
+            <!-- Project image with pastel overlay -->
+            <div class="adventure-image">
+              <img
+                src={project.image}
+                alt={`${project.title} preview`}
+                class="w-full h-full object-cover"
+              />
+              <!-- Camping icon overlay -->
+              <div class="adventure-icon">
+                <Icon name={project.icon} class="w-6 h-6" />
+              </div>
+            </div>
+            
+            <!-- Project content -->
+            <div class="adventure-content">
+              <h3 class="adventure-title">{project.title}</h3>
+              <p class="adventure-description">{project.description}</p>
+              
+              <!-- Tech tags as trail markers -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.tags.map(tag => (
+                  <span class="trail-tag">{tag}</span>
+                ))}
+              </div>
+              
+              <!-- Project links -->
+              <div class="flex items-center justify-between mt-auto">
+                <a href={project.projectUrl} class="adventure-link">
+                  <span>Explore</span>
+                  <Icon name="tabler:compass" class="w-4 h-4" />
+                </a>
+                <a href={project.githubUrl} class="github-link">
+                  <Icon name="tabler:brand-github" class="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- View All Projects Button styled as adventure button -->
+      <div class="flex justify-center mt-12">
+        <a href="/projects" class="explore-more-btn">
+          <span>Discover More Adventures</span>
+          <Icon name="tabler:map-search" class="w-5 h-5" />
+        </a>
+      </div>
+    </div>
+  </div>
+</WidgetWrapper>
+
+<style>
+
+  /* Projects section styling */
+  .projects-section {
+    position: relative;
+  }
+  
+  /* Section header campsite marker (same as About) */
+  .campsite-marker {
+    width: 30px;
+    height: 30px;
+    margin: 0 15px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff7e4a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 20l5-15 5 15M4 20h16'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+  }
+  
+  /* Adventure card styling */
+  .adventure-card {
+    position: relative;
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 2px solid var(--pastel-blue-100);
+  }
+  
+  .adventure-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--pastel-blue-300);
+  }
+  
+  /* Dark mode card styling */
+  :global(.dark) .adventure-card {
+    background-color: #1f2937; /* dark gray */
+    border-color: rgba(168, 224, 224, 0.2);
+  }
+  
+  :global(.dark) .adventure-card:hover {
+    border-color: rgba(168, 224, 224, 0.4);
+  }
+  
+  /* Project image styling */
+  .adventure-image {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+  }
+  
+  .adventure-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, 
+                  rgba(122, 200, 208, 0.3), 
+                  rgba(255, 182, 193, 0.3));
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+  }
+  
+  .adventure-card:hover .adventure-image::after {
+    opacity: 0.3;
+  }
+  
+  /* Camping icon overlay */
+  .adventure-icon {
+    position: absolute;
+    bottom: -15px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--pastel-teal-500);
+    color: var(--pastel-teal-600);
+    z-index: 10;
+  }
+  
+  :global(.dark) .adventure-icon {
+    background-color: #1f2937;
+    color: var(--pastel-teal-500);
+  }
+  
+  /* Project content styling */
+  .adventure-content {
+    padding: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .adventure-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  :global(.dark) .adventure-title {
+    color: white;
+  }
+  
+  .adventure-description {
+    color: #666;
+    margin-bottom: 16px;
+    flex: 1;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  :global(.dark) .adventure-description {
+    color: #d1d5db;
+  }
+  
+  /* Tech tags as trail markers */
+  .trail-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    background-color: var(--pastel-blue-100);
+    color: var(--pastel-blue-700);
+    font-weight: 500;
+  }
+  
+  :global(.dark) .trail-tag {
+    background-color: rgba(122, 200, 208, 0.15);
+    color: var(--pastel-blue-300);
+  }
+  
+  /* Project links styling */
+  .adventure-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--pastel-teal-600);
+    transition: all 0.2s ease;
+  }
+  
+  .adventure-link:hover {
+    color: var(--pastel-orange-500);
+    transform: translateX(2px);
+  }
+  
+  :global(.dark) .adventure-link {
+    color: var(--pastel-teal-500);
+  }
+  
+  :global(.dark) .adventure-link:hover {
+    color: var(--pastel-orange-400);
+  }
+  
+  .github-link {
+    color: #666;
+    transition: all 0.2s ease;
+  }
+  
+  .github-link:hover {
+    color: #333;
+    transform: scale(1.1);
+  }
+  
+  :global(.dark) .github-link {
+    color: #d1d5db;
+  }
+  
+  :global(.dark) .github-link:hover {
+    color: white;
+  }
+  
+  /* Explore more button */
+  .explore-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--pastel-teal-500);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(77, 182, 172, 0.3);
+  }
+  
+  .explore-more-btn:hover {
+    background-color: var(--pastel-teal-600);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(77, 182, 172, 0.4);
+  }
+  
+  :global(.dark) .explore-more-btn {
+    box-shadow: 0 4px 12px rgba(77, 182, 172, 0.2);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .adventure-card {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+</style>
