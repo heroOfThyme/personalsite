@@ -1,88 +1,93 @@
 ---
-import '@fontsource-variable/inter';
-import '@fontsource-variable/montserrat'; // Add a secondary font for headings
-
-// You can import other fonts here for your brand
-// import '@fontsource/poppins';
-// import '@fontsource/roboto';
+import '@fontsource/ubuntu';
+import '@fontsource-variable/montserrat';
 ---
 
 <style is:inline>
   :root {
-    --aw-font-sans: 'Inter Variable';
-    --aw-font-serif: 'Inter Variable';
-    --aw-font-heading: 'Montserrat Variable'; /* Changed to Montserrat for headings */
+    --aw-font-sans: 'Ubuntu Variable';
+    --aw-font-serif: 'Ubuntu Variable';
+    --aw-font-heading: 'Montserrat Variable';
 
-    /* Primary brand color - change this to your preferred color */
-    --aw-color-primary: rgb(79, 70, 229); /* Indigo */
-    --aw-color-secondary: rgb(67, 56, 202); /* Darker Indigo */
-    --aw-color-accent: rgb(139, 92, 246); /* Purple */
+    /* Modern color palette with purples, blues, and pinks */
+    --aw-color-primary: rgb(108, 99, 255); /* Vibrant purple */
+    --aw-color-secondary: rgb(83, 109, 254); /* Bright blue */
+    --aw-color-accent: rgb(255, 100, 218); /* Soft pink */
 
     /* Text colors */
-    --aw-color-text-heading: rgb(0 0 0);
-    --aw-color-text-default: rgb(16 16 16);
-    --aw-color-text-muted: rgb(16 16 16 / 66%);
-    --aw-color-bg-page: rgb(255 255 255);
+    --aw-color-text-heading: rgb(24, 24, 27);
+    --aw-color-text-default: rgb(38, 38, 46);
+    --aw-color-text-muted: rgb(38, 38, 46 / 66%);
+    --aw-color-bg-page: rgb(249, 249, 255);
 
     /* Dark mode background */
-    --aw-color-bg-page-dark: rgb(3, 7, 18);
+    --aw-color-bg-page-dark: rgb(26, 26, 46);
 
     ::selection {
-      background-color: rgb(224 231 255); /* Light indigo for selection */
+      background-color: rgb(226, 223, 255); /* Light purple for selection */
     }
   }
 
   .dark {
-    --aw-font-sans: 'Inter Variable';
-    --aw-font-serif: 'Inter Variable';
+    --aw-font-sans: 'Ubuntu Variable';
+    --aw-font-serif: 'Ubuntu Variable';
     --aw-font-heading: 'Montserrat Variable';
 
-    /* Primary brand color in dark mode */
-    --aw-color-primary: rgb(129, 140, 248); /* Lighter Indigo for dark mode */
-    --aw-color-secondary: rgb(99, 102, 241);
-    --aw-color-accent: rgb(167, 139, 250);
+    /* Dark mode colors */
+    --aw-color-primary: rgb(138, 130, 255); /* Lighter purple for dark mode */
+    --aw-color-secondary: rgb(123, 142, 255);
+    --aw-color-accent: rgb(255, 138, 226);
 
     /* Text colors in dark mode */
-    --aw-color-text-heading: rgb(247, 248, 248);
-    --aw-color-text-default: rgb(229 236 246);
-    --aw-color-text-muted: rgb(229 236 246 / 66%);
+    --aw-color-text-heading: rgb(237, 237, 250);
+    --aw-color-text-default: rgb(229, 236, 246);
+    --aw-color-text-muted: rgb(229, 236, 246 / 66%);
     --aw-color-bg-page: var(--aw-color-bg-page-dark);
 
     ::selection {
-      background-color: rgb(67, 56, 202); /* Darker indigo for selection in dark mode */
+      background-color: rgb(108, 99, 255); /* Darker purple for selection in dark mode */
       color: white;
     }
   }
 
   /* Button styles */
   .btn {
-    @apply inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700;
+    @apply inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:border-gray-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700 transition-all duration-300;
   }
 
   .btn-primary {
-    @apply border-transparent bg-primary text-white hover:bg-primary-600 dark:border-transparent dark:bg-primary dark:text-white dark:hover:bg-primary-700;
+    @apply border-transparent bg-primary text-white hover:bg-primary-600 dark:border-transparent dark:bg-primary dark:text-white dark:hover:bg-primary-700 shadow-md hover:shadow-lg transform hover:-translate-y-1;
+  }
+
+  .btn-secondary {
+    @apply border-transparent bg-secondary text-white hover:bg-secondary-600 shadow-md hover:shadow-lg transform hover:-translate-y-1;
   }
   
   .btn-outline {
-    @apply border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800;
+    @apply border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 hover:border-primary dark:hover:border-primary;
   }
 
+  /* Gradient text effect */
   .gradient-text {
     @apply text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent;
   }
 
   /* Hero section enhancements */
   .hero-bg {
-    background: linear-gradient(135deg, rgb(239 246 255 / 80%) 0%, rgb(219 234 254 / 80%) 100%);
+    background: linear-gradient(135deg, rgb(249, 249, 255) 0%, rgb(241, 238, 255) 100%);
   }
 
   .dark .hero-bg {
-    background: linear-gradient(135deg, rgba(13, 16, 45, 0.8) 0%, rgba(16, 23, 42, 0.8) 100%);
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.8) 100%);
   }
 
   /* Card styles */
-  .portfolio-card {
-    @apply bg-white dark:bg-slate-900 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300;
+  .card {
+    @apply bg-white dark:bg-slate-900 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-800 transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .project-card {
+    @apply bg-white dark:bg-slate-900 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-800 transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
 
   /* Animated underline for links */
@@ -106,5 +111,43 @@ import '@fontsource-variable/montserrat'; // Add a secondary font for headings
     width: 100%;
     left: 0;
     background: var(--aw-color-primary);
+  }
+
+  /* Gradient buttons */
+  .btn-gradient {
+    background-image: linear-gradient(135deg, var(--aw-color-primary), var(--aw-color-secondary));
+    color: white;
+    transition: all 0.3s ease;
+  }
+
+  .btn-gradient:hover {
+    box-shadow: 0 6px 15px rgba(108, 99, 255, 0.25);
+    transform: translateY(-1px);
+  }
+
+  /* Pill/badge styling for skills and technologies */
+  .badge {
+    @apply px-3 py-1 text-xs font-medium rounded-full transition-colors;
+  }
+
+  .badge-primary {
+    @apply bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-200;
+  }
+
+  .badge-secondary {
+    @apply bg-secondary/10 text-secondary dark:bg-secondary/20 dark:text-secondary-200;
+  }
+
+  .badge-accent {
+    @apply bg-accent/10 text-accent-700 dark:bg-accent/20 dark:text-accent-200;
+  }
+
+  /* Section styling */
+  .section {
+    @apply py-12 md:py-16;
+  }
+
+  .section-alt {
+    @apply py-12 md:py-16 bg-gray-50 dark:bg-gray-900/20;
   }
 </style>
