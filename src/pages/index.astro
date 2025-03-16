@@ -23,9 +23,8 @@ const metadata = {
         { text: 'About', href: '#about' },
         { text: 'Projects', href: '#projects' },
         { text: 'Skills', href: '#skills' },
-        { text: 'Contact', href: '#contact' },
         { text: 'Blog', href: '#blog' },
-        { text: 'Github', href: 'https://github.com/yourusername' },
+        { text: 'Contact', href: '#contact' },
       ]}
       actions={[
         {
@@ -40,7 +39,6 @@ const metadata = {
   </Fragment>
 
   <ModernHero
-    title="Hello, my name is "
     tagline="Portfolio"
     image={{
       src: '~/assets/images/avataaars.png',
@@ -62,29 +60,16 @@ const metadata = {
     id="about"
     title="About Me"
     tagline="Background"
-    subtitle="Full-stack developer with a passion for creating elegant, user-friendly applications"
+    subtitle="Aspiring full-stack developer with a passion for creating elegant, user-friendly applications."
     image={{
       src: '~/assets/images/avataaars.png',
       alt: 'P. Vidakovic profile picture',
     }}
-    socialLinks={[
-      { icon: 'tabler:brand-github', label: 'GitHub', href: 'https://github.com/yourusername' },
-      { icon: 'tabler:brand-linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/yourusername' },
-      { icon: 'tabler:brand-twitter', label: 'Twitter', href: 'https://twitter.com/yourusername' },
-    ]}
   >
     <Fragment slot="content">
-      <p class="mb-4">
-        Here's where you can tell your story. What drives you? What's your background? What are you passionate about?
-      </p>
-      <p class="mb-4">
-        This is a great place to share more about your journey, your philosophy, and what makes you unique in your
-        field. Consider mentioning your experience, education, and the values that guide your work.
-      </p>
-      <p>
-        Don't be afraid to inject some personality here - this section helps visitors connect with you on a more
-        personal level.
-      </p>
+      <p class="mb-4">I discovered my passion for development during a marketing degree when web development sparked my interest. Years later, after building my first gaming PC and creating Discord bots, I fully committed to this journey.</p>
+      <p class="mb-4">I approach development challenges with patience and methodical problem-solving, breaking down complex issues into manageable solutions. When not coding, I recharge through hiking, photography, kayaking, gaming, and exploring local restaurants.</p>
+      <p class="mb-4">My marketing background combined with technical skills gives me a unique perspective in creating solutions that are both functional and user-focused. I'm passionate about building technology that makes a difference while continuously expanding my development expertise.</p>
     </Fragment>
 
     <Fragment slot="bg">
@@ -138,60 +123,41 @@ const metadata = {
         demoUrl: '#',
         sourceUrl: 'https://github.com/yourusername/fitness-tracker',
       },
-      {
-        title: 'Weather Dashboard',
-        description: 'Real-time weather forecasting app with location-based data and interactive visualizations.',
-        image: {
-          src: 'https://images.unsplash.com/photo-1530908295418-a12e326966ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1548&q=80',
-          alt: 'Weather dashboard interface',
-        },
-        tags: ['JavaScript', 'OpenWeather API', 'Chart.js'],
-        demoUrl: '#',
-        sourceUrl: 'https://github.com/yourusername/weather-dashboard',
-      },
     ]}
     viewAllUrl="/projects"
-    bg={`<div class="absolute inset-0 bg-blue-50 dark:bg-slate-950 opacity-70"></div>
-       <div class="absolute inset-0 bg-dots"></div>`}
   />
 
   <!-- Skills Section with Modern Pill Design -->
   <SkillsComponent
+  tagline="Skills & Expertise"
   id="skills"
   categories={[
     {
       name: "Languages",
       skills: [
-        { name: "JavaScript", icon: "tabler:brand-javascript" },
-        { name: "TypeScript", icon: "tabler:brand-typescript" },
-        { name: "Python", icon: "tabler:brand-python" },
-        { name: "PHP", icon: "tabler:brand-php" },
-        { name: "HTML", icon: "tabler:brand-html5" },
-        { name: "CSS", icon: "tabler:brand-css3" },
+        { name: "JavaScript", icon: "tabler:brand-javascript", level: "Intermediate" },
+        { name: "TypeScript", icon: "tabler:brand-typescript", level: "Intermediate" },
+        { name: "Python", icon: "tabler:brand-python", level: "Beginner" },
+        { name: "HTML", icon: "tabler:brand-html5", level: "Expert" },
+        { name: "CSS", icon: "tabler:brand-css3", level: "Expert" },
       ]
     },
     {
       name: "Frameworks & Libraries",
       skills: [
-        { name: "React", icon: "tabler:brand-react" },
-        { name: "Vue.js", icon: "tabler:brand-vue" },
-        { name: "Node.js", icon: "tabler:brand-nodejs" },
-        { name: "Express", icon: "tabler:server" },
-        { name: "Django", icon: "tabler:brand-django" },
-        { name: "Tailwind CSS", icon: "tabler:brand-tailwind" },
-        { name: "Bootstrap", icon: "tabler:brand-bootstrap" },
+        { name: "React", icon: "tabler:brand-react", level: "Intermediate" },
+        { name: "Astro", icon: "tabler:brand-astro", level: "Expert" },
+        { name: "Node.js", icon: "tabler:brand-nodejs", level: "Intermediate" },
+        { name: "Tailwind CSS", icon: "tabler:brand-tailwind", level: "Advanced" },
       ]
     },
     {
       name: "Tools & Platforms",
       skills: [
-        { name: "Git", icon: "tabler:brand-git" },
-        { name: "GitHub", icon: "tabler:brand-github" },
-        { name: "Docker", icon: "tabler:brand-docker" },
-        { name: "AWS", icon: "tabler:brand-aws" },
-        { name: "Firebase", icon: "tabler:brand-firebase" },
-        { name: "Netlify", icon: "tabler:cloud" },
-        { name: "Vercel", icon: "tabler:cloud" },
+        { name: "Git", icon: "tabler:brand-git", level: "Intermediate" },
+        { name: "GitHub", icon: "tabler:brand-github", level: "Intermediate" },
+        { name: "Docker", icon: "tabler:brand-docker", level: "Beginner" },
+        { name: "Firebase", icon: "tabler:brand-firebase", level: "Beginner" },
       ]
     },
   ]}
@@ -199,6 +165,7 @@ const metadata = {
 
   <!-- BlogLatestPost Widget **************** -->
   <BlogLatestPosts
+    tagline="My Headspace"
     id="blog"
     title="From My Blog"
     information={`Thoughts, tips, and insights on technology, design, and my professional journey.`}
@@ -210,80 +177,37 @@ const metadata = {
 
   <!-- CallToAction Widget *********** -->
   <CallToAction
-    title="Subscribe to our newsletter"
-    subtitle="Get the latest updates and news delivered to your inbox."
-    hasForm={true}
-    formTitle="Sign up today"
-    highlight="newsletter"
+    id="contact"
+    title="Ready to bring your project to life?"
+    subtitle="I'm currently available for new opportunities and would love to discuss your project."
+    tagline="Let's Collaborate"
+    highlight="project"
     form={{
       inputs: [
         {
+          type: 'text',
+          name: 'name',
+          label: 'Your Name',
+          placeholder: 'John Smith',
+          autocomplete: 'name',
+        },
+        {
           type: 'email',
           name: 'email',
-          label: 'Email address',
-          placeholder: 'your@email.com',
+          label: 'Email Address',
+          placeholder: 'john@example.com',
+          autocomplete: 'email',
         },
       ],
-      button: 'Subscribe',
-      description: 'We respect your privacy. Unsubscribe anytime.',
+      textarea: {
+        name: 'message',
+        label: 'Tell me about your project',
+        placeholder: 'I need help with...',
+        rows: 4
+      },
+      button: 'Send Message',
+      description: 'I typically respond within 24-48 hours.'
     }}
   />
 
 </Layout>
-
-<style is:global>
-  /* Gradient button */
-  .btn-gradient {
-    background-image: linear-gradient(to right, var(--tw-gradient-stops));
-    --tw-gradient-from: #2563eb;
-    --tw-gradient-to: #4f46e5;
-    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-    color: white;
-    transition: all 0.2s ease;
-  }
-
-  .btn-gradient:hover {
-    --tw-gradient-from: #1d4ed8;
-    --tw-gradient-to: #4338ca;
-    --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    box-shadow: var(--tw-shadow);
-  }
-
-  /* Blinking cursor animation */
-  .cursor-blink {
-    animation: blink 1s step-end infinite;
-  }
-
-  @keyframes blink {
-    from,
-    to {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-  }
-
-  /* Animation for hero section background */
-  #hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(ellipse at bottom right, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
-    animation: pulse 8s ease-in-out infinite alternate;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  @keyframes pulse {
-    0% {
-      opacity: 0.5;
-    }
-    100% {
-      opacity: 0.8;
-    }
-  }
-</style>

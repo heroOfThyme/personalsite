@@ -25,7 +25,6 @@ export interface Props {
 }
 
 const {
-  title = "Full-Stack Developer",
   subtitle = "Transforming complex challenges into elegant solutions with over 5 years of expertise in modern web development. Specializing in JavaScript and TypeScript to create responsive, scalable applications that deliver exceptional user experiences.",
   tagline = "Portfolio",
   primaryCTA = {
@@ -43,12 +42,9 @@ const {
 ---
 
 <section class="relative overflow-hidden">
-  <!-- Gradient background with subtle dotted pattern -->
-  <div class="absolute inset-0 bg-gradient-to-br from-white to-indigo-50 dark:from-gray-900 dark:to-indigo-950 z-0"></div>
-  
-  <!-- Subtle spotty gradient pattern overlay -->
-  <div class="absolute inset-0 bg-dots z-0"></div>
-  
+  <div class="absolute top-0 -z-10 h-full w-full">
+    <div class="absolute bottom-auto left-1 right-0 top-0 h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div>
+  </div>
   <!-- Main content -->
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 lg:py-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 z-10">
     <!-- Left column: Text content -->
@@ -60,11 +56,7 @@ const {
       )}
       
       <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tighter mb-6 font-heading text-gray-900 dark:text-white">
-        {title.split(' ').map((word, i) => (
-          i % 2 === 0 ? 
-            <span>{word} </span> : 
-            <span class="text-indigo-600 dark:text-indigo-400">{word} </span>
-        ))}
+        Hello, I'm <span class="text-indigo-600 dark:text-indigo-400">Petar Vidakovic</span>.
       </h1>
       
       <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto lg:mx-0">
@@ -78,7 +70,7 @@ const {
           {primaryCTA.icon && <Icon name={primaryCTA.icon} class="w-5 h-5" />}
         </Button>
         
-        <Button variant="primary" href={secondaryCTA.href} class="flex items-center gap-2">
+        <Button variant="secondary" href={secondaryCTA.href} class="flex items-center gap-2">
           <span>{secondaryCTA.text}</span>
           {secondaryCTA.icon && <Icon name={secondaryCTA.icon} class="w-5 h-5" />}
         </Button>
@@ -121,35 +113,7 @@ const {
             </p>
           </div>
         </div>
-        
-        <!-- Project count card/badge -->
-        <div class="absolute -bottom-4 right-8 bg-white dark:bg-gray-800 rounded-lg px-4 py-3 shadow-lg border border-gray-100 dark:border-gray-700">
-          <div class="flex items-center space-x-2">
-            <div class="bg-indigo-100 dark:bg-indigo-900/30 p-2 rounded-md">
-              <Icon name="tabler:briefcase" class="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-            </div>
-            <p class="text-sm font-medium text-gray-900 dark:text-white">
-              <span class="text-indigo-600 dark:text-indigo-400 font-semibold">20+</span> Projects Completed
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   </div>
-
 </section>
-
-<style>
-/* Subtle dot pattern */
-.bg-dots {
-  background-image: radial-gradient(rgba(79, 70, 229, 0.1) 1px, transparent 1px);
-  background-size: 30px 30px;
-  opacity: 0.4;
-}
-
-/* Dark mode version */
-:global(.dark) .bg-dots {
-  background-image: radial-gradient(rgba(79, 70, 229, 0.2) 1px, transparent 1px);
-  opacity: 0.2;
-}
-</style>
