@@ -8,6 +8,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import ProjectShowcase from '~/components/widgets/ProjectShowcase.astro';
 import Button from '~/components/ui/Button.astro';
+import SkillsComponent from '~/components/widgets/SkillsComponent.astro';
 
 const metadata = {
   title: 'P. Vidakovic - Full-Stack Engineer',
@@ -42,7 +43,7 @@ const metadata = {
     title="Full-Stack Engineer"
     tagline="Portfolio"
     image={{
-      src: '~/assets/images/hero-image.png',
+      src: '~/assets/images/avataaars.png',
       alt: 'Niga',
     }}
   >
@@ -85,35 +86,13 @@ const metadata = {
     tagline="Background"
     subtitle="Full-stack developer with a passion for creating elegant, user-friendly applications"
     image={{
-      src: '~/assets/images/profile.jpg',
+      src: '~/assets/images/avataaars.png',
       alt: 'P. Vidakovic profile picture',
     }}
     socialLinks={[
       { icon: 'tabler:brand-github', label: 'GitHub', href: 'https://github.com/yourusername' },
       { icon: 'tabler:brand-linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/yourusername' },
       { icon: 'tabler:brand-twitter', label: 'Twitter', href: 'https://twitter.com/yourusername' },
-    ]}
-    highlights={[
-      {
-        icon: 'tabler:code',
-        title: 'Full-Stack Development',
-        description: 'Experience with both frontend and backend technologies for complete application development',
-      },
-      {
-        icon: 'tabler:device-laptop',
-        title: 'Responsive Design',
-        description: 'Creating applications that work beautifully across all devices and screen sizes',
-      },
-      {
-        icon: 'tabler:bulb',
-        title: 'Problem Solver',
-        description: 'Analytical thinker who enjoys tackling complex problems with efficient solutions',
-      },
-      {
-        icon: 'tabler:users',
-        title: 'Team Collaboration',
-        description: 'Strong communication skills and experience working in agile development teams',
-      },
     ]}
   >
     <Fragment slot="content">
@@ -199,109 +178,48 @@ const metadata = {
   />
 
   <!-- Skills Section with Modern Pill Design -->
-  <div class="py-12 md:py-16" id="skills">
-    <div class="container mx-auto px-4">
-      <div class="mb-10 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold leading-tight">My Skills</h2>
-        <p class="text-gray-600 dark:text-gray-300 mt-3">Technologies and tools I work with</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <!-- Frontend Skills Card -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
-          <h3 class="text-xl font-bold mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">Frontend</h3>
-          <div class="flex flex-wrap gap-2">
-            <span
-              class="bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-100 px-3 py-1 rounded-full text-sm"
-              >React</span
-            >
-            <span
-              class="bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-100 px-3 py-1 rounded-full text-sm"
-              >Vue</span
-            >
-            <span
-              class="bg-pink-100 dark:bg-pink-900/50 text-pink-800 dark:text-pink-100 px-3 py-1 rounded-full text-sm"
-              >HTML5</span
-            >
-            <span
-              class="bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-100 px-3 py-1 rounded-full text-sm"
-              >CSS/SCSS</span
-            >
-            <span
-              class="bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-100 px-3 py-1 rounded-full text-sm"
-              >Tailwind</span
-            >
-          </div>
-        </div>
-
-        <!-- Backend Skills Card -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
-          <h3 class="text-xl font-bold mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">Backend</h3>
-          <div class="flex flex-wrap gap-2">
-            <span
-              class="bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-100 px-3 py-1 rounded-full text-sm"
-              >Node.js</span
-            >
-            <span
-              class="bg-gray-100 dark:bg-gray-700/50 text-gray-800 dark:text-gray-100 px-3 py-1 rounded-full text-sm"
-              >Express</span
-            >
-            <span
-              class="bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-100 px-3 py-1 rounded-full text-sm"
-              >Python</span
-            >
-            <span class="bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-100 px-3 py-1 rounded-full text-sm"
-              >Django</span
-            >
-            <span
-              class="bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-100 px-3 py-1 rounded-full text-sm"
-              >GraphQL</span
-            >
-          </div>
-        </div>
-
-        <!-- Database Skills Card -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
-          <h3 class="text-xl font-bold mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">Databases</h3>
-          <div class="flex flex-wrap gap-2">
-            <span
-              class="bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-100 px-3 py-1 rounded-full text-sm"
-              >MongoDB</span
-            >
-            <span
-              class="bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-100 px-3 py-1 rounded-full text-sm"
-              >PostgreSQL</span
-            >
-            <span
-              class="bg-orange-100 dark:bg-orange-900/50 text-orange-800 dark:text-orange-100 px-3 py-1 rounded-full text-sm"
-              >MySQL</span
-            >
-            <span class="bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-100 px-3 py-1 rounded-full text-sm"
-              >Redis</span
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    id="contact"
-    title="Let's work together"
-    subtitle="I'm currently available for freelance work or full-time opportunities. If you'd like to talk about a project or job opportunity, get in touch!"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Contact Me',
-        href: 'mailto:your.email@example.com',
-      },
-    ]}
-  />
+  <SkillsComponent
+  id="skills"
+  categories={[
+    {
+      name: "Languages",
+      skills: [
+        { name: "JavaScript", icon: "tabler:brand-javascript" },
+        { name: "TypeScript", icon: "tabler:brand-typescript" },
+        { name: "Python", icon: "tabler:brand-python" },
+        { name: "PHP", icon: "tabler:brand-php" },
+        { name: "HTML", icon: "tabler:brand-html5" },
+        { name: "CSS", icon: "tabler:brand-css3" },
+      ]
+    },
+    {
+      name: "Frameworks & Libraries",
+      skills: [
+        { name: "React", icon: "tabler:brand-react" },
+        { name: "Vue.js", icon: "tabler:brand-vue" },
+        { name: "Node.js", icon: "tabler:brand-nodejs" },
+        { name: "Express", icon: "tabler:server" },
+        { name: "Django", icon: "tabler:brand-django" },
+        { name: "Tailwind CSS", icon: "tabler:brand-tailwind" },
+        { name: "Bootstrap", icon: "tabler:brand-bootstrap" },
+      ]
+    },
+    {
+      name: "Tools & Platforms",
+      skills: [
+        { name: "Git", icon: "tabler:brand-git" },
+        { name: "GitHub", icon: "tabler:brand-github" },
+        { name: "Docker", icon: "tabler:brand-docker" },
+        { name: "AWS", icon: "tabler:brand-aws" },
+        { name: "Firebase", icon: "tabler:brand-firebase" },
+        { name: "Netlify", icon: "tabler:cloud" },
+        { name: "Vercel", icon: "tabler:cloud" },
+      ]
+    },
+  ]}
+/>
 
   <!-- BlogLatestPost Widget **************** -->
-
   <BlogLatestPosts
     id="blog"
     title="From My Blog"
@@ -311,6 +229,28 @@ const metadata = {
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
   </BlogLatestPosts>
+
+  <!-- CallToAction Widget *********** -->
+  <CallToAction
+    title="Subscribe to our newsletter"
+    subtitle="Get the latest updates and news delivered to your inbox."
+    hasForm={true}
+    formTitle="Sign up today"
+    highlight="newsletter"
+    form={{
+      inputs: [
+        {
+          type: 'email',
+          name: 'email',
+          label: 'Email address',
+          placeholder: 'your@email.com',
+        },
+      ],
+      button: 'Subscribe',
+      description: 'We respect your privacy. Unsubscribe anytime.',
+    }}
+  />
+
 </Layout>
 
 <style is:global>
