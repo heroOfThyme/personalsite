@@ -26,7 +26,7 @@ export interface Props {
 
 const {
   title = "Full-Stack Developer",
-  subtitle = "Creating elegant solutions to complex problems",
+  subtitle = "Transforming complex challenges into elegant solutions with over 5 years of expertise in modern web development. Specializing in JavaScript and TypeScript to create responsive, scalable applications that deliver exceptional user experiences.",
   tagline = "Portfolio",
   primaryCTA = {
     text: "View My Work",
@@ -39,7 +39,6 @@ const {
     icon: "tabler:mail"
   },
   image = await Astro.slots.render('image'),
-  technologies = ["React", "Node.js", "TypeScript", "Full-Stack"]
 } = Astro.props;
 ---
 
@@ -71,16 +70,7 @@ const {
       <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto lg:mx-0">
         {subtitle}
       </p>
-      
-      <!-- Technology badges -->
-      <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-8">
-        {technologies.map(tech => (
-          <span class="badge badge-primary">
-            {tech}
-          </span>
-        ))}
-      </div>
-      
+    
       <!-- Call to actions -->
       <div class="flex flex-wrap justify-center lg:justify-start gap-4">
         <Button variant="primary" href={primaryCTA.href} class="flex items-center gap-2">

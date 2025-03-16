@@ -1,5 +1,5 @@
 ---
-// src/pages/projects/elementii/index.astro
+// src/pages/elementii.astro
 import ProjectLayout from '~/layouts/ProjectLayout.astro';
 import Header from '~/components/widgets/Header.astro';
 import Hero from '~/components/widgets/Hero.astro';
@@ -12,10 +12,10 @@ import { Icon } from 'astro-icon/components';
 
 const metadata = {
   title: 'Elementii - Interactive Periodic Table App',
-  description: 'Explore the periodic table in a fun, interactive way with Elementii',
+  description: 'Explore chemistry through an engaging, interactive periodic table experience',
 };
 
-// Project details - customize these with your actual app information!
+// App information
 const appInfo = {
   name: 'Elementii',
   tagline: 'Interactive Periodic Table',
@@ -25,26 +25,26 @@ const appInfo = {
   githubLink: 'https://github.com/yourusername/elementii',
 };
 
-// App screenshots
+// App screenshots - use your actual screenshot images
 const screenshots = [
   {
-    title: 'Home Screen',
-    description: 'The main dashboard presenting an overview of the periodic table',
-    image: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
-  },
-  {
     title: 'Element Details',
-    description: 'Detailed view of each element showing properties, history, and applications',
-    image: 'https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
+    description: 'Discover detailed information about all 118 elements',
+    image: '~/assets/images/elementii/element-details.jpg', // Update with your actual image path
   },
   {
-    title: 'Interactive Quizzes',
-    description: 'Test your knowledge with fun, interactive quizzes about the elements',
-    image: 'https://images.unsplash.com/photo-1633167606207-d840b5070fc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80',
+    title: 'Interactive Table',
+    description: 'Explore the periodic table with color-coded elements by category',
+    image: '~/assets/images/elementii/periodic-table.jpg', // Update with your actual image path
+  },
+  {
+    title: 'Fun Facts',
+    description: 'Learn interesting facts about elements you might not have known before',
+    image: '~/assets/images/elementii/fun-facts.jpg', // Update with your actual image path
   },
 ];
 
-// App features
+// App features with colored icons
 const features = [
   {
     title: 'Complete Periodic Table',
@@ -104,6 +104,42 @@ const faqs = [
     title: 'How often is Elementii updated?',
     description: 'We update Elementii monthly with new content, features, and improvements based on user feedback and scientific developments.',
   },
+  {
+    title: 'How can I contact support?',
+    description: 'You can reach our support team at support@elementii.app for any questions, feedback, or issues you may encounter.',
+  },
+];
+
+// Policy information for the Content component
+const policyItems = [
+  {
+    title: 'Privacy Policy',
+    description: 'We take your privacy seriously. Elementii collects minimal usage data to improve the app. Your quiz results and progress are stored locally on your device.',
+  },
+  {
+    title: 'Data Collection',
+    description: 'We only collect anonymous usage statistics and device information to fix bugs and optimize performance. No personal information is collected without your consent.',
+  },
+  {
+    title: 'Terms of Service',
+    description: 'By using Elementii, you agree to our terms of service. The app is provided "as is" without warranties. In-app purchases are non-refundable except as required by law.',
+  },
+];
+
+// Support information for the Content component
+const supportItems = [
+  {
+    title: 'Email Support',
+    description: 'Reach our dedicated support team at support@elementii.app for any questions or issues.',
+  },
+  {
+    title: 'Social Media',
+    description: 'Connect with us on Twitter (@elementiiapp) or Facebook (facebook.com/elementiiapp) for updates and support.',
+  },
+  {
+    title: 'Feedback',
+    description: 'We welcome your suggestions and feedback to make Elementii better with each update.',
+  },
 ];
 ---
 
@@ -113,7 +149,8 @@ const faqs = [
     links={[
       { text: 'Features', href: '#features' },
       { text: 'Screenshots', href: '#screenshots' },
-      { text: 'FAQ', href: '#faq' },
+      { text: 'Privacy', href: '#privacy' },
+      { text: 'Support', href: '#support' },
       { text: 'Download', href: '#download' },
       { text: 'All Projects', href: '/projects' },
     ]}
@@ -164,12 +201,14 @@ const faqs = [
     subtitle="Discover what makes Elementii the perfect tool for learning about the periodic table"
     columns={3}
     items={features}
+    classes={{ container: 'max-w-6xl' }}
   />
 
   <!-- Stats -->
   <Stats
     title="By the Numbers"
     stats={stats}
+    classes={{ container: 'max-w-4xl' }}
   />
 
   <!-- Screenshots -->
@@ -200,35 +239,51 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Development Story -->
+  <!-- Privacy Policy -->
   <Content
+    id="privacy"
     isReversed
-    title="The Story Behind Elementii"
-    items={[
-      {
-        title: 'The Challenge',
-        description: 'Chemistry students often struggle with memorizing element properties and understanding periodic trends. Traditional learning methods can be dry and unengaging.',
-      },
-      {
-        title: 'The Solution',
-        description: 'Elementii transforms learning about the periodic table into an interactive, visual experience that makes chemistry concepts more accessible and memorable.',
-      },
-      {
-        title: 'Technical Details',
-        description: 'Built with React Native for cross-platform compatibility, with animations powered by Reanimated, state management with Redux, and a Firebase backend for user data.',
-      },
-    ]}
+    title="Privacy Policy & Terms"
+    subtitle="Your privacy matters to us"
+    items={policyItems}
     image={{
-      src: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
-      alt: 'Chemistry lab',
+      src: '~/assets/images/illustrations/privacy.svg', // Update with your actual image
+      alt: 'Privacy illustration',
     }}
   >
     <Fragment slot="content">
-      <p class="text-lg text-muted dark:text-slate-400">
-        Elementii was born from a passion for making science education more accessible and engaging. 
-        As a developer with a background in chemistry education, I wanted to create a tool that would 
-        help students develop a stronger understanding of the periodic table and chemistry fundamentals.
+      <p class="text-lg mb-6 text-muted dark:text-slate-400">
+        At Elementii, we believe in transparency. Here's a summary of our privacy practices,
+        but you can read our full policy below. If you have any questions, please don't
+        hesitate to contact us.
       </p>
+      <div class="flex mt-6">
+        <a href="/elementii/privacy-policy" class="btn btn-primary mr-4">Full Privacy Policy</a>
+        <a href="/elementii/terms" class="btn">Terms of Service</a>
+      </div>
+    </Fragment>
+  </Content>
+
+  <!-- Support Information -->
+  <Content
+    id="support"
+    title="Support & Contact"
+    subtitle="We're here to help"
+    items={supportItems}
+    image={{
+      src: '~/assets/images/illustrations/support.svg', // Update with your actual image
+      alt: 'Support illustration',
+    }}
+  >
+    <Fragment slot="content">
+      <p class="text-lg mb-6 text-muted dark:text-slate-400">
+        Have questions or need assistance with Elementii? Our support team is ready to help
+        you get the most out of your experience with our app.
+      </p>
+      <a href="mailto:support@elementii.app" class="btn btn-primary">
+        <Icon name="tabler:mail" class="h-5 w-5 mr-2" />
+        Contact Support
+      </a>
     </Fragment>
   </Content>
 
