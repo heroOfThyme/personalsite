@@ -1,8 +1,9 @@
 ---
-import ProjectLayout from '~/layouts/ProjectLayout.astro';
+import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
-import Header from '~/components/widgets/Header.astro';
 import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import Button from '~/components/ui/Button.astro';
 
 const metadata = {
   title: 'My Projects',
@@ -12,8 +13,8 @@ const metadata = {
 const projects = [
   {
     title: 'Elementii',
-    description: 'A mobile app that helps users learn and interact with the periodic table of elements in an interactive and engaging way.',
-    technologies: ['React Native', 'Firebase', 'Redux'],
+    description: 'An iOS native application that allows users to explore and see detailed views of the Elements of the Periodic Table.',
+    technologies: ['Swift', 'SwiftUI', 'JSON'],
     image: {
       src: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
       alt: 'Elementii app interface',
@@ -34,7 +35,6 @@ const projects = [
     demoUrl: 'https://demo-site.com',
     codeUrl: 'https://github.com/yourusername/project',
   },
-
 ];
 
 // Filter featured projects to highlight them
@@ -42,25 +42,7 @@ const featuredProjects = projects.filter(project => project.featured);
 const regularProjects = projects.filter(project => !project.featured);
 ---
 
-<ProjectLayout metadata={metadata}>
-  <!-- Header -->
-  <Header
-    links={[
-      { text: 'Home', href: '/' },
-      { text: 'About', href: '/about' },
-      { text: 'Resume', href: '/resume' },
-      { text: 'Contact', href: '/contact' },
-    ]}
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Back to Portfolio',
-        href: '/#projects',
-      },
-    ]}
-    isSticky
-    showToggleTheme
-  />
+<Layout metadata={metadata}>
   <!-- Hero -->
   <Hero title="My Projects" tagline="Portfolio">
     <Fragment slot="subtitle">
@@ -70,39 +52,47 @@ const regularProjects = projects.filter(project => !project.featured);
 
   <!-- Featured Projects -->
   {featuredProjects.length > 0 && (
-    <div class="py-12 md:py-20 bg-blue-50 dark:bg-slate-800/20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="py-12 md:py-20 bg-gradient-to-b from-white to-indigo-50 dark:from-gray-900 dark:to-indigo-950/30">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
         <div class="mb-12 text-center">
+          <p class="inline-block px-3 py-1 text-xs font-medium tracking-wider text-indigo-700 uppercase bg-indigo-100 dark:bg-indigo-900/30 dark:text-indigo-300 rounded-full mb-4">
+            Featured Work
+          </p>
           <h2 class="text-3xl font-bold tracking-tight mb-4">Featured Projects</h2>
           <p class="text-lg text-muted dark:text-slate-400 max-w-3xl mx-auto">
             These projects showcase my best work and the technologies I'm most passionate about.
           </p>
         </div>
         
-        <div class="space-y-24">
+        <div class="space-y-16">
           {featuredProjects.map((project, index) => (
-            <div class="bg-white dark:bg-slate-900 rounded-xl shadow-xl overflow-hidden">
-              <div class={`md:flex ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
-                <div class="md:w-1/2">
-                  <img 
-                    src={project.image.src} 
-                    alt={project.image.alt} 
-                    class="h-full w-full object-cover"
-                  />
+            <div class="backdrop-blur-md bg-white/80 dark:bg-gray-800/60 rounded-2xl shadow-lg overflow-hidden border border-gray-100/80 dark:border-gray-700/80 transition-all duration-300 hover:shadow-xl">
+              <div class={`md:flex ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''} items-center`}>
+                <div class="md:w-2/5 p-4">
+                  <div class="rounded-xl overflow-hidden shadow-md">
+                    <Image
+                      src={project.image.src} 
+                      alt={project.image.alt} 
+                      class="w-full h-auto object-cover"
+                      aspectRatio="4:3"
+                      width={600}
+                      height={450}
+                    />
+                  </div>
                 </div>
-                <div class="p-8 md:w-1/2 flex flex-col justify-center">
-                  <div class="mb-2">
-                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-primary bg-primary/10">
+                <div class="p-8 md:w-3/5">
+                  <div class="mb-3">
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-primary bg-primary/10 dark:bg-primary/20">
                       Featured Project
                     </span>
                   </div>
-                  <h3 class="text-2xl font-bold mb-4">{project.title}</h3>
-                  <p class="text-muted dark:text-slate-400 mb-6">{project.description}</p>
+                  <h3 class="text-2xl font-bold mb-3">{project.title}</h3>
+                  <p class="text-muted dark:text-slate-300 mb-6">{project.description}</p>
                   
                   <div class="mb-6">
                     <div class="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
-                        <span class="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 px-3 py-1 rounded-full text-sm">
+                        <span class="text-xs px-3 py-1 bg-indigo-100/80 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full">
                           {tech}
                         </span>
                       ))}
@@ -111,17 +101,17 @@ const regularProjects = projects.filter(project => !project.featured);
                   
                   <div class="flex gap-4">
                     {project.link && (
-                      <a href={project.link} class="btn btn-primary inline-flex items-center gap-1">
+                      <Button variant="primary" href={project.link} class="group">
                         <span>View Project</span>
-                        <Icon name="tabler:arrow-right" class="w-4 h-4" />
-                      </a>
+                        <Icon name="tabler:arrow-right" class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Button>
                     )}
                     
                     {project.codeUrl && (
-                      <a href={project.codeUrl} class="btn btn-outline inline-flex items-center gap-1" target="_blank">
-                        <Icon name="tabler:brand-github" class="w-4 h-4" />
+                      <Button variant="secondary" href={project.codeUrl} target="_blank" class="group">
+                        <Icon name="tabler:brand-github" class="w-4 h-4 mr-2" />
                         <span>Code</span>
-                      </a>
+                      </Button>
                     )}
                   </div>
                 </div>
@@ -130,59 +120,65 @@ const regularProjects = projects.filter(project => !project.featured);
           ))}
         </div>
       </div>
-    </div>
+    </section>
   )}
 
   <!-- More Projects Grid -->
-  <div class="py-12 md:py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-12 md:py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="mb-12 text-center">
+        <p class="inline-block px-3 py-1 text-xs font-medium tracking-wider text-indigo-700 uppercase bg-indigo-100 dark:bg-indigo-900/30 dark:text-indigo-300 rounded-full mb-4">
+          Portfolio
+        </p>
         <h2 class="text-3xl font-bold tracking-tight mb-4">More Projects</h2>
         <p class="text-lg text-muted dark:text-slate-400 max-w-3xl mx-auto">
           Explore more of my work across different domains and technologies.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {regularProjects.map((project) => (
-          <div class="bg-white dark:bg-slate-900 rounded-lg shadow-lg overflow-hidden flex flex-col h-full transform hover:-translate-y-2 transition-transform duration-300">
+          <div class="backdrop-blur-md bg-white/80 dark:bg-gray-800/60 rounded-xl shadow-md overflow-hidden border border-gray-100/80 dark:border-gray-700/80 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full">
             <div class="h-48 overflow-hidden">
-              <img 
+              <Image
                 src={project.image.src}
                 alt={project.image.alt}
                 class="w-full h-full object-cover"
+                width={400}
+                height={200}
+                aspectRatio="2:1"
               />
             </div>
             <div class="p-6 flex-grow">
               <h3 class="text-xl font-bold mb-2">{project.title}</h3>
-              <p class="text-muted dark:text-slate-400 mb-4 line-clamp-3">{project.description}</p>
+              <p class="text-muted dark:text-slate-300 mb-4 line-clamp-3">{project.description}</p>
               
               <div class="mb-4">
                 <div class="flex flex-wrap gap-1">
                   {project.technologies.slice(0, 3).map((tech) => (
-                    <span class="text-xs px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded">
+                    <span class="text-xs px-2 py-1 bg-indigo-100/80 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full">
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 3 && (
-                    <span class="text-xs px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded">
+                    <span class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full">
                       +{project.technologies.length - 3}
                     </span>
                   )}
                 </div>
               </div>
             </div>
-            <div class="p-6 pt-0 mt-auto">
+            <div class="p-6 pt-0 mt-auto border-t border-gray-100 dark:border-gray-700/50">
               <div class="flex gap-4">
                 {project.demoUrl && (
-                  <a href={project.demoUrl} class="text-primary font-medium inline-flex items-center gap-1">
+                  <a href={project.demoUrl} class="text-primary hover:text-primary-600 dark:hover:text-primary-400 font-medium inline-flex items-center gap-1 transition-colors">
                     <span>View Project</span>
                     <Icon name="tabler:external-link" class="w-4 h-4" />
                   </a>
                 )}
                 
                 {project.codeUrl && (
-                  <a href={project.codeUrl} class="text-muted dark:text-slate-400 font-medium inline-flex items-center gap-1" target="_blank">
+                  <a href={project.codeUrl} class="text-muted hover:text-gray-900 dark:text-slate-400 dark:hover:text-white font-medium inline-flex items-center gap-1 transition-colors" target="_blank">
                     <Icon name="tabler:brand-github" class="w-4 h-4" />
                     <span>Code</span>
                   </a>
@@ -193,13 +189,13 @@ const regularProjects = projects.filter(project => !project.featured);
         ))}
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Back to Portfolio Button -->
   <div class="text-center py-12">
-    <a href="/#projects" class="btn btn-outline inline-flex items-center gap-2">
+    <Button variant="secondary" href="/#projects" class="inline-flex items-center gap-2">
       <Icon name="tabler:arrow-left" class="w-5 h-5" />
       <span>Back to Portfolio</span>
-    </a>
+    </Button>
   </div>
-</ProjectLayout>
+</Layout>

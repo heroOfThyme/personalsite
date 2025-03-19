@@ -2,7 +2,6 @@
 import type { ImageMetadata } from 'astro';
 import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
-import PostTags from '~/components/blog/Tags.astro';
 
 import { APP_BLOG } from 'astrowind:config';
 import type { Post } from '~/types';
@@ -107,14 +106,5 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
     </header>
 
     {post.excerpt && <p class="flex-grow text-muted dark:text-slate-400 text-lg">{post.excerpt}</p>}
-    {
-      post.tags && Array.isArray(post.tags) ? (
-        <footer class="mt-5">
-          <PostTags tags={post.tags} />
-        </footer>
-      ) : (
-        <Fragment />
-      )
-    }
   </div>
 </article>

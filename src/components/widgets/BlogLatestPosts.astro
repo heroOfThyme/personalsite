@@ -58,15 +58,11 @@ const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <article
-              class="backdrop-blur-md bg-white/60 dark:bg-gray-800/60 rounded-xl 
-                      shadow-md overflow-hidden border border-gray-100/80 dark:border-gray-700/80 
+              class="bg-white dark:bg-[#050505] rounded-xl 
+                      shadow-md overflow-hidden border border-gray-100 dark:border-gray-800 
                       transition-all duration-300 hover:shadow-lg hover:-translate-y-1 
                       flex flex-col relative"
             >
-              <div
-                class="absolute inset-0 -z-10 bg-gradient-to-br from-white/40 to-white/10 
-                   dark:from-gray-800/40 dark:to-gray-800/10 rounded-xl"
-              />
               <div class="relative">
                 {post.image && (
                   <a href={post.permalink}>
@@ -113,7 +109,7 @@ const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
                   {post.category && (
                     <a
                       href={`/category/${post.category.slug}`}
-                      class="text-xs px-2 py-1 bg-gray-100/80 dark:bg-gray-700/80 backdrop-blur-sm text-gray-800 dark:text-gray-200 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                      class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                     >
                       {post.category.title}
                     </a>
@@ -135,14 +131,10 @@ const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
         <div class="space-y-8">
           {posts.map((post) => (
             <article
-              class="backdrop-blur-md bg-white/60 dark:bg-gray-800/60 rounded-xl 
-                  shadow-md overflow-hidden border border-gray-100/80 dark:border-gray-700/80 
+              class="bg-white dark:bg-[#050505] rounded-xl 
+                  shadow-md overflow-hidden border border-gray-100 dark:border-gray-800 
                   transition-all duration-300 hover:shadow-lg relative"
             >
-              <div
-                class="absolute inset-0 -z-10 bg-gradient-to-br from-white/40 to-white/10 
-                 dark:from-gray-800/40 dark:to-gray-800/10 rounded-xl"
-              />
               <div class="md:flex">
                 {post.image && (
                   <div class="md:w-1/3">
@@ -178,7 +170,7 @@ const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
                       {post.category && (
                         <a
                           href={`/category/${post.category.slug}`}
-                          class="text-xs px-2 py-1 bg-gray-100/80 dark:bg-gray-700/80 backdrop-blur-sm text-gray-800 dark:text-gray-200 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                          class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                         >
                           {post.category.title}
                         </a>

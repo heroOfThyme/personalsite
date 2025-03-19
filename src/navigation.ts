@@ -1,14 +1,13 @@
-import { getPermalink, getBlogPermalink } from './utils/permalinks';
+import { getPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
     { text: 'About', href: getPermalink('/#about') },
-    { text: 'Projects', href: getPermalink('/projects') },
+    { text: 'Projects', href: getPermalink('/#projects') },
     { text: 'Skills', href: getPermalink('/#skills') },
-    { text: 'Resume', href: getPermalink('/resume') },
     {
       text: 'Blog',
-      href: getBlogPermalink(),
+      href: getPermalink('/#blog'),
     },
     { text: 'Contact', href: getPermalink('/#contact') },
   ],
@@ -26,9 +25,11 @@ export const footerData = {
     {
       title: 'Quick Links',
       links: [
-        { text: 'About Me', href: getPermalink('/#about') },
-        { text: 'Projects', href: getPermalink('/projects') },
-        { text: 'Skills & Expertise', href: getPermalink('/#skills') },
+        { text: 'About', href: '#about' },
+        { text: 'Projects', href: '#projects' },
+        { text: 'Skills', href: '#skills' },
+        { text: 'Blog', href: '#blog' },
+        { text: 'Contact', href: '#contact' },
       ],
     },
   ],

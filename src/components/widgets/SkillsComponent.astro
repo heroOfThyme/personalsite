@@ -31,7 +31,7 @@ export interface Props {
 
 const {
   title = 'My Skill Set',
-  subtitle = 'Technologies and tools I work with!',
+  subtitle = 'Technologies and tools I work with.',
   tagline = '',
   categories = [],
   displayType = 'grid',
@@ -87,7 +87,7 @@ const levelStyles = {
     displayType === 'grid' && (
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {categories.map((category) => (
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:shadow-lg">
+          <div class="bg-white dark:bg-[#050505] rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:shadow-lg">
             <div class="flex items-center mb-4">
               {category.icon && (
                 <div class="p-2 mr-4 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-300">

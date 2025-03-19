@@ -3,12 +3,12 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Header from '~/components/widgets/Header.astro';
 import ModernHero from '~/components/widgets/ModernHero.astro';
-import AboutMe from '~/components/widgets/AboutMe.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import ProjectShowcase from '~/components/widgets/ProjectShowcase.astro';
 import Button from '~/components/ui/Button.astro';
 import SkillsComponent from '~/components/widgets/SkillsComponent.astro';
+import AboutMe from '~/components/widgets/AboutMe.astro';
 
 const metadata = {
   title: 'P. Vidakovic - Full-Stack Engineer',
@@ -16,7 +16,6 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <Fragment slot="announcement"></Fragment>
   <Fragment slot="header">
     <Header
       links={[
@@ -28,9 +27,8 @@ const metadata = {
       ]}
       actions={[
         {
-          text: 'Get in Touch',
+          text: 'Hire Me',
           href: '#contact',
-          class: 'btn-gradient',
         },
       ]}
       isSticky
@@ -39,13 +37,12 @@ const metadata = {
   </Fragment>
 
   <ModernHero
-    tagline="Portfolio"
+    tagline="Developer"
     image={{
       src: '~/assets/images/avataaars.png',
       alt: 'Niga',
     }}
   >
-
     <Fragment slot="actions">
       <Button href="#projects" variant="primary" class="btn-gradient">View My Work</Button>
     </Fragment>
@@ -56,42 +53,43 @@ const metadata = {
     id="about"
     title="About Me"
     tagline="Background"
-    subtitle="Aspiring full-stack developer with a passion for creating elegant, user-friendly applications."
+    subtitle="Aspiring Developer - Tolkien Enthusiast."
     image={{
       src: '~/assets/images/avataaars.png',
       alt: 'P. Vidakovic profile picture',
     }}
   >
     <Fragment slot="content">
-      <p class="mb-4">I discovered my passion for development during a marketing degree when web development sparked my interest. Years later, after building my first gaming PC and creating Discord bots, I fully committed to this journey.</p>
-      <p class="mb-4">I approach development challenges with patience and methodical problem-solving, breaking down complex issues into manageable solutions. When not coding, I recharge through hiking, photography, kayaking, gaming, and exploring local restaurants.</p>
-      <p class="mb-4">My marketing background combined with technical skills gives me a unique perspective in creating solutions that are both functional and user-focused. I'm passionate about building technology that makes a difference while continuously expanding my development expertise.</p>
+      <p class="mb-4">
+        My fascination with development began during a web development course in my marketing program. After we created our first HTML page, and I managed to center a div, it quickly became my favorite class in the enitre program. 
+      </p>
+      <p class="mb-4">
+        What started with coding small websites quickly evolved as I ventured into creating Discord bots and other JavaScript-heavy projects. I was drawn to JavaScript's versatility, and as the language grew more powerful over time, I leveraged it to expand into backend development as well. This progression led me to discover Astro, which has since become my framework of choice.
+      </p>
+      <p class="mb-4">
+        When away from my keyboard, I like to recharge through hiking, cruising, gaming, exploring local restaurants, and watch the Lord of The Rings trilogy. Extended Edition only.
+        My goal is to continue my developer path to become a Full Stack Engineer.
+      </p>
     </Fragment>
 
-    <Fragment slot="bg">
-      <div
-        class="absolute inset-0 bg-gradient-to-br from-white to-indigo-50 dark:from-gray-900 dark:to-indigo-950 opacity-70"
-      >
-      </div>
-    </Fragment>
   </AboutMe>
 
   <!-- Projects Section with Modern Card Layout -->
   <ProjectShowcase
     id="projects"
     title="Recent Projects"
-    subtitle="Check out some of my latest work and ongoing projects"
+    subtitle="Check out some of my latest work and ongoing projects."
     tagline="Portfolio"
     projects={[
       {
-        title: 'E-commerce Platform',
+        title: 'Elementii',
         description:
           'A full-featured online store with product management, shopping cart, and secure checkout functionality using React, Node.js, and MongoDB.',
         image: {
           src: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
           alt: 'E-commerce project screenshot',
         },
-        tags: ['React', 'Node.js', 'MongoDB', 'Express', 'Stripe'],
+        tags: ['Swift', 'SwiftUI'],
         demoUrl: '#',
         sourceUrl: 'https://github.com/yourusername/ecommerce-project',
       },
@@ -125,39 +123,44 @@ const metadata = {
 
   <!-- Skills Section with Modern Pill Design -->
   <SkillsComponent
-  tagline="Skills & Expertise"
-  id="skills"
-  categories={[
-    {
-      name: "Languages",
-      skills: [
-        { name: "JavaScript", icon: "tabler:brand-javascript", level: "Intermediate" },
-        { name: "TypeScript", icon: "tabler:brand-typescript", level: "Intermediate" },
-        { name: "Python", icon: "tabler:brand-python", level: "Beginner" },
-        { name: "HTML", icon: "tabler:brand-html5", level: "Expert" },
-        { name: "CSS", icon: "tabler:brand-css3", level: "Expert" },
-      ]
-    },
-    {
-      name: "Frameworks & Libraries",
-      skills: [
-        { name: "React", icon: "tabler:brand-react", level: "Intermediate" },
-        { name: "Astro", icon: "tabler:brand-astro", level: "Expert" },
-        { name: "Node.js", icon: "tabler:brand-nodejs", level: "Intermediate" },
-        { name: "Tailwind CSS", icon: "tabler:brand-tailwind", level: "Advanced" },
-      ]
-    },
-    {
-      name: "Tools & Platforms",
-      skills: [
-        { name: "Git", icon: "tabler:brand-git", level: "Intermediate" },
-        { name: "GitHub", icon: "tabler:brand-github", level: "Intermediate" },
-        { name: "Docker", icon: "tabler:brand-docker", level: "Beginner" },
-        { name: "Firebase", icon: "tabler:brand-firebase", level: "Beginner" },
-      ]
-    },
-  ]}
-/>
+    tagline="Skills & Expertise"
+    id="skills"
+    categories={[
+      {
+        name: 'Languages',
+        skills: [
+          { name: 'JavaScript', icon: 'tabler:brand-javascript', level: 'Intermediate' },
+          { name: 'TypeScript', icon: 'tabler:brand-typescript', level: 'Intermediate' },
+          { name: 'HTML', icon: 'tabler:brand-html5', level: 'Expert' },
+          { name: 'CSS', icon: 'tabler:brand-css3', level: 'Expert' },
+          { name: 'Swift', icon: 'tabler:brand-swift', level: 'beginner' },
+          { name: 'Python', icon: 'tabler:brand-python', level: 'Beginner' },
+          { name: 'PHP', icon: 'tabler:brand-php', level: 'Beginner' },
+        ],
+      },
+      {
+        name: 'Frameworks & Libraries',
+        skills: [
+          { name: 'React', icon: 'tabler:brand-react', level: 'Intermediate' },
+          { name: 'Astro', icon: 'tabler:brand-astro', level: 'Advanced' },
+          { name: 'Node.js', icon: 'tabler:brand-nodejs', level: 'Intermediate' },
+          { name: 'Tailwind CSS', icon: 'tabler:brand-tailwind', level: 'Advanced' },
+          { name: 'Laravel', icon: 'tabler:brand-laravel', level: 'Beginner' },
+        ],
+      },
+      {
+        name: 'Tools & Platforms',
+        skills: [
+          { name: 'Git', icon: 'tabler:brand-git', level: 'Intermediate' },
+          { name: 'GitHub', icon: 'tabler:brand-github', level: 'Intermediate' },
+          { name: 'Docker', icon: 'tabler:brand-docker', level: 'Beginner' },
+          { name: 'Firebase', icon: 'tabler:brand-firebase', level: 'Beginner' },
+          { name: 'VS Code', icon: 'tabler:brand-vscode', level: 'Intermediate' },
+          { name: 'XCode', icon: 'tabler:code', level: 'Beginner' },
+        ],
+      },
+    ]}
+  />
 
   <!-- BlogLatestPost Widget **************** -->
   <BlogLatestPosts
@@ -165,8 +168,7 @@ const metadata = {
     id="blog"
     title="From My Blog"
     information={`Thoughts, tips, and insights on technology, design, and my professional journey.`}
-  >
-  </BlogLatestPosts>
+  />
 
   <!-- CallToAction Widget *********** -->
   <CallToAction
@@ -196,11 +198,10 @@ const metadata = {
         name: 'message',
         label: 'Tell me about your project',
         placeholder: 'I need help with...',
-        rows: 4
+        rows: 4,
       },
       button: 'Send Message',
-      description: 'I typically respond within 24-48 hours.'
+      description: 'I typically respond within 24-48 hours.',
     }}
   />
-
 </Layout>
