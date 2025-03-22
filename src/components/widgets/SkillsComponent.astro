@@ -34,7 +34,7 @@ const {
   subtitle = 'Technologies and tools I work with.',
   tagline = '',
   categories = [],
-  displayType = 'grid',
+  displayType = 'compact',
   id,
   isDark = false,
   bg = await Astro.slots.render('bg'),
@@ -66,7 +66,7 @@ const levelStyles = {
 };
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto px-4 sm:px-6 ${classes?.container ?? ''}`} bg={bg}>
   <!-- Headline -->
   <div class="mb-12 md:mb-16 text-center">
     {
@@ -82,7 +82,72 @@ const levelStyles = {
     {subtitle && <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">{subtitle}</p>}
   </div>
 
-  <!-- Skills Content -->
+  <!-- Skills Content - Compact Display -->
+  {
+    displayType === 'compact' && (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {categories.map((category) => (
+          <div class="bg-white dark:bg-[#050505] rounded-xl p-6 border border-gray-700">
+            <h3 class="text-xl font-bold mb-4 flex items-center">
+              {category.icon && <Icon name={category.icon} class="w-5 h-5 mr-2 text-primary dark:text-primary-300" />}
+              {category.name}
+            </h3>
+
+            <div class="space-y-4">
+              {category.skills.map((skill) => (
+                <div class="flex flex-col">
+                  <div class="flex justify-between items-center mb-1">
+                    <div class="flex items-center">
+                      {skill.icon && (
+                        <Icon
+                          name={skill.icon}
+                          class={`w-5 h-5 mr-2 ${
+                            skill.level === 'Expert'
+                              ? 'text-indigo-600 dark:text-indigo-400'
+                              : skill.level === 'Advanced'
+                                ? 'text-purple-600 dark:text-purple-400'
+                                : skill.level === 'Intermediate'
+                                  ? 'text-green-600 dark:text-green-400'
+                                  : skill.level === 'Beginner'
+                                    ? 'text-blue-600 dark:text-blue-400'
+                                    : 'text-gray-600 dark:text-gray-400'
+                          }`}
+                        />
+                      )}
+                      <span class="font-medium">{skill.name}</span>
+                    </div>
+                    {skill.level && (
+                      <span class="ml-2 text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                        {skill.level}
+                      </span>
+                    )}
+                  </div>
+
+                  {skill.level && (
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 mt-1">
+                      <div
+                        class={
+                          skill.level === 'Expert'
+                            ? 'h-1.5 rounded-full w-full bg-indigo-600 dark:bg-indigo-500'
+                            : skill.level === 'Advanced'
+                              ? 'h-1.5 rounded-full w-3/4 bg-purple-600 dark:bg-purple-500'
+                              : skill.level === 'Intermediate'
+                                ? 'h-1.5 rounded-full w-2/4 bg-green-600 dark:bg-green-500'
+                                : 'h-1.5 rounded-full w-1/4 bg-blue-600 dark:bg-blue-500'
+                        }
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  <!-- Keep these other display types for reference, but hidden with displayType === 'compact' -->
   {
     displayType === 'grid' && (
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -185,68 +250,6 @@ const levelStyles = {
 
                     {skill.description && <p class="text-sm text-gray-500 dark:text-gray-400">{skill.description}</p>}
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    )
-  }
-
-  {
-    displayType === 'compact' && (
-      <div class="space-y-8">
-        {categories.map((category) => (
-          <div>
-            <h3 class="text-xl font-bold mb-4 flex items-center">
-              {category.icon && <Icon name={category.icon} class="w-5 h-5 mr-2 text-primary dark:text-primary-300" />}
-              {category.name}
-            </h3>
-
-            <div class="flex flex-wrap gap-3">
-              {category.skills.map((skill) => (
-                <div class="group flex flex-col bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-lg px-4 py-3 transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-                  <div class="flex items-center mb-2">
-                    {skill.icon && (
-                      <Icon
-                        name={skill.icon}
-                        class={`w-5 h-5 mr-2 ${
-                          skill.level === 'Expert'
-                            ? 'text-indigo-600 dark:text-indigo-400'
-                            : skill.level === 'Advanced'
-                              ? 'text-purple-600 dark:text-purple-400'
-                              : skill.level === 'Intermediate'
-                                ? 'text-green-600 dark:text-green-400'
-                                : skill.level === 'Beginner'
-                                  ? 'text-blue-600 dark:text-blue-400'
-                                  : 'text-gray-600 dark:text-gray-400'
-                        }`}
-                      />
-                    )}
-                    <span class="font-medium flex-1">{skill.name}</span>
-                    {skill.level && (
-                      <span class="ml-2 text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                        {skill.level}
-                      </span>
-                    )}
-                  </div>
-
-                  {skill.level && (
-                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 mt-1">
-                      <div
-                        class={
-                          skill.level === 'Expert'
-                            ? 'h-1.5 rounded-full w-full bg-indigo-600 dark:bg-indigo-500'
-                            : skill.level === 'Advanced'
-                              ? 'h-1.5 rounded-full w-3/4 bg-purple-600 dark:bg-purple-500'
-                              : skill.level === 'Intermediate'
-                                ? 'h-1.5 rounded-full w-2/4 bg-green-600 dark:bg-green-500'
-                                : 'h-1.5 rounded-full w-1/4 bg-blue-600 dark:bg-blue-500'
-                        }
-                      />
-                    </div>
-                  )}
                 </div>
               ))}
             </div>

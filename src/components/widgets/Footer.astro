@@ -1,9 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
 import { SITE } from 'astrowind:config';
-import { getHomePermalink } from '~/utils/permalinks';
-import Logo from '~/components/Logo.astro';
-
 interface Link {
   text?: string;
   href?: string;
@@ -28,10 +24,7 @@ export interface Props {
 }
 
 const {
-  links = [],
   theme = 'light',
-  tagline = 'Full-Stack Developer specialized in creating elegant, user-friendly applications',
-  email = 'hello@petarv.dev',
 } = Astro.props;
 ---
 
@@ -39,76 +32,6 @@ const {
   <div class="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
   
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300">
-    <div class="py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- About Section -->
-      <div>
-        <div class="mb-5">
-          <a class="inline-flex items-center" href={getHomePermalink()}>
-            <Logo />
-          </a>
-        </div>
-        
-        <p class="text-gray-600 dark:text-slate-400 mb-6 max-w-md leading-relaxed">
-          {tagline}
-        </p>
-        
-        <!-- Social Links
-        {socialLinks && socialLinks.length > 0 && (
-          <div class="flex flex-wrap gap-3 mt-auto">
-            {socialLinks.map(({ ariaLabel, href, icon }) => (
-              <a
-                href={href}
-                class="bg-gray-100 dark:bg-gray-800 p-2.5 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-white transition duration-200"
-                aria-label={ariaLabel}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {icon && <Icon name={icon} class="w-5 h-5" />}
-              </a>
-            ))}
-          </div>
-        )}
-      -->
-
-      </div>
-      
-      <!-- Contact Info Section -->
-      <div>
-        <h3 class="font-semibold text-lg mb-4 text-gray-900 dark:text-white">Get in Touch</h3>
-        <div class="space-y-4 text-gray-600 dark:text-slate-400">
-          {email && (
-            <a href={`mailto:${email}`} class="flex items-center group">
-              <div class="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg mr-3 group-hover:bg-primary group-hover:text-white transition duration-200">
-                <Icon name="tabler:mail" class="w-5 h-5" />
-              </div>
-              <span class="group-hover:text-primary transition duration-200">{email}</span>
-            </a>
-          )}
-        </div>
-      </div>
-      
-      <!-- Quick Links Section -->
-      {links.map((group) => (
-        <div>
-          <h3 class="font-semibold text-lg mb-4 text-gray-900 dark:text-white">{group.title}</h3>
-          <ul class="space-y-3">
-            {group.links.map(({ text, href, ariaLabel }) => (
-              <li>
-                <a
-                  class="text-gray-600 hover:text-primary dark:text-gray-400 transition duration-200 flex items-center"
-                  href={href}
-                  aria-label={ariaLabel}
-                >
-                  <Icon name="tabler:chevron-right" class="w-4 h-4 mr-2" />
-                  <Fragment set:html={text} />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-    
     <!-- Bottom Bar with Copyright -->
     <div class="py-6 border-t border-gray-200 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-600 dark:text-slate-400">
       <div>

@@ -25,7 +25,7 @@ export interface Props {
 }
 
 const {
-  subtitle = "Transforming complex challenges into elegant solutions with over 5 years of expertise in modern web development. Specializing in JavaScript and TypeScript to create responsive, scalable applications that deliver exceptional user experiences.",
+  subtitle = "I'm a Full-stack developer who builds digital solutions. I run a web agency in my city and enjoy experimenting with various languages and frameworks. Sometimes I solve problems, sometimes I just build things that interest me.",
   tagline = "Portfolio",
   primaryCTA = {
     text: "View My Work",
@@ -52,11 +52,11 @@ const {
         </p>
       )}
       
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tighter mb-6 font-heading text-gray-900 dark:text-white">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tighter mb-6 font-heading text-gray-900 dark:text-muted">
         Hello, I'm <span class="text-indigo-600 dark:text-indigo-400">Petar Vidakovic</span>.
       </h1>
       
-      <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto lg:mx-0">
+      <p class="text-xl text-muted dark:text-muted mb-8 max-w-xl mx-auto lg:mx-0">
         {subtitle}
       </p>
     
@@ -75,7 +75,7 @@ const {
     </div>
     
     <!-- Right column: Image -->
-    <div class="w-full lg:w-1/2">
+    <div class="w-2/3 lg:w-1/2">
       <div class="relative">
         <!-- Image with proper component usage -->
         <div class="relative intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
@@ -97,18 +97,6 @@ const {
               <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-transparent"></div>
             </div>
           )}
-        </div>
-        
-        <!-- Experience card/badge -->
-        <div class="absolute top-6 -left-6 md:top-8 md:-left-8 bg-white dark:bg-gray-800 rounded-lg px-4 py-3 shadow-lg border border-gray-100 dark:border-gray-700">
-          <div class="flex items-center space-x-2">
-            <div class="bg-indigo-100 dark:bg-indigo-900/30 p-2 rounded-md">
-              <Icon name="tabler:code" class="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-            </div>
-            <p class="text-sm font-medium text-gray-900 dark:text-white">
-              <span class="text-indigo-600 dark:text-indigo-400 font-semibold">5+</span> Years Experience
-            </p>
-          </div>
         </div>
       </div>
     </div>

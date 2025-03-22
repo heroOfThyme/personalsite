@@ -8,11 +8,12 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import ProjectShowcase from '~/components/widgets/ProjectShowcase.astro';
 import Button from '~/components/ui/Button.astro';
 import SkillsComponent from '~/components/widgets/SkillsComponent.astro';
-import AboutMe from '~/components/widgets/AboutMe.astro';
+import AboutMe from '../components/widgets/AboutMe.astro';
 
 const metadata = {
   title: 'P. Vidakovic - Full-Stack Engineer',
 };
+
 ---
 
 <Layout metadata={metadata}>
@@ -40,24 +41,19 @@ const metadata = {
     tagline="Developer"
     image={{
       src: '~/assets/images/avataaars.png',
-      alt: 'Niga',
+      alt: 'This is my Avataar.',
     }}
   >
     <Fragment slot="actions">
-      <Button href="#projects" variant="primary" class="btn-gradient">View My Work</Button>
+      <Button href="#projects" variant="primary">View My Work</Button>
     </Fragment>
   </ModernHero>
 
   <!-- About Me Section with Forest-Inspired Styling -->
   <AboutMe
     id="about"
-    title="About Me"
+    title="Aspiring Developer - Tolkien Enthusiast."
     tagline="Background"
-    subtitle="Aspiring Developer - Tolkien Enthusiast."
-    image={{
-      src: '~/assets/images/avataaars.png',
-      alt: 'P. Vidakovic profile picture',
-    }}
   >
     <Fragment slot="content">
       <p class="mb-4">
@@ -67,8 +63,7 @@ const metadata = {
         What started with coding small websites quickly evolved as I ventured into creating Discord bots and other JavaScript-heavy projects. I was drawn to JavaScript's versatility, and as the language grew more powerful over time, I leveraged it to expand into backend development as well. This progression led me to discover Astro, which has since become my framework of choice.
       </p>
       <p class="mb-4">
-        When away from my keyboard, I like to recharge through hiking, cruising, gaming, exploring local restaurants, and watch the Lord of The Rings trilogy. Extended Edition only.
-        My goal is to continue my developer path to become a Full Stack Engineer.
+        When away from my keyboard, I like to recharge through hiking, cruising, gaming, exploring local restaurants, and watch the Lord of The Rings trilogy. Extended Edition only. My goal is to continue my developer path to become a Full Stack Engineer.
       </p>
     </Fragment>
 
@@ -94,28 +89,16 @@ const metadata = {
         sourceUrl: 'https://github.com/yourusername/ecommerce-project',
       },
       {
-        title: 'Task Management App',
+        title: 'RVB Data Sciences Corp.',
         description:
           'A productivity application for organizing tasks with drag-and-drop functionality and team collaboration features.',
         image: {
           src: 'https://images.unsplash.com/photo-1540350394557-8d14678e7f91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2032&q=80',
           alt: 'Task management app interface',
         },
-        tags: ['Vue.js', 'Firebase', 'Tailwind CSS'],
+        tags: ['Astro', 'Tailwind'],
         demoUrl: '#',
         sourceUrl: 'https://github.com/yourusername/task-app',
-      },
-      {
-        title: 'Fitness Tracker',
-        description:
-          'Mobile application for tracking workouts, nutrition, and fitness goals with progress visualization.',
-        image: {
-          src: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-          alt: 'Fitness app interface',
-        },
-        tags: ['React Native', 'Redux', 'Node.js', 'MongoDB'],
-        demoUrl: '#',
-        sourceUrl: 'https://github.com/yourusername/fitness-tracker',
       },
     ]}
     viewAllUrl="/projects"
