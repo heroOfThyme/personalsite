@@ -9,26 +9,28 @@ import '@fontsource-variable/montserrat';
     --aw-font-serif: 'Ubuntu Variable';
     --aw-font-heading: 'Montserrat Variable';
 
-    /* Modern color palette with purples, blues, and pinks */
-    --aw-color-primary: rgb(99, 255, 156); /* Vibrant purple */
-    --aw-color-secondary: rgb(89, 254, 83); /* Bright blue */
-    --aw-color-accent: rgb(255, 100, 218); /* Soft pink */
+    /* Modern color palette with blue, green, and red */
+    --aw-color-primary: rgb(32, 156, 238); /* Bright blue */
+    --aw-color-secondary: rgb(46, 204, 113); /* Vibrant green */
+    --aw-color-accent: rgb(231, 76, 60); /* Warm red */
 
     /* Text colors */
     --aw-color-text-heading: rgb(24, 24, 27);
     --aw-color-text-default: rgb(38, 38, 46);
-    --aw-color-text-muted: rgb(38, 38, 46 , 66%);
-    --aw-color-bg-page: rgb(249, 249, 255);
-
+    --aw-color-text-muted: rgb(38, 38, 46, 66%);
+    
+    /* Softer white background */
+    --aw-color-bg-page: rgb(248, 249, 250);
+    
     /* Dark mode background */
     --aw-color-bg-page-dark: #050505;
     
     /* Pattern background colors */
-    --aw-pattern-primary-color: rgb(88, 80, 236);
-    --aw-pattern-secondary-color: rgb(235, 80, 198);
+    --aw-pattern-primary-color: rgb(32, 156, 238);
+    --aw-pattern-secondary-color: rgb(46, 204, 113);
 
     ::selection {
-      background-color: rgb(226, 223, 255); /* Light purple for selection */
+      background-color: rgba(32, 156, 238, 0.3); /* Light blue for selection */
     }
   }
 
@@ -38,22 +40,23 @@ import '@fontsource-variable/montserrat';
     --aw-font-heading: 'Montserrat Variable';
 
     /* Dark mode colors */
-    --aw-color-primary: rgb(75, 254, 72); /* Lighter purple for dark mode */
-    --aw-color-secondary: rgb(123, 255, 138);
-    --aw-color-accent: rgb(255, 138, 226);
+    --aw-color-primary: rgb(85, 190, 255); /* Brighter blue for dark mode */
+    --aw-color-secondary: rgb(82, 225, 139); /* Brighter green for dark mode */
+    --aw-color-accent: rgb(255, 107, 89); /* Brighter red for dark mode */
 
     /* Text colors in dark mode */
     --aw-color-text-heading: rgb(237, 237, 250);
     --aw-color-text-default: rgb(229, 236, 246);
-    --aw-color-text-muted: rgb(229, 236, 246 , 66%);
+    --aw-color-text-muted: rgb(229, 236, 246, 66%);
     --aw-color-bg-page: var(--aw-color-bg-page-dark);
     
     /* Pattern background colors for dark mode */
-    --aw-pattern-primary-color: rgb(158, 150, 255);
-    --aw-pattern-secondary-color: rgb(255, 118, 216);
+    --aw-pattern-primary-color: rgb(85, 190, 255);
+    --aw-pattern-secondary-color: rgb(82, 225, 139);
 
     ::selection {
-      background-color: rgb(108, 99, 255); /* Darker purple for selection in dark mode */
+      background-color: rgba(85, 190, 255, 0.5); /* Brighter blue for selection in dark mode */
       color: white;
     }
   }
+</style>

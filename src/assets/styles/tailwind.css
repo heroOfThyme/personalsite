@@ -18,26 +18,23 @@
 
   /* Modern project card */
   .project-card {
-    @apply bg-white dark:bg-[#050505] rounded-xl shadow-md overflow-hidden 
+    @apply bg-white dark:bg-[#050505] rounded-md shadow-md overflow-hidden 
            transition-all duration-300 hover:shadow-lg hover:-translate-y-1
            border border-gray-100 dark:border-gray-800;
   }
 
   /* Original button styles with rounded corners */
   .btn {
-    @apply inline-flex items-center justify-center rounded-md border-gray-400 bg-transparent font-semibold text-center text-base text-page leading-snug transition py-3.5 px-6 md:px-8 ease-in duration-200 focus:ring-blue-500 focus:ring-offset-blue-200 focus:ring-2 focus:ring-offset-2 hover:bg-gray-100 hover:border-gray-600 dark:text-white dark:hover:border-transparent cursor-pointer;
+    @apply inline-flex items-center justify-center rounded-md font-semibold text-center text-base leading-snug transition-all py-3.5 px-6 md:px-8 ease-in duration-200 focus:ring-primary focus:ring-2 focus:ring-offset-2 transform hover:scale-[1.02] active:scale-[0.98] cursor-pointer;
   }
-
   .btn-primary {
-    @apply btn font-semibold bg-primary border text-white border-primary hover:bg-secondary hover:border-secondary hover:text-white dark:text-white dark:bg-primary dark:border-primary dark:hover:border-secondary dark:hover:bg-secondary;
+    @apply btn bg-primary text-[#050505] border border-primary shadow-md hover:shadow-lg dark:bg-primary dark:text-[#050505] dark:border-primary;
   }
-
   .btn-secondary {
-    @apply btn border dark:hover:bg-secondary dark:border-primary;
+    @apply btn bg-transparent border border-primary text-primary shadow-sm hover:shadow dark:bg-transparent dark:border-primary dark:text-primary;
   }
-
   .btn-tertiary {
-    @apply btn border-none shadow-none text-muted hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
+    @apply btn border-none shadow-none text-muted hover:text-primary dark:text-gray-400 dark:hover:text-primary;
   }
 
   #header.scroll > div:first-child {
@@ -86,22 +83,20 @@
   [data-aw-toggle-menu].expanded g > path:last-child {
     @apply rotate-45 translate-y-[-8px] translate-x-[14px];
   }
-
-  /* Pill/badge styling for skills and technologies */
   .badge {
-    @apply px-3 py-1 text-xs font-medium rounded-sm transition-colors;
+    @apply px-3 py-1 text-xs font-medium rounded-full transition-colors;
   }
-
+  
   .badge-primary {
-    @apply bg-primary text-black dark:bg-primary dark:text-black;
+    @apply bg-primary text-[#050505] dark:bg-primary dark:text-[#050505];
   }
-
+  
   .badge-secondary {
-    @apply bg-secondary text-white dark:bg-secondary dark:text-white;
+    @apply bg-secondary text-[#050505] dark:bg-secondary dark:text-[#050505];
   }
-
+  
   .badge-accent {
-    @apply bg-accent text-accent dark:bg-accent dark:text-accent;
+    @apply bg-accent text-white dark:bg-accent dark:text-white;
   }
 
   /* Animated link underline effect */

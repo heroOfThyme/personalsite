@@ -3,7 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Header from '~/components/widgets/Header.astro';
 import ModernHero from '~/components/widgets/ModernHero.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import AgencyCTA from '~/components/widgets/AgencyCTA.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import ProjectShowcase from '~/components/widgets/ProjectShowcase.astro';
 import Button from '~/components/ui/Button.astro';
@@ -52,8 +52,6 @@ const metadata = {
   <!-- About Me Section with Forest-Inspired Styling -->
   <AboutMe
     id="about"
-    title="Aspiring Developer - Tolkien Enthusiast."
-    tagline="Background"
   >
     <Fragment slot="content">
       <p class="mb-4">
@@ -154,37 +152,13 @@ const metadata = {
   />
 
   <!-- CallToAction Widget *********** -->
-  <CallToAction
-    id="contact"
-    title="Ready to bring your project to life?"
-    subtitle="I'm currently available for new opportunities and would love to discuss your project."
-    tagline="Let's Collaborate"
-    highlight="project"
-    form={{
-      inputs: [
-        {
-          type: 'text',
-          name: 'name',
-          label: 'Your Name',
-          placeholder: 'John Smith',
-          autocomplete: 'name',
-        },
-        {
-          type: 'email',
-          name: 'email',
-          label: 'Email Address',
-          placeholder: 'john@example.com',
-          autocomplete: 'email',
-        },
-      ],
-      textarea: {
-        name: 'message',
-        label: 'Tell me about your project',
-        placeholder: 'I need help with...',
-        rows: 4,
-      },
-      button: 'Send Message',
-      description: 'I typically respond within 24-48 hours.',
-    }}
-  />
+  <AgencyCTA
+  id="contact"
+  title="Let's work together on your next project"
+  subtitle="For professional web development services, visit my agency RVB Corp where my team and I build enterprise-level solutions."
+  tagline="Collaborate"
+  buttonText="Visit RVB Corp"
+  buttonUrl="https://rvbcorp.com"
+  buttonIcon="tabler:external-link"
+/>
 </Layout>
