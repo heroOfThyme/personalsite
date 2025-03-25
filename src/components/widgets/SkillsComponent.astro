@@ -22,7 +22,6 @@ export interface Props {
   subtitle?: string;
   tagline?: string;
   categories: SkillCategory[];
-  displayType?: 'grid' | 'list' | 'compact';
   id?: string;
   bg?: string;
   classes?: Record<string, string>;
@@ -34,31 +33,30 @@ const {
   subtitle = 'Technologies and tools I work with.',
   tagline = '',
   categories = [],
-  displayType = 'compact',
   id,
   isDark = false,
   bg = await Astro.slots.render('bg'),
   classes = {},
 } = Astro.props;
 
-// Default styling for skill levels
+// Define level colors and widths with original color scheme
 const levelStyles = {
-  Beginner: {
+  'Beginner': {
     badge: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
     progressBar: 'w-1/4 bg-blue-500',
     icon: 'tabler:circle-1',
   },
-  Intermediate: {
+  'Intermediate': {
     badge: 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300',
     progressBar: 'w-2/4 bg-green-500',
     icon: 'tabler:circle-2',
   },
-  Advanced: {
+  'Advanced': {
     badge: 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300',
     progressBar: 'w-3/4 bg-purple-500',
     icon: 'tabler:circle-3',
   },
-  Expert: {
+  'Expert': {
     badge: 'bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-300',
     progressBar: 'w-full bg-primary',
     icon: 'tabler:circle-check',
@@ -68,194 +66,74 @@ const levelStyles = {
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto px-4 sm:px-6 ${classes?.container ?? ''}`} bg={bg}>
   <!-- Headline -->
-  <div class="mb-12 md:mb-16 text-center">
+  <div class="mb-10 text-center">
     {
       tagline && (
-        <p class="inline-block px-3 py-1 text-xs font-medium tracking-wider text-indigo-700 uppercase bg-indigo-100 dark:bg-indigo-900/30 dark:text-indigo-300 rounded-full mb-4">
-          {tagline}
+        <p class="font-mono inline-block px-3 py-1 text-xs tracking-wider text-primary uppercase bg-primary/10 dark:bg-primary/20 rounded-md border border-primary/20 dark:border-primary/30 mb-4">
+          &lt;{tagline}/&gt;
         </p>
       )
     }
 
-    {title && <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">{title}</h2>}
-
+    {title && <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-4">{title}</h2>}
     {subtitle && <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">{subtitle}</p>}
   </div>
 
-  <!-- Skills Content - Compact Display -->
-  {
-    displayType === 'compact' && (
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {categories.map((category) => (
-          <div class="bg-white dark:bg-[#050505] rounded-xl p-6 border border-gray-700">
-            <h3 class="text-xl font-bold mb-4 flex items-center">
-              {category.icon && <Icon name={category.icon} class="w-5 h-5 mr-2 text-primary dark:text-primary-300" />}
-              {category.name}
+  <!-- Compact skills grid with developer theme -->
+  <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    {categories.map((category) => (
+      <div class="bg-white dark:bg-gray-950 rounded-lg shadow-md overflow-hidden border border-gray-200 dark:border-gray-700">
+        <!-- Category header with code-style comment -->
+        <div class="bg-gray-100 dark:bg-gray-950 px-4 py-3 border-b border-gray-200 dark:border-gray-600">
+          <div class="flex items-center">
+            {category.icon && <Icon name={category.icon} class="w-5 h-5 text-primary mr-2" />}
+            <h3 class="font-mono font-bold text-gray-800 dark:text-gray-200">
+              /* {category.name} */
             </h3>
-
-            <div class="space-y-4">
-              {category.skills.map((skill) => (
-                <div class="flex flex-col">
-                  <div class="flex justify-between items-center mb-1">
-                    <div class="flex items-center">
-                      {skill.icon && (
-                        <Icon
-                          name={skill.icon}
-                          class={`w-5 h-5 mr-2 ${
-                            skill.level === 'Expert'
-                              ? 'text-indigo-600 dark:text-indigo-400'
-                              : skill.level === 'Advanced'
-                                ? 'text-purple-600 dark:text-purple-400'
-                                : skill.level === 'Intermediate'
-                                  ? 'text-green-600 dark:text-green-400'
-                                  : skill.level === 'Beginner'
-                                    ? 'text-blue-600 dark:text-blue-400'
-                                    : 'text-gray-600 dark:text-gray-400'
-                          }`}
-                        />
-                      )}
-                      <span class="font-medium">{skill.name}</span>
-                    </div>
-                    {skill.level && (
-                      <span class="ml-2 text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                        {skill.level}
-                      </span>
-                    )}
-                  </div>
-
-                  {skill.level && (
-                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 mt-1">
-                      <div
-                        class={
-                          skill.level === 'Expert'
-                            ? 'h-1.5 rounded-full w-full bg-indigo-600 dark:bg-indigo-500'
-                            : skill.level === 'Advanced'
-                              ? 'h-1.5 rounded-full w-3/4 bg-purple-600 dark:bg-purple-500'
-                              : skill.level === 'Intermediate'
-                                ? 'h-1.5 rounded-full w-2/4 bg-green-600 dark:bg-green-500'
-                                : 'h-1.5 rounded-full w-1/4 bg-blue-600 dark:bg-blue-500'
-                        }
-                      />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
           </div>
-        ))}
-      </div>
-    )
-  }
-
-  <!-- Keep these other display types for reference, but hidden with displayType === 'compact' -->
-  {
-    displayType === 'grid' && (
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {categories.map((category) => (
-          <div class="bg-white dark:bg-[#050505] rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:shadow-lg">
-            <div class="flex items-center mb-4">
-              {category.icon && (
-                <div class="p-2 mr-4 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-300">
-                  <Icon name={category.icon} class="w-6 h-6" />
-                </div>
-              )}
-              <h3 class="text-xl font-bold">{category.name}</h3>
-            </div>
-
-            {category.description && (
-              <p class="text-gray-600 dark:text-gray-300 mb-5 text-sm">{category.description}</p>
-            )}
-
-            <div class="space-y-3">
-              {category.skills.map((skill) => (
-                <div class="relative">
-                  <div class="flex justify-between items-center mb-1">
-                    <div class="flex items-center">
-                      {skill.icon && <Icon name={skill.icon} class="w-4 h-4 mr-2 text-gray-600 dark:text-gray-400" />}
-                      <span class="font-medium">{skill.name}</span>
-                    </div>
-                    {skill.level && (
-                      <span class={`text-xs px-2 py-1 rounded-full ${skill.color || levelStyles[skill.level]?.badge}`}>
-                        {skill.level}
-                      </span>
-                    )}
-                  </div>
-
-                  {skill.level && (
-                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 mb-1">
-                      <div
-                        class={`h-1.5 rounded-full ${skill.color ? skill.color.replace('text-', 'bg-').replace('bg-', 'bg-') : levelStyles[skill.level]?.progressBar}`}
+        </div>
+        
+        <!-- Skills list -->
+        <div class="p-4">
+          <div class="grid grid-cols-1 gap-3">
+            {category.skills.map((skill) => (
+              <div class="skill-item group">
+                <div class="flex justify-between items-center mb-1">
+                  <div class="flex items-center">
+                    {skill.icon && (
+                      <Icon 
+                        name={skill.icon} 
+                        class="w-4 h-4 mr-2 text-gray-600 dark:text-gray-400" 
                       />
-                    </div>
-                  )}
-
-                  {skill.description && (
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{skill.description}</p>
+                    )}
+                    <span class="font-medium text-gray-800 dark:text-gray-200">
+                      {skill.name}
+                    </span>
+                  </div>
+                  
+                  {skill.level && (
+                    <span class={`font-mono text-xs px-2 py-0.5 rounded ${levelStyles[skill.level]?.badge || 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'}`}>
+                      {skill.level}
+                    </span>
                   )}
                 </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    )
-  }
-
-  {
-    displayType === 'list' && (
-      <div class="space-y-10">
-        {categories.map((category) => (
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700">
-            <div class="flex items-center mb-6">
-              {category.icon && (
-                <div class="p-3 mr-4 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-300">
-                  <Icon name={category.icon} class="w-7 h-7" />
-                </div>
-              )}
-              <div>
-                <h3 class="text-2xl font-bold">{category.name}</h3>
-                {category.description && <p class="text-gray-600 dark:text-gray-300 mt-1">{category.description}</p>}
+                
+                {/* Slim progress bar for skill level */}
+                {skill.level && (
+                  <div class="h-1 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                    <div class={`h-1 ${levelStyles[skill.level]?.progressBar || 'w-1/4 bg-gray-400'}`}></div>
+                  </div>
+                )}
               </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-4">
-              {category.skills.map((skill) => (
-                <div class="flex items-center p-3 border border-gray-100 dark:border-gray-700 rounded-lg">
-                  {skill.level && (
-                    <div class="mr-3 text-center">
-                      <Icon
-                        name={levelStyles[skill.level]?.icon || 'tabler:code'}
-                        class={`w-8 h-8 ${
-                          skill.color ||
-                          levelStyles[skill.level]?.badge
-                            .split(' ')
-                            .filter((c) => c.includes('text-'))
-                            .join(' ')
-                        }`}
-                      />
-                    </div>
-                  )}
-
-                  <div class="flex-grow">
-                    <div class="flex justify-between items-center">
-                      <span class="font-bold">{skill.name}</span>
-                      {skill.level && (
-                        <span
-                          class={`text-xs px-2 py-1 rounded-full ${skill.color || levelStyles[skill.level]?.badge}`}
-                        >
-                          {skill.level}
-                        </span>
-                      )}
-                    </div>
-
-                    {skill.description && <p class="text-sm text-gray-500 dark:text-gray-400">{skill.description}</p>}
-                  </div>
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-    )
-  }
+    ))}
+  </div>
+  
+  <!-- Code comment for visual interest and developer theme -->
+  <div class="mt-8 text-center font-mono text-sm text-gray-500 dark:text-gray-400">
+    // Always improving and learning new technologies
+  </div>
 </WidgetWrapper>

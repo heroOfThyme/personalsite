@@ -28,7 +28,7 @@ const plainTextContent = content.replace(/<[^>]*>?/gm, '');
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-3xl mx-auto px-4 ${classes?.container ?? ''}`} bg={bg}>
   <section class="terminal-container relative">
     <!-- Terminal Window -->
-    <div class="terminal-window rounded-lg overflow-hidden shadow-xl border border-gray-700 bg-[#050505] text-muted">
+    <div class="terminal-window rounded-lg overflow-hidden shadow-xl border border-gray-700 bg-[#050505] text-gray-400">
       <!-- Terminal Header -->
       <div class="terminal-header flex items-center p-2 bg-[#161b22] border-b border-gray-700">
         <div class="flex space-x-2">
@@ -46,16 +46,16 @@ const plainTextContent = content.replace(/<[^>]*>?/gm, '');
           <div class="flex-1">
             <span class="text-green-400 font-bold">Quick Facts</span>
             <div class="mt-2">
-              <span class="text-yellow-400">Age:</span> <span class="text-muted">29</span>
+              <span class="text-yellow-400">Age:</span> <span class="text-gray-400">29</span>
             </div>
             <div>
-              <span class="text-yellow-400">Location:</span> <span class="text-muted">Ontario, Canada</span>
+              <span class="text-yellow-400">Location:</span> <span class="text-gray-400">Ontario, Canada</span>
             </div>
             <div>
-              <span class="text-yellow-400">Skills:</span> <span class="text-muted">{skills.join(", ")}</span>
+              <span class="text-yellow-400">Skills:</span> <span class="text-gray-400">{skills.join(", ")}</span>
             </div>
             <div>
-              <span class="text-yellow-400">Interests:</span> <span class="text-muted">{interests.join(", ")}</span>
+              <span class="text-yellow-400">Interests:</span> <span class="text-gray-400">{interests.join(", ")}</span>
             </div>
           </div>
         </div>
@@ -64,20 +64,20 @@ const plainTextContent = content.replace(/<[^>]*>?/gm, '');
         <div class="mt-4 pt-4 border-t border-gray-700">
           <div class="flex flex-wrap">
             <span class="text-green-400">pv</span>
-            <span class="text-white">:</span>
+            <span class="text-gray-400">:</span>
             <span class="text-blue-400">~/portfolio</span>
-            <span class="text-white">$ </span>
-            <span class="text-white">cat about.txt</span>
+            <span class="text-gray-400">$ </span>
+            <span class="text-gray-400">cat about.txt</span>
           </div>
-          <div class="mt-1 text-muted whitespace-pre-wrap">{plainTextContent || "I'm a developer passionate about web technologies and creating engaging user experiences."}</div>
+          <div class="mt-1 text-gray-400 whitespace-pre-wrap">{plainTextContent || "I'm a developer passionate about web technologies and creating engaging user experiences."}</div>
           
           <!-- Current command prompt with blinking cursor -->
           <div class="flex flex-wrap mt-2">
             <span class="text-green-400">pv</span>
-            <span class="text-white">:</span>
+            <span class="text-gray-400">:</span>
             <span class="text-blue-400">~/portfolio</span>
-            <span class="text-white">$ </span>
-            <span class="text-white flex items-center">
+            <span class="text-gray-400">$ </span>
+            <span class="text-gray-400 flex items-center">
               <span class="animate-pulse">▋</span>
             </span>
           </div>

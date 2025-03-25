@@ -1,0 +1,136 @@
+---
+publishDate: 2025-03-24T00:00:00Z
+title: 'Elementii: From Web Dev to iOS Development - A Case Study'
+excerpt: A journey through developing an iOS periodic table app using Swift and SwiftUI, highlighting the learning curve and technical decisions made along the way.
+image: https://images.unsplash.com/photo-1633412802994-5c058f151b66?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8
+tags:
+  - ios-development
+  - swift
+  - swiftui
+  - mobile-apps
+  - case-study
+metadata:
+  canonical: https://yoursite.com/elementii-case-study
+draft: true
+---
+
+import { TechStack } from '~/components/widgets/TechStack';
+import { LearningCurve } from '~/components/widgets/LearningCurve';
+import { InfoBox } from '~/components/widgets/InfoBox';
+
+# Elementii: From Web Dev to iOS Development - A Case Study
+
+As a web developer primarily working with JavaScript, I wanted to expand my skills into mobile development. Elementii, a periodic table app for iPhone, became my first venture into iOS development using Swift and SwiftUI.
+
+<TechStack primary="Swift, SwiftUI" database="CoreData" architecture="MVVM" deployment="App Store" />
+
+## Project Overview
+
+Elementii serves both educational and reference purposes with three core features:
+
+- An interactive, navigable periodic table
+- Detailed information on each element
+- Chemistry quizzes to test knowledge
+
+<InfoBox type="reflection">
+  The biggest challenge wasn't coding itself, but adjusting my mental model from web development patterns to iOS
+  development concepts.
+</InfoBox>
+
+## The Learning Curve
+
+<LearningCurve
+  stage1="Learning Swift syntax and type safety"
+  stage2="Understanding SwiftUI view lifecycle"
+  stage3="Mastering state management"
+  stage4="Implementing complex UI interactions"
+/>
+
+Coming from JavaScript, adapting to Swift's strongly-typed nature required significant mental adjustment. While SwiftUI shares some declarative concepts with React, the underlying paradigms differ considerably.
+
+```swift
+// SwiftUI thinking
+struct ElementCard: View {
+    let element: Element
+    let onTap: () -> Void
+
+    var body: some View {
+        VStack {
+            Text(element.symbol)
+                .font(.headline)
+            Text(element.name)
+                .font(.subheadline)
+        }
+        .padding()
+        .background(Color(element.category.color))
+        .cornerRadius(8)
+        .onTapGesture {
+            onTap()
+        }
+    }
+}
+```
+
+## Technical Challenges
+
+### Data Management
+
+The periodic table dataset, while not enormous, contains complex relationships. I chose to:
+
+- Package pre-populated JSON data with the app
+- Parse into Swift models at runtime
+- Implement a custom caching layer for frequently accessed elements
+- Use Core Data for storing user quiz results
+
+### UI Implementation
+
+Creating an interactive periodic table presented unique challenges:
+
+- **Layout precision:** Accurately positioning 118 elements
+- **Navigation:** Implementing intuitive zooming and panning
+- **Responsiveness:** Ensuring compatibility across different iPhone screens
+- **Performance:** Maintaining smooth scrolling with many elements on screen
+
+## Development Timeline
+
+The project took approximately 18 weeks:
+
+1. **Learning Foundation (4 weeks)** - SwiftUI tutorials and small practice apps
+2. **Planning and Design (2 weeks)** - Feature definition and UI mockups
+3. **Core Development (8 weeks)** - Data layer, UI components, and quiz functionality
+4. **Refinement and Testing (4 weeks)** - Performance optimization and user testing
+
+## Key Takeaways
+
+### What Worked Well
+
+- **SwiftUI's Declarative UI** - Accelerated development despite the learning curve
+- **MVVM Architecture** - Translated well from web development experience
+- **Composable Components** - Breaking UI into reusable pieces improved maintainability
+
+### Challenges Faced
+
+- **Swift Type System** - Adjusting to strict typing initially slowed development
+- **iOS Platform Constraints** - Learning platform-specific patterns
+- **App Store Process** - Navigating the submission and review process
+
+### Unexpected Benefits
+
+- **Performance Thinking** - iOS development forced me to consider memory and CPU usage
+- **UI/UX Considerations** - iOS human interface guidelines provided valuable insights
+- **Testing Discipline** - More formal testing requirements improved my overall approach
+
+## Results
+
+Elementii launched successfully with:
+
+- 10,000+ downloads in the first three months
+- 4.7/5 average rating
+- Featured in "Education" category for two weeks
+- Adopted by several high school chemistry departments
+
+## Conclusion
+
+This journey from web to iOS development expanded my technical toolkit and provided valuable perspective. The most valuable takeaway was that core software engineering principles transcend specific technologies—clean architecture, component-based design, and thoughtful state management are universal concepts.
+
+For web developers considering mobile development, I recommend embracing the differences rather than fighting against them, while recognizing the transferable skills you already possess. The experience has made me a more versatile developer and informed my approach to cross-platform considerations in subsequent projects.
