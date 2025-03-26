@@ -1,6 +1,7 @@
 ---
 title: 'Privacy Policy for Elementii'
-layout: '~/layouts/MarkdownLayout.astro'
+layout: '~/layouts/ElementiiMarkdownLayout.astro'
+description: 'Privacy policy for the Elementii app, explaining how we handle your data.'
 ---
 
 **Effective Date:** March 25, 2025

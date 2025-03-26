@@ -1,7 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-import Header from '~/components/widgets/Header.astro';
 import ModernHero from '~/components/widgets/ModernHero.astro';
 import AgencyCTA from '~/components/widgets/AgencyCTA.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
@@ -16,25 +15,6 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <Fragment slot="header">
-    <Header
-      links={[
-        { text: 'About', href: '#about' },
-        { text: 'Projects', href: '#projects' },
-        { text: 'Skills', href: '#skills' },
-        { text: 'Blog', href: '#blog' },
-        { text: 'Contact', href: '#contact' },
-      ]}
-      actions={[
-        {
-          text: 'Lets Work Together',
-          href: '#contact',
-        },
-      ]}
-      isSticky
-      showToggleTheme
-    />
-  </Fragment>
 
   <ModernHero
     tagline="Developer"
@@ -51,17 +31,17 @@ const metadata = {
   <!-- About Me Section with Forest-Inspired Styling -->
   <AboutMe id="about">
     <Fragment slot="content">
-      <p class="mb-4">
+      <p class="mb-1">
         My fascination with development began during a web development course in my marketing program. After we created
         our first HTML page, and I managed to center a div, it quickly became my favorite class in the enitre program.
       </p>
-      <p class="mb-4">
+      <p class="mb-1">
         What started with coding small websites quickly evolved as I ventured into creating Discord bots and other
         JavaScript-heavy projects. I was drawn to JavaScript's versatility, and as the language grew more powerful over
         time, I leveraged it to expand into backend development as well. This progression led me to discover Astro,
         which has since become my framework of choice.
       </p>
-      <p class="mb-4">
+      <p class="mb-1">
         When away from my keyboard, I like to recharge through hiking, cruising, gaming, exploring local restaurants,
         and watch the Lord of The Rings trilogy. Extended Edition only. My goal is to continue my developer path to
         become a Full Stack Engineer.
@@ -85,7 +65,7 @@ const metadata = {
           alt: 'E-commerce project screenshot',
         },
         tags: ['Swift', 'SwiftUI'],
-        demoUrl: 'https://elementii.petarv.dev',
+        demoUrl: '/projects/elementii',
         sourceUrl: 'https://github.com/yourusername/ecommerce-project',
       },
       {
@@ -94,7 +74,7 @@ const metadata = {
           'RVB is my boutique web agency site built with Astro, combining personal creative vision with technical excellence.',
         image: {
           src: '~/assets/images/rvb.png',
-          alt: 'Task management app interface',
+          alt: 'Task management app interface', 
         },
         tags: ['Astro', 'Tailwind'],
         demoUrl: 'https://rvbcorp.com',

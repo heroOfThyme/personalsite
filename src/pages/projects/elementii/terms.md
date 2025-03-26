@@ -1,6 +1,7 @@
 ---
 title: 'Terms of Service for Elementii'
-layout: '~/layouts/MarkdownLayout.astro'
+layout: '~/layouts/ElementiiMarkdownLayout.astro'
+description: 'Terms of service for using the Elementii app.'
 ---
 
 **Effective Date:** March 25, 2025

@@ -46,16 +46,16 @@ const plainTextContent = content.replace(/<[^>]*>?/gm, '');
           <div class="flex-1">
             <span class="text-green-400 font-bold">Quick Facts</span>
             <div class="mt-2">
-              <span class="text-yellow-400">Age:</span> <span class="text-gray-400">29</span>
+              <span class="text-yellow-400">Age:</span> <span class="text-gray-200">29</span>
             </div>
             <div>
-              <span class="text-yellow-400">Location:</span> <span class="text-gray-400">Ontario, Canada</span>
+              <span class="text-yellow-400">Location:</span> <span class="text-gray-200">Ontario, Canada</span>
             </div>
             <div>
-              <span class="text-yellow-400">Skills:</span> <span class="text-gray-400">{skills.join(", ")}</span>
+              <span class="text-yellow-400">Skills:</span> <span class="text-gray-200">{skills.join(", ")}</span>
             </div>
             <div>
-              <span class="text-yellow-400">Interests:</span> <span class="text-gray-400">{interests.join(", ")}</span>
+              <span class="text-yellow-400">Interests:</span> <span class="text-gray-200">{interests.join(", ")}</span>
             </div>
           </div>
         </div>
@@ -66,18 +66,16 @@ const plainTextContent = content.replace(/<[^>]*>?/gm, '');
             <span class="text-green-400">pv</span>
             <span class="text-gray-400">:</span>
             <span class="text-blue-400">~/portfolio</span>
-            <span class="text-gray-400">$ </span>
-            <span class="text-gray-400">cat about.txt</span>
+            <span class="text-gray-200">$ </span>
+            <span class="text-gray-200">cat about.txt</span>
           </div>
-          <div class="mt-1 text-gray-400 whitespace-pre-wrap">{plainTextContent || "I'm a developer passionate about web technologies and creating engaging user experiences."}</div>
-          
-          <!-- Current command prompt with blinking cursor -->
-          <div class="flex flex-wrap mt-2">
+          <div class="text-gray-400 whitespace-pre-line break-words">{plainTextContent || "I'm a developer passionate about web technologies and creating engaging user experiences."}</div>          <!-- Current command prompt with blinking cursor -->
+          <div class="flex flex-wrap mt-2 mb-1">
             <span class="text-green-400">pv</span>
             <span class="text-gray-400">:</span>
             <span class="text-blue-400">~/portfolio</span>
-            <span class="text-gray-400">$ </span>
-            <span class="text-gray-400 flex items-center">
+            <span class="text-gray-200">$ </span>
+            <span class="text-gray-200 flex items-center">
               <span class="animate-pulse">▋</span>
             </span>
           </div>

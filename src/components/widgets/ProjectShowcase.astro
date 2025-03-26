@@ -55,93 +55,81 @@ const {
   </div>
 
   <!-- Projects Grid - Repository Card Style -->
-  {projects && projects.length > 0 && (
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-      {projects.map((project) => (
-        <div class="repo-card flex flex-col h-full overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-950 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-          <!-- Repository Header -->
-          <div class="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
-            <div class="flex items-center">
-              <Icon name="tabler:folder-code" class="w-5 h-5 text-primary mr-2" />
-              <h3 class="font-mono font-bold text-gray-800 dark:text-gray-100 truncate">
-                {project.title}
-              </h3>
-            </div>
-            <div class="text-xs px-2 py-1 rounded-full bg-primary/10 dark:bg-primary/20 text-primary flex items-center">
-              <Icon name="tabler:star" class="w-3.5 h-3.5 mr-1" />
-              <span>Project</span>
-            </div>
+<!-- Projects Grid - Repository Card Style -->
+{projects && projects.length > 0 && (
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+    {projects.map((project) => (
+      <div class="bg-white dark:bg-gray-950 rounded-lg shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full">
+        <!-- Repository Header -->
+        <div class="bg-gray-50 dark:bg-gray-950 px-4 py-2 border-b border-gray-200 dark:border-gray-600 flex items-center justify-between">
+          <div class="flex items-center">
+            <Icon name="tabler:folder" class="w-4 h-4 text-primary mr-2" />
+            <span class="font-mono text-sm font-medium truncate">{project.title}</span>
           </div>
-          
-          <!-- Project Image -->
-          <div class="relative">
-            {typeof project.image === 'string' ? (
-              <Fragment set:html={project.image} />
-            ) : (
-              <Image
-                class="w-full h-48 object-cover"
-                widths={[300, 400, 600]}
-                width={400}
-                height={225}
-                {...project.image}
-              />
-            )}
+          <div class="text-xs font-mono text-primary bg-primary/10 dark:bg-primary/20 px-2 py-0.5 rounded-full">
+            project
           </div>
+        </div>
+        
+        <!-- Project Image -->
+        <div class="h-48 overflow-hidden">
+          {typeof project.image === 'string' ? (
+            <Fragment set:html={project.image} />
+          ) : (
+            <Image
+              src={project.image.src}
+              alt={project.image.alt}
+              class="w-full h-full object-cover"
+              width={400}
+              height={225}
+              aspectRatio="16:9"
+            />
+          )}
+        </div>
+        
+        <!-- Project Details/Description -->
+        <div class="p-6 flex-grow">
+          <h3 class="text-xl font-bold mb-2">{project.title}</h3>
+          <p class="text-muted dark:text-muted mb-4 line-clamp-3">
+            {project.description}
+          </p>
           
-          <!-- Project Details/Description -->
-          <div class="p-4 flex-grow">
-            <p class="text-gray-600 dark:text-gray-300 mb-4">
-              {project.description.length > 120 
-                ? project.description.slice(0, 120) + '...' 
-                : project.description}
-            </p>
-            
-            <!-- Tags -->
-            <div class="flex flex-wrap gap-2 mb-4">
+          <!-- Tags -->
+          <div class="mb-4">
+            <div class="flex flex-wrap gap-2">
               {project.tags && project.tags.length > 0 && (
                 project.tags.map(tag => (
-                  <span class="font-mono text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
+                  <span class="font-mono text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full">
                     {tag}
                   </span>
                 ))
               )}
             </div>
           </div>
-          
-          <!-- Repository Footer -->
-          <div class="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 mt-auto">
-            <div class="flex flex-wrap gap-4 justify-between">
-              <!-- Demo Link -->
-              {project.demoUrl && (
-                <a href={project.demoUrl} class="flex items-center text-primary hover:text-primary/80 transition-colors text-sm font-medium">
-                  <Icon name="tabler:external-link" class="w-4 h-4 mr-1" />
-                  <span>View Project</span>
-                </a>
-              )}
-              
-              <!-- Blog/Case Study Link -->
-              {project.blogUrl && (
-                <a href={project.blogUrl} class="flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors text-sm font-medium">
-                  <Icon name="tabler:file-text" class="w-4 h-4 mr-1" />
-                  <span>Case Study</span>
-                </a>
-              )}
-              
-              {/* 
-              <!-- Source Link -->
-              {project.sourceUrl && (
-                <a href={project.sourceUrl} class="flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors text-sm font-medium">
-                  <Icon name="tabler:code" class="w-4 h-4 mr-1" />
-                  <span>Source</span>
-                </a>
-              )} 
-              */}
-            </div>
+        </div>
+        
+        <!-- Repository Footer -->
+        <div class="p-4 bg-gray-50 dark:bg-gray-950 mt-auto border-t border-gray-200 dark:border-gray-600">
+          <div class="flex justify-between">
+            {project.demoUrl && (
+              <a href={project.demoUrl} class="text-primary hover:text-primary-600 dark:hover:text-primary-400 font-medium inline-flex items-center gap-1 transition-colors">
+                <Icon name="tabler:external-link" class="w-4 h-4" />
+                <span>View Project</span>
+              </a>
+            )}
+            
+            {project.blogUrl && (
+              <a href={project.blogUrl} class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 font-medium inline-flex items-center gap-1 transition-colors">
+                <Icon name="tabler:file-text" class="w-4 h-4" />
+                <span>Case Study</span>
+              </a>
+            )}
           </div>
         </div>
-      ))}
-    </div>
-  )}
+      </div>
+    ))}
+  </div>
+)}
   
   <!-- View All Button -->
   {viewAllUrl && projects && projects.length > 0 && (

@@ -13,9 +13,9 @@ export const headerData = {
   ],
   actions: [
     { 
-      text: 'Hire Me', 
+      text: 'Lets Work Together', 
       href: getPermalink('/#contact'),
-      variant: 'primary',
+      variant: 'secondary',
     }
   ],
 };
