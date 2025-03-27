@@ -4,28 +4,24 @@ site:
   base: '/'
   trailingSlash: false
 
-  googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
+  googleSiteVerificationId:
 
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: Petar Vidakovic
+    template: '%s — Petar Vidakovic'
+  description: "Full-stack developer specializing in modern web technologies, iOS development, and creative solutions. Portfolio showcasing projects, skills, and professional journey."
   robots:
     index: false
     follow: false
   openGraph:
-    site_name: AstroWind
+    site_name: Petar Vidakovic
     images:
       - url: '~/assets/images/default.png'
         width: 1200
         height: 628
     type: website
-  twitter:
-    handle: '@onwidget'
-    site: '@onwidget'
-    cardType: summary_large_image
 
 i18n:
   language: en
