@@ -20,8 +20,8 @@ export interface Props extends Widget {
 }
 
 const {
-  title = await Astro.slots.render('title'),
-  subtitle = await Astro.slots.render('subtitle'),
+  title = await Astro.slots.render('title') || 'Latest Posts',
+  subtitle = await Astro.slots.render('subtitle') || 'Thoughts on development, design, and technology',
   tagline = await Astro.slots.render('tagline'),
   linkText = 'View all posts',
   linkUrl = getBlogPermalink(),
@@ -29,7 +29,7 @@ const {
   count = 3,
   postLayout = 'grid',
   id,
-  isDark = false,
+  isDark = true,
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
@@ -39,88 +39,71 @@ const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
 
 {
   APP_BLOG.isEnabled ? (
-    <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
-      <div class="mb-12 text-center">
-        {tagline && (
-          <p class="font-mono inline-block px-3 py-1 text-xs tracking-wider text-primary uppercase bg-primary/10 dark:bg-primary/20 rounded-md border border-primary/20 dark:border-primary/30 mb-4">
-            {tagline}
-          </p>
-        )}
-
-        {title && <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-4">{title}</h2>}
-
-        {subtitle && <p class="text-xl text-muted max-w-3xl mx-auto">{subtitle}</p>}
-
-        {information && <p class="text-xl text-muted max-w-2xl mx-auto mt-2">{information}</p>}
-      </div>
+    <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl ${classes?.container ?? ''}`} bg={bg}>
+      <div>
+        <!-- Section Header -->
+        <div class="section-header">
+          <div class="header-badge">
+            <Icon name="tabler:article" class="badge-icon" />
+            <span>Blog</span>
+          </div>
+          {title && <h2 class="section-title">{title}</h2>}
+          {subtitle && <p class="section-subtitle">{subtitle}</p>}
+        </div>
 
       {postLayout === 'grid' ? (
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div class="blog-grid">
           {posts.map((post) => (
-            <article
-              class="bg-white dark:bg-gray-950 rounded-xl 
-                      shadow-md overflow-hidden border border-gray-100 dark:border-gray-800 
-                      transition-all duration-300 hover:shadow-lg hover:-translate-y-1 
-                      flex flex-col relative"
-            >
-              <div class="relative">
-                {post.image && (
+            <article class="blog-card">
+              {post.image && (
+                <div class="blog-image">
                   <a href={post.permalink}>
                     <Image
                       src={post.image}
-                      class="w-full h-48 object-cover"
+                      class="card-image"
                       width={400}
-                      height={200}
+                      height={250}
                       alt={post.title}
-                      aspectRatio="2:1"
+                      aspectRatio="16:10"
                     />
                   </a>
-                )}
-              </div>
+                  <div class="image-overlay" />
+                </div>
+              )}
 
-              <div class="p-6 flex flex-col flex-grow">
-                <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
-                  <Icon name="tabler:calendar" class="w-4 h-4 text-primary dark:text-primary" />
-                  <time datetime={post.publishDate.toISOString()}>
-                    {new Date(post.publishDate).toLocaleDateString('en-us', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                  </time>
-
+              <div class="blog-content">
+                <div class="blog-meta">
+                  <div class="meta-item">
+                    <Icon name="tabler:calendar" class="meta-icon" />
+                    <time datetime={post.publishDate.toISOString()}>
+                      {new Date(post.publishDate).toLocaleDateString('en-us', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                      })}
+                    </time>
+                  </div>
                   {post.readingTime && (
-                    <span class="flex items-center gap-1 ms-3">
-                      <Icon name="tabler:clock" class="w-4 h-4 text-primary dark:text-primary" />
-                      {post.readingTime} min read
-                    </span>
+                    <div class="meta-item">
+                      <Icon name="tabler:clock" class="meta-icon" />
+                      <span>{post.readingTime} min</span>
+                    </div>
                   )}
                 </div>
 
-                <h3 class="font-heading text-xl font-bold mb-2">
-                  <a href={post.permalink} class="hover:text-primary dark:hover:text-primary transition-colors">
-                    {post.title}
-                  </a>
+                <h3 class="blog-title">
+                  <a href={post.permalink}>{post.title}</a>
                 </h3>
 
-                <p class="text-muted line-clamp-2 mb-4">{post.excerpt}</p>
+                {post.excerpt && <p class="blog-excerpt">{post.excerpt}</p>}
 
-                <div class="flex justify-between items-center mt-auto">
+                <div class="blog-footer">
                   {post.category && (
-                    <a
-                      href={`/category/${post.category.slug}`}
-                      class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                    >
-                      {post.category.title}
-                    </a>
+                    <span class="blog-category">{post.category.title}</span>
                   )}
-
-                  <a
-                    href={post.permalink}
-                    class="flex items-center gap-1 text-primary dark:text-primary font-medium text-sm transform hover:scale-[1.02] transition-colors"
-                  >
+                  <a href={post.permalink} class="read-more">
                     Read more
-                    <Icon name="tabler:arrow-right" class="w-4 h-4" />
+                    <Icon name="tabler:arrow-right" class="arrow-icon" />
                   </a>
                 </div>
               </div>
@@ -211,15 +194,285 @@ const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
       )}
 
       {linkText && linkUrl && (
-        <div class="mt-12 text-center">
-          <Button variant="primary" href={linkUrl} class="group font-medium">
+        <div class="view-all-container">
+          <Button variant="secondary" href={linkUrl} class="view-all-button">
             {linkText}
-            <Icon name="tabler:arrow-right" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            <Icon name="tabler:arrow-right" class="button-icon" />
           </Button>
         </div>
       )}
+      </div>
     </WidgetWrapper>
   ) : (
     <Fragment />
   )
 }
+
+<style>
+  /* Section Header */
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #3b82f6;
+    margin-bottom: 1rem;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .badge-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 1rem 0;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    font-size: 1.125rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+
+  /* Blog Grid */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* Blog Card */
+  .blog-card {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    position: relative;
+    height: 100%;
+  }
+
+  .blog-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 12px;
+  }
+
+  .blog-card:hover::before {
+    opacity: 1;
+  }
+
+  .blog-card:hover {
+    border-color: rgba(59, 130, 246, 0.5);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
+  }
+
+  .blog-image {
+    width: 100%;
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .blog-card:hover .card-image {
+    transform: scale(1.05);
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .blog-card:hover .image-overlay {
+    opacity: 1;
+  }
+
+  .blog-content {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  .blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    color: #94a3b8;
+  }
+
+  .meta-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+    color: #3b82f6;
+  }
+
+  .blog-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem 0;
+    line-height: 1.4;
+  }
+
+  .blog-title a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .blog-title a:hover {
+    color: #3b82f6;
+  }
+
+  .blog-excerpt {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0 0 1rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid rgba(59, 130, 246, 0.5);
+    flex: 1;
+  }
+
+  .blog-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .blog-category {
+    padding: 0.25rem 0.625rem;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: #60a5fa;
+    font-weight: 500;
+  }
+
+  .read-more {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .read-more:hover {
+    color: #60a5fa;
+    gap: 0.625rem;
+  }
+
+  .arrow-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+    transition: transform 0.2s ease;
+  }
+
+  .read-more:hover .arrow-icon {
+    transform: translateX(2px);
+  }
+
+  /* View All Container */
+  .view-all-container {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .view-all-button {
+    background: transparent !important;
+    border: 1px solid rgba(59, 130, 246, 0.4) !important;
+    color: #3b82f6 !important;
+    font-size: 0.875rem;
+    padding: 0.625rem 1.5rem !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+  }
+
+  .view-all-button:hover {
+    background: rgba(59, 130, 246, 0.1) !important;
+    border-color: rgba(59, 130, 246, 0.6) !important;
+  }
+
+  .button-icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.2s ease;
+  }
+
+  .view-all-button:hover .button-icon {
+    transform: translateX(2px);
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 1024px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .blog-content {
+      padding: 1rem;
+    }
+
+    .blog-title {
+      font-size: 1rem;
+    }
+  }
+</style>

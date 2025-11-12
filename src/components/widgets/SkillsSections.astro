@@ -1,0 +1,595 @@
+---
+import { Icon } from 'astro-icon/components';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+
+export interface Skill {
+  name: string;
+  icon?: string;
+  level: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
+  yearsExperience?: number;
+}
+
+export interface SkillCategory {
+  name: string;
+  description?: string;
+  icon?: string;
+  skills: Skill[];
+}
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  categories?: SkillCategory[];
+  id?: string;
+  bg?: string;
+  classes?: Record<string, string>;
+  isDark?: boolean;
+}
+
+const {
+  title = 'My Skill Set',
+  subtitle = 'Technologies and tools I work with.',
+  tagline = '',
+  categories = [
+    {
+      name: 'Languages',
+      icon: 'tabler:code',
+      skills: [
+        { name: 'JavaScript', icon: 'tabler:brand-javascript', level: 'Intermediate', yearsExperience: 3 },
+        { name: 'TypeScript', icon: 'tabler:brand-typescript', level: 'Intermediate', yearsExperience: 2 },
+        { name: 'HTML', icon: 'tabler:brand-html5', level: 'Expert', yearsExperience: 4 },
+        { name: 'CSS', icon: 'tabler:brand-css3', level: 'Expert', yearsExperience: 4 },
+        { name: 'Swift', icon: 'tabler:brand-swift', level: 'Beginner', yearsExperience: 1 },
+        { name: 'Python', icon: 'tabler:brand-python', level: 'Beginner', yearsExperience: 1 },
+        { name: 'PHP', icon: 'tabler:brand-php', level: 'Beginner', yearsExperience: 1 },
+      ],
+    },
+    {
+      name: 'Frameworks & Libraries',
+      icon: 'tabler:stack',
+      skills: [
+        { name: 'React', icon: 'tabler:brand-react', level: 'Intermediate', yearsExperience: 2 },
+        { name: 'Astro', icon: 'tabler:rocket', level: 'Advanced', yearsExperience: 1 },
+        { name: 'Node.js', icon: 'tabler:brand-nodejs', level: 'Intermediate', yearsExperience: 2 },
+        { name: 'Tailwind CSS', icon: 'tabler:palette', level: 'Advanced', yearsExperience: 2 },
+        { name: 'Laravel', icon: 'tabler:brand-laravel', level: 'Beginner', yearsExperience: 1 },
+      ],
+    },
+    {
+      name: 'Tools & Platforms',
+      icon: 'tabler:tools',
+      skills: [
+        { name: 'Git', icon: 'tabler:brand-git', level: 'Intermediate', yearsExperience: 3 },
+        { name: 'GitHub', icon: 'tabler:brand-github', level: 'Intermediate', yearsExperience: 3 },
+        { name: 'Docker', icon: 'tabler:brand-docker', level: 'Beginner', yearsExperience: 1 },
+        { name: 'Firebase', icon: 'tabler:brand-firebase', level: 'Beginner', yearsExperience: 2 },
+        { name: 'VS Code', icon: 'tabler:code', level: 'Intermediate', yearsExperience: 4 },
+        { name: 'XCode', icon: 'tabler:device-desktop', level: 'Beginner', yearsExperience: 1 },
+      ],
+    },
+  ],
+  id,
+  isDark = false,
+  bg = await Astro.slots.render('bg'),
+  classes = {},
+} = Astro.props;
+
+const levelColors = {
+  Beginner: { bg: 'rgba(59, 130, 246, 0.1)', border: 'rgba(59, 130, 246, 0.3)', text: '#60a5fa' },
+  Intermediate: { bg: 'rgba(34, 197, 94, 0.1)', border: 'rgba(34, 197, 94, 0.3)', text: '#4ade80' },
+  Advanced: { bg: 'rgba(168, 85, 247, 0.1)', border: 'rgba(168, 85, 247, 0.3)', text: '#a855f7' },
+  Expert: { bg: 'rgba(236, 72, 153, 0.1)', border: 'rgba(236, 72, 153, 0.3)', text: '#ec4899' },
+};
+---
+
+<WidgetWrapper
+  id={id}
+  isDark={isDark}
+  containerClass={`max-w-7xl ${classes?.container ?? ''}`}
+  bg={bg}
+>
+  <div>
+    <!-- Section Header -->
+    <div class="section-header">
+      {
+        tagline && (
+          <div class="header-badge">
+            <Icon name="tabler:code" class="badge-icon" />
+            <span>{tagline}</span>
+          </div>
+        )
+      }
+      {
+        !tagline && (
+          <div class="header-badge">
+            <Icon name="tabler:code" class="badge-icon" />
+            <span>Tech Stack</span>
+          </div>
+        )
+      }
+      <h2 class="section-title">{title}</h2>
+      <p class="section-subtitle">{subtitle}</p>
+    </div>
+
+    <!-- Skills Bento Grid -->
+    <div class="skills-grid">
+      <!-- Featured Skills Card (Wide) - Languages -->
+      <div class="featured-skill-card">
+        <div class="skill-content">
+          <div class="skill-header">
+            <div class="category-info">
+              <div class="category-icon-wrapper">
+                <Icon name={categories[0].icon} class="category-icon" />
+              </div>
+              <div class="category-text">
+                <h3 class="category-title">{categories[0].name}</h3>
+                <span class="skill-count">{categories[0].skills.length} languages</span>
+              </div>
+            </div>
+            <div class="featured-badge">
+              <Icon name="tabler:star" class="star-icon" />
+              Primary
+            </div>
+          </div>
+
+          <div class="skills-showcase">
+            {
+              categories[0].skills.map((skill) => (
+                <div class="skill-chip">
+                  <div class="skill-chip-content">
+                    {skill.icon && <Icon name={skill.icon} class="skill-chip-icon" />}
+                    <span class="skill-name">{skill.name}</span>
+                  </div>
+                  <span
+                    class="skill-level-dot"
+                    style={`background: ${levelColors[skill.level]?.text}`}
+                    title={skill.level}
+                  />
+                </div>
+              ))
+            }
+          </div>
+
+          <div class="skill-footer">
+            <Icon name="tabler:trending-up" class="trend-icon" />
+            <span class="trend-text">Core competency</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frameworks Card -->
+      <div class="skill-card">
+        <div class="card-header">
+          <div class="category-status">
+            <span class="status-dot frameworks"></span>
+            <span class="status-text">Active</span>
+          </div>
+          <Icon name={categories[1].icon} class="folder-icon" />
+        </div>
+
+        <div class="card-content">
+          <h4 class="card-title">{categories[1].name}</h4>
+          <p class="card-description">Modern frameworks and libraries I use for development</p>
+
+          <div class="skill-list">
+            {
+              categories[1].skills.map((skill) => (
+                <div class="skill-row">
+                  <div class="skill-info">
+                    {skill.icon && <Icon name={skill.icon} class="skill-row-icon" />}
+                    <span class="skill-row-name">{skill.name}</span>
+                  </div>
+                  <span
+                    class="level-badge"
+                    style={`
+                    background: ${levelColors[skill.level]?.bg}; 
+                    color: ${levelColors[skill.level]?.text};
+                    border: 1px solid ${levelColors[skill.level]?.border}
+                  `}
+                  >
+                    {skill.level}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <Icon name="tabler:code" class="link-icon" />
+          <span>Building with these</span>
+        </div>
+      </div>
+
+      <!-- Tools Card -->
+      <div class="skill-card">
+        <div class="card-header">
+          <div class="category-status">
+            <span class="status-dot tools"></span>
+            <span class="status-text">Daily</span>
+          </div>
+          <Icon name={categories[2].icon} class="folder-icon" />
+        </div>
+
+        <div class="card-content">
+          <h4 class="card-title">{categories[2].name}</h4>
+          <p class="card-description">Development tools and platforms in my workflow</p>
+
+          <div class="tools-grid">
+            {
+              categories[2].skills.map((skill) => (
+                <div class="tool-item">
+                  <div class="tool-icon">{skill.icon && <Icon name={skill.icon} class="tool-icon-svg" />}</div>
+                  <div class="tool-info">
+                    <span class="tool-name">{skill.name}</span>
+                    <span class="tool-years">{skill.yearsExperience}y</span>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <Icon name="tabler:tools" class="link-icon" />
+          <span>Workflow essentials</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code comment for visual interest -->
+    <div class="code-comment">// Always improving and learning new technologies</div>
+  </div>
+</WidgetWrapper>
+
+<style>
+
+  /* Section Header */
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .header-badge {
+    display: none;
+  }
+
+  .badge-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .section-subtitle {
+    font-size: 0.875rem;
+    color: rgb(107, 114, 128);
+    margin: 0;
+  }
+
+  /* Skills Bento Grid */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  /* Featured Skill Card - Wide across top */
+  .featured-skill-card {
+    display: none;
+  }
+
+  .featured-skill-card:hover {
+    border-color: rgba(168, 85, 247, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .skill-content {
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .category-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .category-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(236, 72, 153, 0.1);
+    border: 2px solid rgba(236, 72, 153, 0.3);
+    border-radius: 8px;
+    color: #ec4899;
+  }
+
+  .category-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .category-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .category-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+  }
+
+  .skill-count {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .featured-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    color: #fbbf24;
+    font-weight: 600;
+  }
+
+  .star-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  /* Skills Showcase Grid */
+  .skills-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+
+  .skill-chip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+  }
+
+  .skill-chip:hover {
+    background: rgba(168, 85, 247, 0.15);
+    border-color: rgba(168, 85, 247, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .skill-chip-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .skill-chip-icon {
+    width: 1rem;
+    height: 1rem;
+    color: #c4b5fd;
+  }
+
+  .skill-name {
+    font-size: 0.875rem;
+    color: white;
+    font-weight: 500;
+  }
+
+  .skill-level-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .skill-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #22c55e;
+    margin-top: auto;
+  }
+
+  .trend-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Regular Skill Cards - Bottom row */
+  .skill-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+  }
+
+  .skill-card:hover {
+    border-color: rgba(168, 85, 247, 0.5);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .category-status {
+    display: none;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .status-dot.frameworks {
+    background: #22c55e;
+    animation: pulse 2s infinite;
+  }
+
+  .status-dot.tools {
+    background: #f59e0b;
+  }
+
+  .status-text {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  .folder-icon {
+    width: 2rem;
+    height: 2rem;
+    color: rgb(156, 163, 175);
+  }
+
+  .card-content {
+    flex: 1;
+    text-align: center;
+  }
+
+  .card-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .card-description {
+    font-size: 0.75rem;
+    color: rgb(107, 114, 128);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* Skill List for Frameworks */
+  .skill-list {
+    display: none;
+  }
+
+  .skill-row {
+    display: none;
+  }
+
+  .skill-info {
+    display: none;
+  }
+
+  .skill-row-icon {
+    display: none;
+  }
+
+  .skill-row-name {
+    display: none;
+  }
+
+  .level-badge {
+    display: none;
+  }
+
+  /* Tools Grid */
+  .tools-grid {
+    display: none;
+  }
+
+  .tool-item {
+    display: none;
+  }
+
+  .tool-item:hover {
+    display: none;
+  }
+
+  .tool-icon {
+    display: none;
+  }
+
+  .tool-icon-svg {
+    display: none;
+  }
+
+  .tool-info {
+    display: none;
+  }
+
+  .tool-name {
+    display: none;
+  }
+
+  .tool-years {
+    display: none;
+  }
+
+  .card-footer {
+    display: none;
+  }
+
+  .link-icon {
+    display: none;
+  }
+
+  /* Code Comment */
+  .code-comment {
+    display: none;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .skills-container {
+      padding: 0 1rem;
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

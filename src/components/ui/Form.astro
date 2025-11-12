@@ -1,91 +1,222 @@
 ---
 import type { Form as Props } from '~/types';
-import Button from '~/components/ui/Button.astro';
 
-const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
+const { inputs, textarea, disclaimer, button = 'Send Message', description = '' } = Astro.props;
 ---
 
-<form class="max-w-3xl mx-auto">
-  {
-    inputs &&
-      inputs.map(
-        ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '' }) =>
-          name && (
-            <div class="mb-6">
-              {label && (
-                <label for={name} class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {label}
-                </label>
-              )}
-              <input
-                type={type}
-                name={name}
-                id={name}
-                autocomplete={autocomplete}
-                placeholder={placeholder}
-                class="py-3 px-4 block w-full text-gray-700 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#050505] shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-400 transition-colors duration-200"
-              />
-            </div>
-          )
-      )
-  }
+<form class="beautiful-form">
+  <div class="form-content">
+    {
+      inputs &&
+        inputs.map(
+          ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '' }) =>
+            name && (
+              <div class="form-field">
+                {label && (
+                  <label for={name} class="form-label">
+                    {label}
+                  </label>
+                )}
+                <input
+                  type={type}
+                  name={name}
+                  id={name}
+                  autocomplete={autocomplete}
+                  placeholder={placeholder}
+                  class="form-input"
+                />
+              </div>
+            )
+        )
+    }
 
-  {
-    textarea && (
-      <div class="mb-6">
-        <label for="textarea" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          {textarea.label}
-        </label>
-        <textarea
-          id="textarea"
-          name={textarea.name ? textarea.name : 'message'}
-          rows={textarea.rows ? textarea.rows : 4}
-          placeholder={textarea.placeholder}
-          class="py-3 px-4 block w-full text-gray-700 dark:text-white rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#050505] shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-400 transition-colors duration-200"
-        />
-      </div>
-    )
-  }
-
-  {
-    disclaimer && (
-      <div class="mt-6 flex items-start">
-        <div class="flex items-center h-5">
-          <input
-            id="disclaimer"
-            name="disclaimer"
-            type="checkbox"
-            class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-indigo-600 dark:text-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 cursor-pointer transition-colors duration-200"
+    {
+      textarea && (
+        <div class="form-field">
+          <label for="textarea" class="form-label">
+            {textarea.label}
+          </label>
+          <textarea
+            id="textarea"
+            name={textarea.name ? textarea.name : 'message'}
+            rows={textarea.rows ? textarea.rows : 4}
+            placeholder={textarea.placeholder}
+            class="form-textarea"
           />
         </div>
-        <div class="ml-3">
-          <label for="disclaimer" class="cursor-pointer select-none text-sm text-gray-600 dark:text-gray-400">
-            {disclaimer.label}
-          </label>
-        </div>
-      </div>
-    )
-  }
+      )
+    }
 
-  {
-    button && (
-      <div class="mt-8 flex justify-center">
-        <Button 
-          variant="primary" 
-          type="submit" 
-          class="py-3 px-6 text-base font-medium shadow-md hover:shadow-lg transition-all duration-200"
-        >
+    {
+      button && (
+        <button type="submit" class="submit-button">
           {button}
-        </Button>
-      </div>
-    )
+        </button>
+      )
+    }
+  </div>
+
+  <!-- Decorative Elements -->
+  <div class="decoration">
+    <div class="decoration-dot dot-1"></div>
+    <div class="decoration-dot dot-2"></div>
+    <div class="decoration-dot dot-3"></div>
+  </div>
+</form>
+
+<style>
+  .beautiful-form {
+    position: relative;
+    max-width: 48rem;
+    margin: 0 auto;
+    background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.08), transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.08), transparent 50%), #0f172a;
+    border: 1px solid rgba(236, 72, 153, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
   }
 
-  {
-    description && (
-      <div class="mt-4 text-center">
-        <p class="text-sm text-gray-600 dark:text-gray-400">{description}</p>
-      </div>
-    )
+  .beautiful-form:hover {
+    transform: translateY(-4px);
+    border-color: rgba(236, 72, 153, 0.4);
+    box-shadow: 0 20px 40px rgba(236, 72, 153, 0.15);
   }
-</form>
+
+  .form-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 0.875rem 1rem;
+    background: rgba(236, 72, 153, 0.05);
+    border: 1px solid rgba(236, 72, 153, 0.1);
+    border-radius: 12px;
+    font-size: 1rem;
+    color: white;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: #64748b;
+  }
+
+  .form-input:hover,
+  .form-textarea:hover {
+    background: rgba(236, 72, 153, 0.08);
+    border-color: rgba(236, 72, 153, 0.2);
+  }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    background: rgba(236, 72, 153, 0.1);
+    border-color: rgba(236, 72, 153, 0.3);
+    transform: translateX(2px);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .submit-button {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background: linear-gradient(135deg, #ec4899, #a855f7);
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+  }
+
+  /* Decorative Elements */
+  .decoration {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .decoration-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(236, 72, 153, 0.2);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .dot-1 {
+    width: 60px;
+    height: 60px;
+    top: 2rem;
+    right: 2rem;
+    animation-delay: 0s;
+  }
+
+  .dot-2 {
+    width: 30px;
+    height: 30px;
+    top: 4rem;
+    right: 4rem;
+    animation-delay: 2s;
+  }
+
+  .dot-3 {
+    width: 20px;
+    height: 20px;
+    top: 6rem;
+    right: 1rem;
+    animation-delay: 4s;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-10px) scale(1.1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .beautiful-form {
+      padding: 1.5rem;
+    }
+
+    .form-content {
+      gap: 1.25rem;
+    }
+  }
+</style>

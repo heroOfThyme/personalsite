@@ -1,146 +1,65 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-
-import ModernHero from '~/components/widgets/ModernHero.astro';
-import AgencyCTA from '~/components/widgets/AgencyCTA.astro';
+import BentoHeroCard from '~/components/widgets/BentoHeroCard.astro';
+import ProjectsSection from '~/components/widgets/ProjectsSection.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import ProjectShowcase from '~/components/widgets/ProjectShowcase.astro';
-import Button from '~/components/ui/Button.astro';
-import SkillsComponent from '~/components/widgets/SkillsComponent.astro';
-import AboutMe from '../components/widgets/AboutMe.astro';
+import AgencyCTA from '~/components/widgets/AgencyCTA.astro';
+import Contact from '~/components/widgets/Contact.astro';
+import About from '~/components/widgets/About.astro';
 
 const metadata = {
-  title: 'P. Vidakovic - Full-Stack Engineer',
+  title: 'Petar Vidakovic - Developer',
 };
 ---
 
 <Layout metadata={metadata}>
-
-  <ModernHero
-    tagline="Developer"
-    image={{
-      src: '~/assets/images/avataaars.png',
-      alt: 'My Avataar.',
+  <BentoHeroCard
+    title="Developer. Designer. Creator."
+    subtitle="iOS apps & web experiences. Swift • React • TypeScript"
+    primaryCTA={{
+      text: 'View Projects',
+      href: '#projects',
     }}
-  >
-    <Fragment slot="actions">
-      <Button href="#projects" variant="primary">View My Work</Button>
-    </Fragment>
-  </ModernHero>
-
-  <!-- About Me Section with Forest-Inspired Styling -->
-  <AboutMe id="about">
-    <Fragment slot="content">
-      <p class="mb-1">
-        My fascination with development began during a web development course in my marketing program. After we created
-        our first HTML page, and I managed to center a div, it quickly became my favorite class in the enitre program.
-      </p>
-      <p class="mb-1">
-        What started with coding small websites quickly evolved as I ventured into creating Discord bots and other
-        JavaScript-heavy projects. I was drawn to JavaScript's versatility, and as the language grew more powerful over
-        time, I leveraged it to expand into backend development as well. This progression led me to discover Astro,
-        which has since become my framework of choice.
-      </p>
-      <p class="mb-1">
-        When away from my keyboard, I like to recharge through hiking, cruising, gaming, exploring local restaurants,
-        and watch the Lord of The Rings trilogy. Extended Edition only. My goal is to continue my developer path to
-        become a Full Stack Engineer.
-      </p>
-    </Fragment>
-  </AboutMe>
-
-  <!-- Projects Section with Modern Card Layout -->
-  <ProjectShowcase
-    id="projects"
-    title="Recent Projects"
-    subtitle="Check out some of my latest work and ongoing projects."
-    tagline="Portfolio"
-    projects={[
-      {
-        title: 'Elementii',
-        description:
-          'Explore the building blocks of our universe with Elementii, an interactive periodic table reference application.',
-        image: {
-          src: '~/assets/images/elementii/screenshot1.png',
-          alt: 'E-commerce project screenshot',
-        },
-        tags: ['Swift', 'SwiftUI'],
-        demoUrl: '/projects/elementii',
-        sourceUrl: 'https://github.com/yourusername/ecommerce-project',
-      },
-      {
-        title: 'RVB Data Sciences Corp.',
-        description:
-          'RVB is my web agency webpage built with Astro, combining personal creative vision with technical excellence.',
-        image: {
-          src: '~/assets/images/rvb.png',
-          alt: 'Task management app interface', 
-        },
-        tags: ['Astro', 'Tailwind'],
-        demoUrl: 'https://rvbcorp.com',
-        sourceUrl: 'https://github.com/yourusername/task-app',
-      },
-    ]}
-    viewAllUrl="/projects"
+    secondaryCTA={{
+      text: 'Contact',
+      href: '#contact',
+    }}
+    status={{
+      text: 'Available for work',
+      available: true,
+    }}
   />
 
-  <!-- Skills Section with Modern Pill Design -->
-  <SkillsComponent
-    tagline="Skills & Expertise"
-    id="skills"
-    categories={[
-      {
-        name: 'Languages',
-        skills: [
-          { name: 'JavaScript', icon: 'tabler:brand-javascript', level: 'Intermediate' },
-          { name: 'TypeScript', icon: 'tabler:brand-typescript', level: 'Intermediate' },
-          { name: 'HTML', icon: 'tabler:brand-html5', level: 'Expert' },
-          { name: 'CSS', icon: 'tabler:brand-css3', level: 'Expert' },
-          { name: 'Swift', icon: 'tabler:brand-swift', level: 'beginner' },
-          { name: 'Python', icon: 'tabler:brand-python', level: 'Beginner' },
-          { name: 'PHP', icon: 'tabler:brand-php', level: 'Beginner' },
-        ],
-      },
-      {
-        name: 'Frameworks & Libraries',
-        skills: [
-          { name: 'React', icon: 'tabler:brand-react', level: 'Intermediate' },
-          { name: 'Astro', icon: 'tabler:brand-astro', level: 'Advanced' },
-          { name: 'Node.js', icon: 'tabler:brand-nodejs', level: 'Intermediate' },
-          { name: 'Tailwind CSS', icon: 'tabler:brand-tailwind', level: 'Advanced' },
-          { name: 'Laravel', icon: 'tabler:brand-laravel', level: 'Beginner' },
-        ],
-      },
-      {
-        name: 'Tools & Platforms',
-        skills: [
-          { name: 'Git', icon: 'tabler:brand-git', level: 'Intermediate' },
-          { name: 'GitHub', icon: 'tabler:brand-github', level: 'Intermediate' },
-          { name: 'Docker', icon: 'tabler:brand-docker', level: 'Beginner' },
-          { name: 'Firebase', icon: 'tabler:brand-firebase', level: 'Beginner' },
-          { name: 'VS Code', icon: 'tabler:brand-vscode', level: 'Intermediate' },
-          { name: 'XCode', icon: 'tabler:code', level: 'Beginner' },
-        ],
-      },
-    ]}
-  />
+  <ProjectsSection />
 
-  <!-- BlogLatestPost Widget **************** -->
-  <BlogLatestPosts
-    tagline="My Headspace"
-    id="blog"
-    title="From My Blog"
-    information={`Thoughts, tips, and insights on technology, design, and my professional journey.`}
-  />
+  <About />
 
-  <!-- CallToAction Widget *********** -->
-  <AgencyCTA
+  <BlogLatestPosts />
+
+  <Contact
     id="contact"
-    title="Let's work together on your next project"
-    subtitle="For professional web development services, visit my agency RVB Corp where my team and I offer enterprise-level solutions."
-    tagline="Collaborate"
-    buttonText="Visit RVB Corp"
-    buttonUrl="https://rvbcorp.com"
-    buttonIcon="tabler:external-link"
+    title="Get In Touch"
+    subtitle="Let's work together"
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Name',
+        placeholder: 'Your name',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+        placeholder: 'your@email.com',
+      },
+    ]}
+    textarea={{
+      name: 'message',
+      label: 'Message',
+      placeholder: 'Your message...',
+      rows: 4,
+    }}
+    button="Send Message"
   />
 </Layout>

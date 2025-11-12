@@ -1,0 +1,460 @@
+---
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import Button from '~/components/ui/Button.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+
+export interface Project {
+  title: string;
+  description: string;
+  image?: {
+    src: string;
+    alt: string;
+  };
+  tags: string[];
+  demoUrl?: string;
+  sourceUrl?: string;
+  status?: 'live' | 'in-progress' | 'completed';
+  featured?: boolean;
+}
+
+export interface Props {
+  featuredProject?: Project;
+  projects?: Project[];
+  viewAllUrl?: string;
+  id?: string;
+  isDark?: boolean;
+  classes?: Record<string, string>;
+  bg?: string;
+}
+
+const {
+  featuredProject = {
+    title: 'Elementii',
+    description:
+      'Interactive periodic table iOS app built with Swift and SwiftUI. Features detailed element information, quiz modes, and beautiful Bohr model animations. My first venture into iOS development.',
+    image: {
+      src: '~/assets/images/elementii/screenshot1.png',
+      alt: 'Elementii App Screenshot',
+    },
+    tags: ['Swift', 'SwiftUI', 'iOS'],
+    demoUrl: '/projects/elementii',
+    status: 'live',
+    featured: true,
+  },
+  projects = [
+    {
+      title: 'RVB Corp',
+      description: 'My boutique web agency built with Astro. Clean, modern design with a focus on performance.',
+      tags: ['Astro', 'Tailwind', 'TypeScript'],
+      demoUrl: 'https://rvbcorp.com',
+      status: 'live',
+    },
+    {
+      title: 'Portfolio v2.0',
+      description: 'This website! Built with Astro and featuring a modern Bento grid design.',
+      tags: ['Astro', 'Bento Grid', 'React'],
+      status: 'in-progress',
+    },
+  ],
+  viewAllUrl = '/projects',
+  id = 'projects',
+  isDark = true,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl ${classes?.container ?? ''}`} bg={bg}>
+  <div>
+    <!-- Section Header -->
+    <div class="section-header">
+      <div class="header-badge">
+        <Icon name="tabler:code" class="badge-icon" />
+        <span>Portfolio</span>
+      </div>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">Some things I've built recently</p>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid">
+      <!-- Featured Project Card (Large) -->
+      <div class="featured-project-card">
+        {
+          featuredProject.image && (
+            <div class="project-image">
+              <div class="image-container">
+                <Image
+                  src={featuredProject.image.src}
+                  alt={featuredProject.image.alt}
+                  width={500}
+                  height={300}
+                  class="featured-image"
+                />
+                <div class="image-overlay" />
+              </div>
+            </div>
+          )
+        }
+
+        <div class="project-content">
+          <div class="project-header">
+            <div class="project-status">
+              <span class={`status-dot ${featuredProject.status}`}></span>
+              <span class="status-text"
+                >{
+                  featuredProject.status === 'live'
+                    ? 'Live'
+                    : featuredProject.status === 'in-progress'
+                      ? 'In Progress'
+                      : 'Completed'
+                }</span
+              >
+            </div>
+            <div class="featured-badge">
+              <Icon name="tabler:star" class="star-icon" />
+              Featured
+            </div>
+          </div>
+
+          <div class="project-info">
+            <h3 class="project-title">{featuredProject.title}</h3>
+            <p class="project-description">{featuredProject.description}</p>
+
+            <div class="project-tags">
+              {featuredProject.tags.map((tag) => <span class="project-tag">{tag}</span>)}
+            </div>
+          </div>
+
+          <div class="project-actions">
+            {
+              featuredProject.demoUrl && (
+                <Button variant="primary" href={featuredProject.demoUrl} class="project-cta">
+                  View Project
+                  <Icon name="tabler:external-link" class="cta-icon" />
+                </Button>
+              )
+            }
+            {
+              featuredProject.sourceUrl && (
+                <Button variant="secondary" href={featuredProject.sourceUrl} class="project-source">
+                  <Icon name="tabler:brand-github" class="cta-icon" />
+                  Source
+                </Button>
+              )
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Regular Project Cards -->
+      {
+        projects.map((project) => (
+          <div class="project-card">
+            <div class="card-header">
+              <div class="project-status">
+                <span class={`status-dot ${project.status}`} />
+                <span class="status-text">
+                  {project.status === 'live' ? 'Live' : project.status === 'in-progress' ? 'In Progress' : 'Completed'}
+                </span>
+              </div>
+              <Icon name="tabler:folder" class="folder-icon" />
+            </div>
+
+            <div class="card-content">
+              <h4 class="card-title">{project.title}</h4>
+              <p class="card-description">{project.description}</p>
+
+              <div class="card-tags">
+                {project.tags.map((tag) => (
+                  <span class="card-tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+
+            <div class="card-footer">
+              {project.demoUrl && (
+                <a href={project.demoUrl} class="card-link">
+                  <Icon name="tabler:external-link" class="link-icon" />
+                  View
+                </a>
+              )}
+              {project.sourceUrl && (
+                <a href={project.sourceUrl} class="card-link">
+                  <Icon name="tabler:brand-github" class="link-icon" />
+                  Code
+                </a>
+              )}
+            </div>
+          </div>
+        ))
+      }
+
+      <!-- View All Projects Card -->
+      <div class="view-all-card">
+        <div class="view-all-content">
+          <Icon name="tabler:plus" class="plus-icon" />
+          <h4 class="view-all-title">More Projects</h4>
+          <p class="view-all-description">View all my work</p>
+          <Button variant="secondary" href={viewAllUrl} class="view-all-button">
+            See All Projects
+            <Icon name="tabler:arrow-right" class="arrow-icon" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</WidgetWrapper>
+
+<style>
+  /* Section Header */
+  .section-header {
+    text-align: left;
+    margin-bottom: 3rem;
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #ec4899;
+    margin-bottom: 1rem;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .badge-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 1rem 0;
+    background: linear-gradient(135deg, #ec4899, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    font-size: 1.125rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+
+  /* Projects Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .project-content {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .star-icon {
+    width: 0.65rem;
+    height: 0.65rem;
+  }
+
+  .project-info {
+    flex: 1;
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem 0;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+
+  .project-cta {
+    background: linear-gradient(135deg, #ec4899, #a855f7) !important;
+    border: none !important;
+    color: white !important;
+    font-size: 0.8rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+
+  .project-source {
+    background: rgba(148, 163, 184, 0.1) !important;
+    border: 1px solid rgba(148, 163, 184, 0.3) !important;
+    color: #94a3b8 !important;
+    font-size: 0.8rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+
+  .cta-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+    margin-left: 0.375rem;
+  }
+
+  .image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .featured-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .featured-project-card:hover .featured-image {
+    transform: scale(1.05);
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .featured-project-card:hover .image-overlay {
+    opacity: 1;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .folder-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #94a3b8;
+  }
+
+  .card-content {
+    flex: 1;
+    padding: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .card-footer {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1.5rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-link {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .card-link:hover {
+    color: #ec4899;
+  }
+
+  .link-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  /* View All Card - Hidden for now */
+  .view-all-card {
+    display: none;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .project-content {
+      padding: 1rem;
+    }
+
+    .project-title {
+      font-size: 1rem;
+    }
+
+    .project-actions {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+</style>

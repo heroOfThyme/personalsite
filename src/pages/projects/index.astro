@@ -21,7 +21,8 @@ const projects = [
     technologies: ['Swift', 'SwiftUI'],
     demoUrl: '/projects/elementii',
     sourceUrl: 'https://github.com/yourusername/ecommerce-project',
-    featured: 'true'
+    featured: true,
+    status: 'live',
   },
   {
     title: 'RVB Data Sciences Corp.',
@@ -29,132 +30,719 @@ const projects = [
       'RVB is my boutique web agency site built with Astro, combining personal creative vision with technical excellence.',
     image: {
       src: '~/assets/images/rvb.png',
-      alt: 'Task management app interface', 
+      alt: 'Task management app interface',
     },
     technologies: ['Astro', 'Tailwind'],
     link: 'https://rvbcorp.com',
+    status: 'live',
   },
 ];
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero with developer styling -->
-  <div class="relative">
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16 lg:py-20">
-      <div class="text-center max-w-3xl mx-auto">
-        <!-- Code-style tag -->
-        <div class="flex justify-center mb-6">
-          <span class="font-mono px-3 py-1 text-xs tracking-wider text-primary uppercase bg-primary/10 dark:bg-primary/20 rounded-md border border-primary/20 dark:border-primary/30">
-            &lt;Portfolio/&gt;
-          </span>
+  <div class="projects-container">
+    <!-- Hero Section with Bento styling -->
+    <section class="hero-section">
+      <div class="hero-card">
+        <div class="hero-content">
+          <div class="hero-header">
+            <div class="hero-badge">
+              <Icon name="tabler:code" class="badge-icon" />
+              <span>Portfolio</span>
+            </div>
+            <div class="status-indicator">
+              <span class="status-dot active"></span>
+              <span class="status-text">Building</span>
+            </div>
+          </div>
+
+          <div class="hero-info">
+            <h1 class="hero-title">My Projects</h1>
+            <p class="hero-description">
+              A showcase of my work, side projects, and contributions. Each project represents different skills and
+              challenges I've tackled.
+            </p>
+
+            <div class="terminal-comment">
+              <Icon name="tabler:terminal" class="terminal-icon" />
+              <span>// Building solutions one project at a time</span>
+            </div>
+          </div>
         </div>
-        
-        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
-          My <span class="text-primary relative">Projects</span>
-        </h1>
-        
-        <p class="text-xl text-muted dark:text-muted mb-8">
-          A showcase of my work, side projects, and contributions. Each project represents different skills and challenges I've tackled.
-        </p>
-        
-        <!-- Terminal-style comment -->
-        <div class="font-mono text-sm text-gray-500 dark:text-gray-400 mb-8 max-w-lg mx-auto bg-gray-100 dark:bg-gray-800 p-3 rounded-md">
-          <span class="text-primary">//</span> Building solutions one project at a time
+
+        <div class="hero-decoration">
+          <Icon name="tabler:sparkles" class="sparkle-icon sparkle-1" />
+          <Icon name="tabler:circle-dot" class="dot-icon dot-1" />
+          <Icon name="tabler:triangle" class="triangle-icon" />
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- Unified Projects Grid - Repository Card Style -->
-  <section class="py-12 md:py-20 bg-transparent">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="mb-12 text-center">
-        <!-- Terminal style command -->
-        <div class="font-mono text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 p-2 rounded-md inline-block mb-4">
-          <span class="text-primary">$ </span>ls -la ./projects
+    <!-- Projects Grid with Bento styling -->
+    <section class="projects-section">
+      <div class="section-header">
+        <div class="terminal-command">
+          <span class="prompt">$</span>
+          <span class="command">ls -la ./projects</span>
         </div>
-        
-        <h2 class="text-3xl font-bold tracking-tight mb-4">Project Collection</h2>
-        <p class="text-lg text-muted dark:text-muted max-w-3xl mx-auto">
-          Explore my work across different domains and technologies.
-        </p>
+        <h2 class="section-title">Project Collection</h2>
+        <p class="section-subtitle">Explore my work across different domains and technologies.</p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects.map((project) => (
-          <div class="bg-white dark:bg-gray-950 rounded-lg shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full">
-            <!-- Repository-style header -->
-            <div class="bg-gray-50 dark:bg-gray-950 px-4 py-2 border-b border-gray-200 dark:border-gray-600 flex items-center justify-between">
-              <div class="flex items-center">
-                <Icon name="tabler:folder" class="w-4 h-4 text-primary mr-2" />
-                <span class="font-mono text-sm font-medium truncate">{project.title}</span>
+      <div class="projects-grid">
+        {
+          projects.map((project, index) => (
+            <div
+              class={`project-card ${project.featured ? 'featured-project' : ''} ${index === 0 ? 'first-project' : ''}`}
+            >
+              <div class="card-header">
+                <div class="project-status">
+                  <span class={`status-dot ${project.status}`} />
+                  <span class="status-text">{project.status === 'live' ? 'Live' : 'In Progress'}</span>
+                </div>
+                {project.featured && (
+                  <div class="featured-badge">
+                    <Icon name="tabler:star" class="star-icon" />
+                    Featured
+                  </div>
+                )}
+                <Icon name="tabler:folder" class="folder-icon" />
               </div>
-              
-              {project.featured && (
-                <span class="text-xs font-mono text-yellow-500 dark:text-yellow-300 bg-primary/10 dark:bg-primary/20 px-2 py-0.5 rounded-full">
-                  featured
-                </span>
-              )}
-            </div>
-            
-            <div class="h-48 overflow-hidden">
-              <Image
-                src={project.image.src}
-                alt={project.image.alt}
-                class="w-full h-full object-cover"
-                width={400}
-                height={225}
-                aspectRatio="16:9"
-              />
-            </div>
-            
-            <div class="p-6 flex-grow">
-              <h3 class="text-xl font-bold mb-2">{project.title}</h3>
-              <p class="text-muted dark:text-muted mb-4 line-clamp-3">{project.description}</p>
-              
-              <div class="mb-4">
-                <div class="flex flex-wrap gap-2">
+
+              <div class="project-image">
+                <Image
+                  src={project.image.src}
+                  alt={project.image.alt}
+                  class="project-img"
+                  width={400}
+                  height={225}
+                  aspectRatio="16:9"
+                />
+                <div class="image-overlay" />
+              </div>
+
+              <div class="card-content">
+                <h3 class="project-title">{project.title}</h3>
+                <p class="project-description">{project.description}</p>
+
+                <div class="tech-tags">
                   {project.technologies.map((tech) => (
-                    <span class="font-mono text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full">
-                      {tech}
-                    </span>
+                    <span class="tech-tag">{tech}</span>
                   ))}
                 </div>
               </div>
-            </div>
-            
-            <div class="p-4 bg-gray-50 dark:bg-gray-950 mt-auto border-t border-gray-200 dark:border-gray-600">
-              <div class="flex justify-between">
+
+              <div class="card-footer">
                 {project.link ? (
-                  <a href={project.link} class="text-primary hover:text-primary-600 dark:hover:text-primary-400 font-medium inline-flex items-center gap-1 transition-colors">
-                    <Icon name="tabler:external-link" class="w-4 h-4" />
-                    <span>View Project</span>
+                  <a href={project.link} class="project-link">
+                    <Icon name="tabler:external-link" class="link-icon" />
+                    View Project
                   </a>
-                ) : project.demoUrl && (
-                  <a href={project.demoUrl} class="text-primary hover:text-primary-600 dark:hover:text-primary-400 font-medium inline-flex items-center gap-1 transition-colors">
-                    <Icon name="tabler:external-link" class="w-4 h-4" />
-                    <span>View Project</span>
-                  </a>
+                ) : (
+                  project.demoUrl && (
+                    <a href={project.demoUrl} class="project-link">
+                      <Icon name="tabler:external-link" class="link-icon" />
+                      View Project
+                    </a>
+                  )
                 )}
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+          ))
+        }
 
-  <!-- Back to Portfolio Button with Terminal Style -->
-  <div class="text-center py-12">
-    <div class="inline-block">
-      <div class="font-mono text-xs text-gray-500 dark:text-gray-400 mb-2">
-        <span class="text-primary">$ </span>cd ..
+        <!-- Back to Portfolio Card -->
+        <div class="back-card">
+          <div class="back-content">
+            <Icon name="tabler:arrow-left" class="back-icon" />
+            <h3 class="back-title">Back to Portfolio</h3>
+            <p class="back-description">Return to main site</p>
+            <div class="terminal-command-small">
+              <span class="prompt">$</span>
+              <span class="command">cd ..</span>
+            </div>
+            <Button variant="secondary" href="/#projects" class="back-button">
+              <Icon name="tabler:arrow-left" class="button-icon" />
+              Back to Portfolio
+            </Button>
+          </div>
+        </div>
       </div>
-      <Button variant="secondary" href="/#projects" class="inline-flex items-center gap-2">
-        <Icon name="tabler:arrow-left" class="w-5 h-5" />
-        <span>Back to Portfolio</span>
-      </Button>
-    </div>
+    </section>
   </div>
 </Layout>
+
+<style>
+  .projects-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 4rem 4rem 4rem;
+  }
+
+  /* Hero Section with Bento styling */
+  .hero-section {
+    margin-bottom: 4rem;
+  }
+
+  .hero-card {
+    background: radial-gradient(circle at 30% 70%, rgba(168, 85, 247, 0.15), transparent 50%),
+      radial-gradient(circle at 70% 30%, rgba(236, 72, 153, 0.15), transparent 50%), #0f172a;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 20px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    min-height: 300px;
+  }
+
+  .hero-card:hover {
+    border-color: rgba(168, 85, 247, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #a855f7;
+  }
+
+  .badge-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .status-dot.active {
+    background: #22c55e;
+    animation: pulse 2s infinite;
+  }
+
+  .status-text {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  .hero-info {
+    flex: 1;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 1.5rem 0;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    color: #e2e8f0;
+    line-height: 1.6;
+    margin: 0 0 2rem 0;
+    max-width: 600px;
+  }
+
+  .terminal-comment {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    color: #94a3b8;
+    max-width: 400px;
+  }
+
+  .terminal-icon {
+    width: 1rem;
+    height: 1rem;
+    color: #a855f7;
+  }
+
+  /* Hero Decorations */
+  .hero-decoration {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .sparkle-icon {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: rgba(251, 191, 36, 0.4);
+    animation: sparkle 3s ease-in-out infinite;
+  }
+
+  .dot-icon {
+    position: absolute;
+    top: 4rem;
+    right: 4rem;
+    width: 1rem;
+    height: 1rem;
+    color: rgba(168, 85, 247, 0.3);
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+
+  .triangle-icon {
+    position: absolute;
+    bottom: 2rem;
+    right: 2.5rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: rgba(236, 72, 153, 0.3);
+    animation: rotate 6s linear infinite;
+  }
+
+  /* Projects Section */
+  .projects-section {
+    margin-top: 4rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .terminal-command {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prompt {
+    color: #ec4899;
+  }
+
+  .command {
+    color: #a855f7;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 1rem 0;
+    background: linear-gradient(135deg, #ec4899, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    font-size: 1.125rem;
+    color: #94a3b8;
+    margin: 0;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Projects Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* Project Cards with Bento styling */
+  .project-card {
+    background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.05), transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.05), transparent 50%), #0f172a;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card:hover {
+    border-color: rgba(168, 85, 247, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .featured-project {
+    border-color: rgba(251, 191, 36, 0.3);
+  }
+
+  .featured-project:hover {
+    border-color: rgba(251, 191, 36, 0.5);
+  }
+
+  /* Card Header */
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    gap: 1rem;
+  }
+
+  .project-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .status-dot.live {
+    background: #22c55e;
+    animation: pulse 2s infinite;
+  }
+
+  .featured-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    color: #fbbf24;
+    font-weight: 600;
+  }
+
+  .star-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .folder-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #ec4899;
+    margin-left: auto;
+  }
+
+  /* Project Image */
+  .project-image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover .project-img {
+    transform: scale(1.05);
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:hover .image-overlay {
+    opacity: 1;
+  }
+
+  /* Card Content */
+  .card-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .project-description {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    line-height: 1.5;
+    margin: 0 0 1.5rem 0;
+    flex: 1;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech-tag {
+    padding: 0.25rem 0.75rem;
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    color: #c4b5fd;
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Card Footer */
+  .card-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+  }
+
+  .project-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #a855f7;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .project-link:hover {
+    color: #ec4899;
+  }
+
+  .link-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Back Card */
+  .back-card {
+    background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.1), transparent 70%), #0f172a;
+    border: 2px dashed rgba(168, 85, 247, 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    min-height: 300px;
+  }
+
+  .back-card:hover {
+    border-color: rgba(168, 85, 247, 0.6);
+    background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.15), transparent 70%), #0f172a;
+  }
+
+  .back-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .back-icon {
+    width: 2rem;
+    height: 2rem;
+    color: #a855f7;
+    margin-bottom: 0.5rem;
+  }
+
+  .back-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+  }
+
+  .back-description {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+
+  .terminal-command-small {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+  }
+
+  .back-button {
+    background: transparent !important;
+    border: 1px solid rgba(168, 85, 247, 0.4) !important;
+    color: #a855f7 !important;
+    font-size: 0.875rem;
+  }
+
+  .button-icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    transition: transform 0.2s ease;
+  }
+
+  .back-button:hover .button-icon {
+    transform: translateX(-2px);
+  }
+
+  /* Animations */
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes sparkle {
+    0%,
+    100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 0.4;
+    }
+    50% {
+      transform: scale(1.2) rotate(180deg);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 1024px) {
+    .projects-container {
+      padding: 2rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-card {
+      padding: 2rem;
+      min-height: 250px;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .projects-container {
+      padding: 1rem;
+    }
+
+    .hero-card {
+      padding: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+    }
+
+    .terminal-comment {
+      font-size: 0.8125rem;
+      padding: 0.875rem 1rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .card-content {
+      padding: 1rem;
+    }
+
+    .back-card {
+      padding: 1.5rem;
+      min-height: 250px;
+    }
+  }
+</style>

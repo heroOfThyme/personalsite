@@ -42,7 +42,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative overflow-hidden">
+<section class="relative overflow-hidden bg-white dark:bg-[#050505]">
   <!-- Main content -->
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 lg:py-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 z-10">
     <!-- Left column: Text content -->
@@ -92,7 +92,7 @@ const {
     </div>
     
     <!-- Right column: Image -->
-    <div class="w-2/3 lg:w-1/2">
+    <div class="w-2/3">
       <div class="relative intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
         {typeof image === 'string' ? (
           <Fragment set:html={image} />
