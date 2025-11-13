@@ -1,8 +1,30 @@
 ---
 ---
 
-<span
-  class="self-center rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-muted whitespace-nowrap dark:text-muted hover:text-[#050505] dark:hover:text-white"
->
-PV
-</span>
+<div class="logo-container">
+  <span class="logo-text">PV</span>
+</div>
+
+<style>
+  .logo-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ec4899, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @media (max-width: 768px) {
+    .logo-text {
+      font-size: 1.25rem;
+    }
+  }
+</style>

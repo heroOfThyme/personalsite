@@ -18,86 +18,348 @@ export interface Props {
 const { post, url } = Astro.props;
 ---
 
-<section class="py-8 sm:py-16 lg:py-20 mx-auto">
-  <article>
-    <header
-      class={post.image
-        ? 'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-        : 'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'}
-    >
-      <div class="flex justify-between flex-col sm:flex-row max-w-3xl mx-auto mt-0 mb-2 px-4 sm:px-6 sm:items-center">
-        <p>
-          <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
-          <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
-          {
-            post.author && (
-              <>
-                {' '}
-                · <Icon name="tabler:user" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
-                <span class="inline-block">{post.author}</span>
-              </>
-            )
-          }
-          {
-            post.category && (
-              <>
-                {' '}
-                ·{' '}
-                <a class="hover:underline inline-block" href={getPermalink(post.category.slug, 'category')}>
-                  {post.category.title}
-                </a>
-              </>
-            )
-          }
-          {
-            post.readingTime && (
-              <>
-                &nbsp;· <span>{post.readingTime}</span> min read
-              </>
-            )
-          }
-        </p>
+<article class="blog-post">
+  <!-- Back Button -->
+  <div class="back-nav">
+    <a href="/blog" class="back-link">
+      <Icon name="tabler:arrow-left" class="back-icon" />
+      Back to Blog
+    </a>
+  </div>
+
+  <!-- Header -->
+  <header class="post-header">
+    <div class="header-meta">
+      <span class="meta-item">
+        <Icon name="tabler:calendar" class="meta-icon" />
+        <time datetime={String(post.publishDate)}>{getFormattedDate(post.publishDate)}</time>
+      </span>
+      {post.readingTime && (
+        <span class="meta-item">
+          <Icon name="tabler:clock" class="meta-icon" />
+          {post.readingTime} min read
+        </span>
+      )}
+      {post.category && (
+        <>
+          <span class="meta-separator">·</span>
+          <a href={getPermalink(post.category.slug, 'category')} class="meta-category">
+            {post.category.title}
+          </a>
+        </>
+      )}
+    </div>
+
+    <h1 class="post-title">{post.title}</h1>
+
+    {post.excerpt && (
+      <p class="post-excerpt">{post.excerpt}</p>
+    )}
+  </header>
+
+  {post.image && (
+    <div class="post-image-wrapper">
+      <Image
+        src={post.image}
+        class="post-image"
+        widths={[400, 900]}
+        sizes="(max-width: 900px) 400px, 900px"
+        alt={post?.excerpt || ''}
+        width={900}
+        height={506}
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+  )}
+
+  <!-- Content -->
+  <div class="post-content">
+    <slot />
+  </div>
+
+  <!-- Footer -->
+  <footer class="post-footer">
+    {post.tags && post.tags.length > 0 && (
+      <div class="footer-tags">
+        <PostTags tags={post.tags} />
       </div>
-
-      <h1
-        class="px-4 sm:px-6 max-w-3xl mx-auto text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading"
-      >
-        {post.title}
-      </h1>
-      <p
-        class="max-w-3xl mx-auto mt-4 mb-8 px-4 sm:px-6 text-xl md:text-2xl text-muted dark:text-slate-400 text-justify"
-      >
-        {post.excerpt}
-      </p>
-
-      {
-        post.image ? (
-          <Image
-            src={post.image}
-            class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
-            widths={[400, 900]}
-            sizes="(max-width: 900px) 400px, 900px"
-            alt={post?.excerpt || ''}
-            width={900}
-            height={506}
-            loading="eager"
-            decoding="async"
-          />
-        ) : (
-          <div class="max-w-3xl mx-auto px-4 sm:px-6">
-            <div class="border-t dark:border-slate-700" />
-          </div>
-        )
-      }
-    </header>
-    <div
-      class="mx-auto px-6 sm:px-6 max-w-3xl prose prose-md lg:prose-xl dark:prose-invert dark:prose-headings:text-slate-300 prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8 prose-headings:scroll-mt-[80px] prose-li:my-0"
-    >
-      <slot />
+    )}
+    <div class="footer-share">
+      <SocialShare url={url} text={post.title} />
     </div>
-    <div class="mx-auto px-6 sm:px-6 max-w-3xl mt-8 flex justify-between flex-col sm:flex-row">
-      <PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
-      <SocialShare url={url} text={post.title} class="mt-5 sm:mt-1 align-middle text-gray-500 dark:text-slate-600" />
-    </div>
-  </article>
-</section>
+  </footer>
+</article>
+
+<style>
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Back Navigation */
+  .back-nav {
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #a855f7;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #ec4899;
+  }
+
+  .back-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Header */
+  .post-header {
+    margin-bottom: 3rem;
+  }
+
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    color: #94a3b8;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .meta-icon {
+    width: 1rem;
+    height: 1rem;
+    color: #ec4899;
+  }
+
+  .meta-separator {
+    color: #94a3b8;
+  }
+
+  .meta-category {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .meta-category:hover {
+    color: #ec4899;
+  }
+
+  .post-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #ec4899, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .post-excerpt {
+    font-size: 1.25rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Image */
+  .post-image-wrapper {
+    margin-bottom: 3rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .post-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Content */
+  .post-content {
+    color: #cbd5e1;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  .post-content :global(h1),
+  .post-content :global(h2),
+  .post-content :global(h3),
+  .post-content :global(h4),
+  .post-content :global(h5),
+  .post-content :global(h6) {
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(135deg, #ec4899, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .post-content :global(h2) {
+    font-size: 1.75rem;
+    font-weight: 800;
+  }
+  .post-content :global(h3) { font-size: 1.375rem; }
+  .post-content :global(h4) { font-size: 1.125rem; }
+
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content :global(a) {
+    color: #a855f7;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .post-content :global(a:hover) {
+    color: #ec4899;
+  }
+
+  .post-content :global(strong) {
+    color: white;
+    font-weight: 600;
+  }
+
+  .post-content :global(code) {
+    background: rgba(168, 85, 247, 0.1);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875em;
+    color: #ec4899;
+  }
+
+  .post-content :global(pre) {
+    background: rgba(15, 23, 42, 0.6);
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 2rem 0;
+  }
+
+  .post-content :global(pre code) {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 3px solid #a855f7;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #94a3b8;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .post-content :global(img) {
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+
+  .post-content :global(hr) {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ec4899, #a855f7, transparent);
+    margin: 3rem 0;
+  }
+
+  .post-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+  }
+
+  .post-content :global(th),
+  .post-content :global(td) {
+    padding: 0.75rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    text-align: left;
+  }
+
+  .post-content :global(th) {
+    background: rgba(148, 163, 184, 0.1);
+    font-weight: 600;
+  }
+
+  /* Footer */
+  .post-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 2px solid transparent;
+    border-image: linear-gradient(90deg, transparent, #ec4899, #a855f7, transparent) 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .footer-tags {
+    flex: 1;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .post-title {
+      font-size: 2.25rem;
+    }
+
+    .post-excerpt {
+      font-size: 1.125rem;
+    }
+
+    .post-content {
+      font-size: 1rem;
+    }
+
+    .post-content :global(h2) {
+      font-size: 1.5rem;
+    }
+
+    .post-footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .post-title {
+      font-size: 2rem;
+    }
+
+    .post-content :global(h2) {
+      font-size: 1.375rem;
+    }
+  }
+</style>

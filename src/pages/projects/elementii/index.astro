@@ -1,249 +1,858 @@
 ---
-// src/pages/elementii.astro
-import ProjectLayout from '~/layouts/ProjectLayout.astro';
-import Header from '~/components/widgets/Header.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Content from '~/components/widgets/Content.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-
-// Import images directly
-import periodicTableImage from '~/assets/images/elementii/periodic-table.png';
-import PrivacySection from '~/components/widgets/PrivacySection.astro';
+import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import Button from '~/components/ui/Button.astro';
 
 const metadata = {
   title: 'Elementii | Interactive Periodic Table App',
   description: 'Explore chemistry through an engaging, interactive periodic table experience',
 };
 
-// App information
-const appInfo = {
-  name: 'Elementii',
-  tagline: 'Interactive Periodic Table',
-  description: 'Learn chemistry through an engaging, interactive experience with the periodic table of elements',
-  appStoreLink: 'https://apps.apple.com/', // Update with your actual link
-};
+const features = [
+  {
+    title: 'View as Table or List',
+    description: 'View elements in the classic periodic table view, or switch to list view and have all the elements at your ready.',
+    icon: 'tabler:table',
+  },
+  {
+    title: 'Detailed Information',
+    description: 'Access comprehensive data on all 118 elements, including properties, history, and applications.',
+    icon: 'tabler:info-square',
+  },
+  {
+    title: 'Bohr Model Animations',
+    description: 'Explore fun, animated Bohr models with electron configurations for every element.',
+    icon: 'tabler:atom-2',
+  },
+  {
+    title: 'Quiz Mode',
+    description: 'Test your knowledge with interactive quizzes covering element properties, symbols, and categories.',
+    icon: 'tabler:help-hexagon',
+  },
+];
 
-// FAQs
 const faqs = [
   {
-    title: 'Is Elementii free to download?',
-    description:
-      'Yes, Elementii is free to download with core features available to all users. There is zero in app purchases or subscriptions.',
+    question: 'Is Elementii free to download?',
+    answer: 'Yes, Elementii is free to download with core features available to all users. There are zero in-app purchases or subscriptions.',
   },
   {
-    title: 'Does Elementii work offline?',
-    description:
-      'Yes! Once downloaded, all elementii information is accessible an all app features work without an internet connection. Do note however to receive updates you will need an active internet connection.',
+    question: 'Does Elementii work offline?',
+    answer: 'Yes! Once downloaded, all element information is accessible and all app features work without an internet connection. Do note however to receive updates you will need an active internet connection.',
   },
   {
-    title: 'How can I contact support?',
-    description:
-      'You can reach our support team at support@elementii.app for any questions, feedback, or issues you may encounter, or use the contact form on this page.',
+    question: 'How can I contact support?',
+    answer: 'You can reach me at support@elementii.app for any questions, feedback, or issues you may encounter, or use the contact form below.',
   },
 ];
 ---
 
-<ProjectLayout metadata={metadata}>
-  <!-- Header -->
-  <Header
-    links={[
-      { text: 'Features', href: '#features' },
-      { text: 'Privacy', href: '#privacy' },
-      { text: 'Support', href: '#support' },
-      { text: 'FAQ', href: '#faq' },
-    ]}
-    actions={[
-      {
-        variant: 'primary',
-        text: 'App Store',
-        href: appInfo.appStoreLink,
-        icon: 'tabler:brand-apple',
-      },
-    ]}
-    isSticky
-    showToggleTheme
-  />
+<Layout metadata={metadata}>
+  <div class="project-container">
+    <!-- Back Button -->
+    <div class="back-nav">
+      <a href="/#projects" class="back-link">
+        <Icon name="tabler:arrow-left" class="back-icon" />
+        Back to Portfolio
+      </a>
+    </div>
 
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Download on App Store',
-        href: appInfo.appStoreLink,
-        target: '_blank',
-        icon: 'tabler:brand-apple',
-      },
-    ]}
-    image={{ src: periodicTableImage, alt: 'Elementii Periodic Table', width: 1200, height: 675, quality: 95 }}
-  >
-    <Fragment slot="title">
-      Explore the <span class="text-primary highlight">Periodic Table</span>.
-    </Fragment>
-    <Fragment slot="subtitle">
-      <span class="sm:inline">
-        <span class="font-bold">Elementii</span> is a comprehensive reference app with detailed information about all chemical
-        elements.
-      </span>
-      Featuring Bohr models, element properties, random facts, it is my first iOS app.
-    </Fragment>
-  </Hero>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-grid">
+        <!-- Main Hero Card -->
+        <div class="hero-card main-card">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <Icon name="tabler:device-mobile" class="badge-icon" />
+              <span>iOS App</span>
+            </div>
 
-  <Content
-    id="features"
-    isReversed
-    tagline="Features"
-    title="A comprehensivd app that has it all!"
-    items={[
-      {
-        title: 'View as Table or List',
-        description:
-          'View elements in the classic periodic table view, or the list view and have all the elements at your ready. ',
-        icon: 'tabler:table',
-      },
-      {
-        title: 'Information',
-        description:
-          'Not sure how to navigate the table? Click the "i" symbol at the top right of your screen for a brief explanation on the table layout and element structure.',
-        icon: 'tabler:info-square',
-      },
-    ]}
-    image={{
-      src: '~/assets/images/elementii/periodic-table.png',
-      alt: 'Colorful Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Complete Periodic Table</h3>
-      Access detailed information on all 118 elements, including properties, history, and applications.
-    </Fragment>
+            <h1 class="hero-title">Elementii</h1>
+            <p class="hero-tagline">Interactive Periodic Table</p>
+            <p class="hero-description">
+              Explore the building blocks of our universe with Elementii, an interactive periodic table reference app.
+              Built with Swift and SwiftUI, it features detailed element information, quiz modes, and beautiful Bohr model animations.
+            </p>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+            <div class="hero-actions">
+              <Button variant="primary" href="https://apps.apple.com/" target="_blank" class="app-store-button">
+                <Icon name="tabler:brand-apple" class="button-icon" />
+                Download on App Store
+              </Button>
+            </div>
 
-  <!-- Content Widget **************** -->
+            <div class="hero-stats">
+              <div class="stat-item">
+                <Icon name="tabler:atom" class="stat-icon" />
+                <div class="stat-content">
+                  <span class="stat-value">118</span>
+                  <span class="stat-label">Elements</span>
+                </div>
+              </div>
+              <div class="stat-item">
+                <Icon name="tabler:device-mobile" class="stat-icon" />
+                <div class="stat-content">
+                  <span class="stat-value">iOS</span>
+                  <span class="stat-label">Platform</span>
+                </div>
+              </div>
+              <div class="stat-item">
+                <Icon name="tabler:code" class="stat-icon" />
+                <div class="stat-content">
+                  <span class="stat-value">Swift</span>
+                  <span class="stat-label">Language</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'Overview',
-        description: `A comprehensive at-a-glance summary of the element, featuring its atomic number, symbol, name, category, and a brief description of its significance.`,
-        icon: 'tabler:list-tree',
-      },
-      {
-        title: 'Properties',
-        description:
-          'Explore the physical and chemical characteristics of the element, including atomic weight, melting and boiling points, density, and more.',
-        icon: 'tabler:zoom',
-      },
-      {
-        title: 'Atom',
-        description: 'A fun, animated Bohr model with the electron configurations underneath.',
-        icon: 'tabler:atom-2',
-      },
-    ]}
-    image={{
-      src: '~/assets/images/elementii/detail-view.png',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Detailed View</h3>
-      When selecting an element, users can access multiple tabs containing scientific data including atomic properties, discovery
-      information, common applications, sustainability factors, Bohr models, and more!
-    </Fragment>
+        <!-- Image Card -->
+        <div class="hero-card image-card">
+          <div class="image-wrapper">
+            <Image
+              src="~/assets/images/elementii/periodic-table.png"
+              alt="Elementii Periodic Table View"
+              width={600}
+              height={400}
+              class="hero-image"
+            />
+            <div class="image-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="section-header">
+        <div class="terminal-command">
+          <span class="prompt">$</span>
+          <span class="command">cat features.txt</span>
+        </div>
+        <h2 class="section-title">Features</h2>
+        <p class="section-subtitle">Everything you need to explore the periodic table</p>
+      </div>
 
-  <!-- Content Widget **************** -->
+      <div class="features-grid">
+        {features.map((feature) => (
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <Icon name={feature.icon} class="feature-icon" />
+            </div>
+            <h3 class="feature-title">{feature.title}</h3>
+            <p class="feature-description">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
 
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Element Identification',
-        description: 'Guess the element from its symbol.',
-        icon: 'tabler:atom',
-      },
-      {
-        title: 'Atomic Numbers',
-        description: 'Match elements with their atomic numbers.',
-        icon: 'tabler:number-123',
-      },
-      {
-        title: 'Element Anagrams',
-        description: 'Unscramble element names.',
-        icon: 'tabler:abc',
-      },
-      {
-        title: 'and more!',
-        icon: 'tabler:plus',
-      },
-    ]}
-    image={{
-      src: '~/assets/images/elementii/quiz-mode.png',
-      alt: 'Astronauts Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Quiz Mode</h3>
-      Test your knowledge with fun quizzes covering element properties, symbols, and categories. Reinforce your learning
-      through interactive questions that challenge your understanding of the periodic table and element characteristics.
-    </Fragment>
+    <!-- Screenshots Section -->
+    <section class="screenshots-section">
+      <div class="section-header">
+        <h2 class="section-title">Screenshots</h2>
+        <p class="section-subtitle">A closer look at Elementii</p>
+      </div>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+      <div class="screenshots-grid">
+        <div class="screenshot-card">
+          <div class="screenshot-wrapper">
+            <Image
+              src="~/assets/images/elementii/screenshot1.png"
+              alt="Elementii Main View"
+              width={400}
+              height={800}
+              class="screenshot-image"
+            />
+          </div>
+          <p class="screenshot-label">Main Periodic Table</p>
+        </div>
 
-  <PrivacySection>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-slate-900"></div>
-    </Fragment>
-  </PrivacySection>
+        <div class="screenshot-card">
+          <div class="screenshot-wrapper">
+            <Image
+              src="~/assets/images/elementii/detail-view.png"
+              alt="Element Detail View"
+              width={400}
+              height={800}
+              class="screenshot-image"
+            />
+          </div>
+          <p class="screenshot-label">Element Details</p>
+        </div>
 
-  <!-- FAQs -->
-  <FAQs
-    id="faq"
-    title="Frequently Asked Questions"
-    subtitle="Find answers to common questions about Elementii"
-    items={faqs}
-    columns={1}
-    classes={{ container: 'max-w-4xl' }}
-  />
+        <div class="screenshot-card">
+          <div class="screenshot-wrapper">
+            <Image
+              src="~/assets/images/elementii/quiz-mode.png"
+              alt="Quiz Mode"
+              width={400}
+              height={800}
+              class="screenshot-image"
+            />
+          </div>
+          <p class="screenshot-label">Interactive Quizzes</p>
+        </div>
+      </div>
+    </section>
 
-  <ContactUs
-    id="support"
-    title="Support"
-    subtitle="Have questions or need assistance with Elementii? Send me a message and I will answer back as soon as possible!"
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information merely for the purpose of communication.',
-    }}
-    description="I typically responds within 24-48 hours!"
-  />
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="section-header">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Common questions about Elementii</p>
+      </div>
 
-  <!-- No custom footer - using default site footer -->
-</ProjectLayout>
+      <div class="faq-grid">
+        {faqs.map((faq) => (
+          <div class="faq-card">
+            <div class="faq-header">
+              <Icon name="tabler:help-circle" class="faq-icon" />
+              <h3 class="faq-question">{faq.question}</h3>
+            </div>
+            <p class="faq-answer">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="support-section">
+      <div class="support-card">
+        <div class="support-content">
+          <Icon name="tabler:mail" class="support-icon" />
+          <h2 class="support-title">Need Help?</h2>
+          <p class="support-description">
+            Have questions or feedback about Elementii? I'd love to hear from you.
+          </p>
+          <a href="mailto:support@elementii.app" class="support-button">
+            <Icon name="tabler:send" class="button-icon" />
+            Contact Support
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to Portfolio -->
+    <section class="back-section">
+      <div class="back-card">
+        <div class="back-content">
+          <Icon name="tabler:arrow-left" class="back-icon-large" />
+          <h3 class="back-title">Back to Portfolio</h3>
+          <p class="back-description">Check out my other projects</p>
+          <Button variant="secondary" href="/#projects" class="back-button">
+            <Icon name="tabler:arrow-left" class="button-icon" />
+            View All Projects
+          </Button>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .project-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 4rem 4rem 4rem;
+  }
+
+  /* Back Navigation */
+  .back-nav {
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 10px;
+    color: #a855f7;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .back-link:hover {
+    border-color: rgba(168, 85, 247, 0.6);
+    background: rgba(168, 85, 247, 0.1);
+    transform: translateX(-4px);
+  }
+
+  .back-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    margin-bottom: 4rem;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .hero-card {
+    background: radial-gradient(circle at 30% 70%, rgba(168, 85, 247, 0.15), transparent 50%),
+      radial-gradient(circle at 70% 30%, rgba(236, 72, 153, 0.15), transparent 50%), #0f172a;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 20px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .hero-card:hover {
+    border-color: rgba(168, 85, 247, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .main-card {
+    min-height: 500px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #a855f7;
+    margin-bottom: 2rem;
+  }
+
+  .badge-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 0.5rem 0;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-tagline {
+    font-size: 1.5rem;
+    color: #e2e8f0;
+    margin: 0 0 1.5rem 0;
+    font-weight: 600;
+  }
+
+  .hero-description {
+    font-size: 1.125rem;
+    color: #94a3b8;
+    line-height: 1.7;
+    margin: 0 0 2rem 0;
+  }
+
+  .hero-actions {
+    margin-bottom: 2rem;
+  }
+
+  .app-store-button {
+    background: linear-gradient(135deg, #ec4899, #a855f7) !important;
+    border: none !important;
+    color: white !important;
+    font-size: 1rem !important;
+    padding: 0.875rem 1.75rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+  }
+
+  .button-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.2);
+  }
+
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .stat-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #ec4899;
+  }
+
+  .stat-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Image Card */
+  .image-card {
+    padding: 1.5rem;
+    min-height: 500px;
+  }
+
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-card:hover .hero-image {
+    transform: scale(1.05);
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .hero-card:hover .image-overlay {
+    opacity: 1;
+  }
+
+  /* Section Headers */
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .terminal-command {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prompt {
+    color: #ec4899;
+  }
+
+  .command {
+    color: #a855f7;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 1rem 0;
+    background: linear-gradient(135deg, #ec4899, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    font-size: 1.125rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+
+  /* Features Section */
+  .features-section {
+    margin-bottom: 4rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.05), transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.05), transparent 50%), #0f172a;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(168, 85, 247, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .feature-icon-wrapper {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .feature-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #a855f7;
+  }
+
+  .feature-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .feature-description {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Screenshots Section */
+  .screenshots-section {
+    margin-bottom: 4rem;
+  }
+
+  .screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .screenshot-card {
+    text-align: center;
+  }
+
+  .screenshot-wrapper {
+    background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.1), transparent 70%), #0f172a;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .screenshot-wrapper:hover {
+    border-color: rgba(168, 85, 247, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .screenshot-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .screenshot-wrapper:hover .screenshot-image {
+    transform: scale(1.02);
+  }
+
+  .screenshot-label {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    margin-bottom: 4rem;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .faq-card {
+    background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.05), transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.05), transparent 50%), #0f172a;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+  }
+
+  .faq-card:hover {
+    border-color: rgba(168, 85, 247, 0.4);
+  }
+
+  .faq-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .faq-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #ec4899;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+
+  .faq-question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+  }
+
+  .faq-answer {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0;
+    padding-left: 2.5rem;
+  }
+
+  /* Support Section */
+  .support-section {
+    margin-bottom: 4rem;
+  }
+
+  .support-card {
+    background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.15), transparent 70%), #0f172a;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 20px;
+    padding: 4rem;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .support-card:hover {
+    border-color: rgba(168, 85, 247, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .support-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .support-icon {
+    width: 3rem;
+    height: 3rem;
+    color: #ec4899;
+    margin-bottom: 1.5rem;
+  }
+
+  .support-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem 0;
+  }
+
+  .support-description {
+    font-size: 1.125rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0 0 2rem 0;
+  }
+
+  .support-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.75rem;
+    background: transparent;
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    border-radius: 8px;
+    color: #a855f7;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .support-button:hover {
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.6);
+  }
+
+  /* Back Section */
+  .back-section {
+    margin-top: 4rem;
+  }
+
+  .back-card {
+    background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.1), transparent 70%), #0f172a;
+    border: 2px dashed rgba(168, 85, 247, 0.3);
+    border-radius: 16px;
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .back-card:hover {
+    border-color: rgba(168, 85, 247, 0.6);
+    background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.15), transparent 70%), #0f172a;
+  }
+
+  .back-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .back-icon-large {
+    width: 2rem;
+    height: 2rem;
+    color: #a855f7;
+  }
+
+  .back-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+  }
+
+  .back-description {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+
+  .back-button {
+    background: transparent !important;
+    border: 1px solid rgba(168, 85, 247, 0.4) !important;
+    color: #a855f7 !important;
+    margin-top: 1rem;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 1024px) {
+    .project-container {
+      padding: 2rem;
+    }
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .main-card {
+      min-height: auto;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .features-grid,
+    .screenshots-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .project-container {
+      padding: 1rem;
+    }
+
+    .hero-card {
+      padding: 2rem;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.25rem;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+    }
+
+    .hero-stats {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .support-card {
+      padding: 2rem;
+    }
+  }
+</style>

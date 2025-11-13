@@ -44,12 +44,30 @@ const metadata = merge(
 ---
 
 <Layout metadata={metadata}>
-  <div class="bg-white dark:bg-[#050505]">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
-      <SinglePost post={{ ...post, image: image }} url={url}>
-        {post.Content ? <post.Content /> : <Fragment set:html={post.content || ''} />}
-      </SinglePost>
-      <ToBlogLink />
-    </div>
+  <div class="post-container">
+    <SinglePost post={{ ...post, image: image }} url={url}>
+      {post.Content ? <post.Content /> : <Fragment set:html={post.content || ''} />}
+    </SinglePost>
+    <ToBlogLink />
   </div>
 </Layout>
+
+<style>
+  .post-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 4rem 4rem 4rem;
+  }
+
+  @media (max-width: 1024px) {
+    .post-container {
+      padding: 2rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .post-container {
+      padding: 1rem;
+    }
+  }
+</style>

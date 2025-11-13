@@ -44,121 +44,399 @@ const {
 } = Astro.props;
 
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+const currentHash = new URL(Astro.url).hash;
 ---
 
 <header
   class:list={[
-    { sticky: isSticky, relative: !isSticky, dark: isDark },
-    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-100/10 transition-[opacity] ease-in-out bg-white/10 dark:bg-[#050505]/10 backdrop-blur-md shadow-sm',
-    {
-      'bg-white dark:bg-[#050505]': isDark,
-    },
-    {
-      'w-full': isFullWidth,
-    },
-    {
-      'md:backdrop-blur-none': !isSticky,
-    },
+    'header-main',
+    { 'header-sticky': isSticky, 'header-relative': !isSticky },
   ]}
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
 >
-  <div class="absolute inset-0"></div>
-  <div
-    class:list={[
-      'relative py-3 px-3 md:px-6 mx-auto w-full',
-      {
-        'md:flex md:justify-between': position !== 'center',
-      },
-      {
-        'md:grid md:grid-cols-3 md:items-center': position === 'center',
-      },
-      {
-        'max-w-7xl': !isFullWidth,
-      },
-    ]}
-  >
-    <div class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between']}>
-      <a class="flex items-center" href={getHomePermalink()}>
-        <Logo />
-      </a>
-      <div class="flex items-center md:hidden">
-        <ToggleMenu />
-      </div>
-    </div>
-    <nav
-      class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-muted overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:justify-self-center"
-      aria-label="Main navigation"
-    >
-      <ul
-        class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
-      >
-        {
-          links.map(({ text, href, links }) => (
-            <li class={links?.length ? 'dropdown' : ''}>
-              {links?.length ? (
-                <>
-                  <button
-                    type="button"
-                    class="text-muted hover:text-gray-900 dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap transition-colors"
-                  >
-                    {text}{' '}
-                    <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
-                  </button>
-                  <ul class="dropdown-menu md:backdrop-blur-md dark:md:bg-[#050505] rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-white md:min-w-[200px] drop-shadow-xl">
-                    {links.map(({ text: text2, href: href2 }) => (
-                      <li>
-                        <a
-                          class:list={[
-                            'text-muted first:rounded-t last:rounded-b md:hover:bg-gray-100 hover:text-gray-900 dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap transition-colors',
-                            { 'text-gray-900 dark:text-white font-semibold': href2 === currentPath },
-                          ]}
-                          href={href2}
-                        >
-                          {text2}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              ) : (
-                <a
-                  class:list={[
-                    'text-muted hover:text-gray-900 dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap transition-colors',
-                    { 'text-gray-900 dark:text-white font-semibold': href === currentPath },
-                  ]}
-                  href={href}
-                >
-                  {text}
-                </a>
-              )}
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
-    <div
-      class:list={[
-        { 'ml-auto rtl:ml-0 rtl:mr-auto': position === 'left' },
-        'hidden md:self-center md:flex items-center md:mb-0 fixed w-full md:w-auto md:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 md:p-0 md:justify-self-end',
-      ]}
-    >
-      <div class="items-center flex justify-between w-full md:w-auto">
-        <div class="flex">
-          {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />}
+  <div class="header-container">
+    <div class="header-content">
+      <!-- Logo -->
+      <div class="header-logo">
+        <a href={getHomePermalink()} class="logo-link">
+          <Logo />
+        </a>
+        <div class="mobile-toggle">
+          <ToggleMenu />
         </div>
-        {
-          actions?.length ? (
-            <span class="ml-4 rtl:ml-0 rtl:mr-4">
-              {actions.map((btnProps) => (
-                <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
-              ))}
-            </span>
-          ) : (
-            ''
-          )
-        }
       </div>
+
+      <!-- Navigation -->
+      <nav class="header-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          {
+            links.map(({ text, href, links }) => (
+              <li class={links?.length ? 'nav-item has-dropdown' : 'nav-item'}>
+                {links?.length ? (
+                  <>
+                    <button type="button" class="nav-link nav-dropdown-trigger">
+                      {text}
+                      <Icon name="tabler:chevron-down" class="dropdown-icon" />
+                    </button>
+                    <ul class="dropdown-menu">
+                      {links.map(({ text: text2, href: href2 }) => (
+                        <li>
+                          <a
+                            class:list={[
+                              'dropdown-link',
+                              { active: href2 === currentPath || href2 === currentHash },
+                            ]}
+                            href={href2}
+                          >
+                            {text2}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <a
+                    class:list={[
+                      'nav-link',
+                      { active: href === currentPath || href === currentHash },
+                    ]}
+                    href={href}
+                  >
+                    {text}
+                  </a>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
     </div>
   </div>
 </header>
+
+<style>
+  /* Header Main */
+  .header-main {
+    position: relative;
+    top: 0;
+    z-index: 40;
+    width: 100%;
+    background: rgba(5, 5, 5, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .header-sticky {
+    position: sticky;
+  }
+
+  .header-relative {
+    position: relative;
+  }
+
+  .header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+
+  /* Logo */
+  .header-logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .mobile-toggle {
+    display: none;
+  }
+
+  /* Navigation */
+  .header-nav {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .nav-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.625rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #94a3b8;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .nav-link:hover {
+    color: #ec4899;
+  }
+
+  .nav-link.active {
+    color: white;
+  }
+
+  /* Dropdown */
+  .has-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .dropdown-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+    transition: transform 0.2s ease;
+  }
+
+  .has-dropdown:hover .dropdown-icon {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    min-width: 200px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 12px;
+    padding: 0.5rem;
+    list-style: none;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .has-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-link {
+    display: block;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    color: #94a3b8;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .dropdown-link:hover {
+    color: #ec4899;
+  }
+
+  .dropdown-link.active {
+    color: white;
+    font-weight: 600;
+  }
+
+  /* Actions */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .actions-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .theme-toggle-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .cta-wrapper :global(.header-cta) {
+    background: linear-gradient(135deg, #ec4899, #a855f7) !important;
+    border: none !important;
+    color: white !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    padding: 0.625rem 1.5rem !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3) !important;
+  }
+
+  .cta-wrapper :global(.header-cta:hover) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4) !important;
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    .header-content {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .header-logo {
+      width: 100%;
+    }
+
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .header-nav {
+      display: none;
+    }
+
+    .header-actions {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(168, 85, 247, 0.2);
+      padding: 1rem;
+      justify-content: center;
+    }
+
+    .actions-wrapper {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .cta-wrapper {
+      flex: 1;
+    }
+
+    .cta-wrapper :global(.header-cta) {
+      width: 100% !important;
+      justify-content: center !important;
+    }
+  }
+
+  /* Tablet Styles */
+  @media (max-width: 1024px) {
+    .header-container {
+      padding: 0 1.5rem;
+    }
+
+    .header-content {
+      gap: 1rem;
+    }
+
+    .nav-list {
+      gap: 0.25rem;
+    }
+
+    .nav-link {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+    }
+  }
+</style>
+
+<script>
+  // Add smooth scroll behavior for hash links
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('a[href^="#"], a[href^="/#"]');
+
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+
+        const hash = href.includes('#') ? href.split('#')[1] : '';
+        if (!hash) return;
+
+        const target = document.getElementById(hash);
+        if (target) {
+          e.preventDefault();
+          const headerOffset = 80;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+
+          // Update URL without scrolling
+          history.pushState(null, '', `#${hash}`);
+        }
+      });
+    });
+
+    // Highlight active nav item based on scroll position
+    const sections = document.querySelectorAll('section[id], div[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-100px 0px -80% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === `#${id}` || href === `/#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+  });
+</script>

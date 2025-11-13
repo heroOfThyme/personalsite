@@ -1,20 +1,42 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { getBlogPermalink } from '~/utils/permalinks';
-import { I18N } from 'astrowind:config';
-import Button from '~/components/ui/Button.astro';
-
-const { textDirection } = I18N;
 ---
 
-<div class="mx-auto px-6 sm:px-6 max-w-3xl pt-8 md:pt-4 pb-12 md:pb-20">
-  <Button variant="tertiary" class="px-3 md:px-3" href={getBlogPermalink()}>
-    {
-      textDirection === 'rtl' ? (
-        <Icon name="tabler:chevron-right" class="w-5 h-5 mr-1 -ml-1.5 rtl:-mr-1.5 rtl:ml-1" />
-      ) : (
-        <Icon name="tabler:chevron-left" class="w-5 h-5 mr-1 -ml-1.5 rtl:-mr-1.5 rtl:ml-1" />
-      )
-    } Back to Blog
-  </Button>
+<div class="back-to-blog">
+  <a href={getBlogPermalink()} class="back-link">
+    <Icon name="tabler:arrow-left" class="back-icon" />
+    Back to Blog
+  </a>
 </div>
+
+<style>
+  .back-to-blog {
+    margin-top: 3rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #a855f7;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #ec4899;
+  }
+
+  .back-icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.2s ease;
+  }
+
+  .back-link:hover .back-icon {
+    transform: translateX(-4px);
+  }
+</style>
