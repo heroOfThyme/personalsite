@@ -46,44 +46,29 @@ const {
   </div>
 </div>
 
-<script>
-  let isTyping = false;
+<script is:inline>
+  (function() {
+    // Prevent multiple executions
+    if (window.typingInitialized) return;
+    window.typingInitialized = true;
 
-  function initTypingEffect() {
-    if (isTyping) return;
-
-    const typingText = document.querySelector('.typing-text') as HTMLElement | null;
+    const typingText = document.querySelector('.typing-text');
     if (!typingText) return;
-
-    // Reset the text
-    typingText.textContent = '';
-    isTyping = true;
 
     const text = 'Developer';
     let index = 0;
 
     function type() {
-      if (typingText && index < text.length) {
+      if (index < text.length) {
         typingText.textContent += text.charAt(index);
         index++;
         setTimeout(type, 150);
-      } else {
-        isTyping = false;
       }
     }
 
     // Start typing after a short delay
     setTimeout(type, 500);
-  }
-
-  // Run on initial load
-  initTypingEffect();
-
-  // Re-run on page transitions (Astro View Transitions)
-  document.addEventListener('astro:page-load', () => {
-    isTyping = false;
-    initTypingEffect();
-  });
+  })();
 </script>
 
 <style>
