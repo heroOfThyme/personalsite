@@ -47,20 +47,50 @@ const {
 </div>
 
 <script>
-  const typingText = document.querySelector('.typing-text');
-  const text = 'Developer';
-  let index = 0;
+  function initTypingEffect() {
+    const typingText = document.querySelector('.typing-text') as HTMLElement | null;
+    if (!typingText) return;
 
-  function type() {
-    if (typingText && index < text.length) {
-      typingText.textContent += text.charAt(index);
-      index++;
-      setTimeout(type, 150);
+    // Reset the text
+    typingText.textContent = '';
+
+    const text = 'Developer';
+    let index = 0;
+
+    function type() {
+      if (typingText && index < text.length) {
+        typingText.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, 150);
+      }
     }
+
+    // Start typing after a short delay
+    setTimeout(type, 500);
   }
 
-  // Start typing after a short delay
-  setTimeout(type, 500);
+  // Run on initial load
+  initTypingEffect();
+
+  // Re-run on page transitions (Astro View Transitions)
+  document.addEventListener('astro:page-load', initTypingEffect);
+
+  // Also handle when element becomes visible again
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const typingText = entry.target.querySelector('.typing-text');
+        if (typingText && typingText.textContent === '') {
+          initTypingEffect();
+        }
+      }
+    });
+  });
+
+  const heroCard = document.querySelector('.bento-hero-card');
+  if (heroCard) {
+    observer.observe(heroCard);
+  }
 </script>
 
 <style>
