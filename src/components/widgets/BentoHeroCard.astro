@@ -38,28 +38,28 @@ const {
     </div>
   </div>
 
-  <!-- Scroll Mouse Animation -->
+  <!-- Scroll indicator -->
   <div class="scroll-indicator">
-    <div class="mouse">
+    <div class="mouse-container">
       <div class="wheel"></div>
     </div>
   </div>
 </div>
 
-<script is:inline>
-  (function() {
-    // Prevent multiple executions
-    if (window.typingInitialized) return;
-    window.typingInitialized = true;
-
+<script>
+  document.addEventListener('astro:page-load', () => {
     const typingText = document.querySelector('.typing-text');
     if (!typingText) return;
+
+    // Check if already typed
+    if (typingText.getAttribute('data-typed') === 'true') return;
+    typingText.setAttribute('data-typed', 'true');
 
     const text = 'Developer';
     let index = 0;
 
     function type() {
-      if (index < text.length) {
+      if (index < text.length && typingText) {
         typingText.textContent += text.charAt(index);
         index++;
         setTimeout(type, 150);
@@ -68,13 +68,13 @@ const {
 
     // Start typing after a short delay
     setTimeout(type, 500);
-  })();
+  });
 </script>
 
 <style>
   .bento-hero-card {
     position: relative;
-    background: #000;
+    background: transparent;
     border: none;
     border-radius: 0;
     padding: 6rem 1.5rem 5rem 1.5rem;
@@ -82,15 +82,6 @@ const {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .bento-hero-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 48px 48px;
   }
 
   .hero-layout {
@@ -252,39 +243,56 @@ const {
   /* Scroll Indicator */
   .scroll-indicator {
     position: absolute;
-    bottom: 1.5rem;
+    bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
+    opacity: 0;
+    animation: fade-in 0.6s ease-in-out 0.8s forwards;
   }
 
-  .mouse {
-    width: 26px;
-    height: 40px;
-    border: 2px solid #ec4899;
-    border-radius: 13px;
-    position: relative;
+  .mouse-container {
+    width: 1.5rem;
+    height: 2.5rem;
+    border: 2px solid rgba(236, 72, 153, 0.4);
+    border-radius: 9999px;
     display: flex;
     justify-content: center;
+    backdrop-filter: blur(4px);
+    background: rgba(236, 72, 153, 0.05);
+    transition: border-color 0.3s ease;
+  }
+
+  .mouse-container:hover {
+    border-color: rgba(236, 72, 153, 0.6);
   }
 
   .wheel {
-    width: 3px;
-    height: 8px;
+    width: 0.25rem;
+    height: 0.75rem;
     background: #ec4899;
-    border-radius: 2px;
-    margin-top: 8px;
-    animation: scroll 2s ease-in-out infinite;
+    border-radius: 9999px;
+    margin-top: 0.5rem;
+    animation: bounce 1s ease-in-out infinite;
   }
 
-  @keyframes scroll {
-    0% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    100% {
+  @keyframes fade-in {
+    from {
       opacity: 0;
-      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: translateY(25%);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
   }
 

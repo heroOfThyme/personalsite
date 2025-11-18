@@ -1,18 +1,8 @@
 ---
-import FormContainer from '~/components/ui/Form.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import { Icon } from 'astro-icon/components';
-import type { Contact as Props } from '~/types';
 
 const {
-  title = await Astro.slots.render('title') || "Let's Work Together",
-  subtitle = await Astro.slots.render('subtitle') || "Have a project in mind? Drop me a message and let's make something amazing.",
-  tagline = await Astro.slots.render('tagline'),
-  inputs,
-  textarea,
-  disclaimer,
-  button,
-  description,
   id = 'contact',
   isDark = true,
   classes = {},
@@ -21,28 +11,70 @@ const {
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl ${classes?.container ?? ''}`} bg={bg}>
-  <div>
+  <div class="contact-section">
     <!-- Section Header -->
     <div class="section-header">
-      <div class="header-badge">
-        <Icon name="tabler:mail" class="badge-icon" />
-        <span>Contact</span>
+      <div class="terminal-prompt">
+        <span class="prompt">$</span>
+        <span class="command">./start-project.sh</span>
       </div>
-      <h2 class="section-title">{title}</h2>
-      <p class="section-subtitle">{subtitle}</p>
+      <h2 class="section-title">Ready to Build Something?</h2>
+      <p class="section-subtitle">
+        Let's collaborate on your next project. From MVPs to full-scale applications, I bring ideas to life through RVB Corp.
+      </p>
     </div>
 
-    {
-      inputs && (
-        <FormContainer
-          inputs={inputs}
-          textarea={textarea}
-          disclaimer={disclaimer}
-          button={button}
-          description={description}
-        />
-      )
-    }
+    <!-- Contact Content -->
+    <div class="contact-content">
+      <div class="contact-card">
+        <div class="card-icon">
+          <Icon name="tabler:rocket" class="rocket-icon" />
+        </div>
+
+        <h3 class="card-title">Start Your Project</h3>
+        <p class="card-description">
+          Visit RVB Corp to discuss your project requirements, get a quote, and start building together.
+        </p>
+
+        <div class="contact-details">
+          <div class="detail-item">
+            <Icon name="tabler:check" class="check-icon" />
+            <span>Fast turnaround times</span>
+          </div>
+          <div class="detail-item">
+            <Icon name="tabler:check" class="check-icon" />
+            <span>Full-stack development</span>
+          </div>
+          <div class="detail-item">
+            <Icon name="tabler:check" class="check-icon" />
+            <span>Modern tech stack</span>
+          </div>
+        </div>
+
+        <a href="https://rvbcorp.com" target="_blank" rel="noopener noreferrer" class="contact-cta">
+          <span>Visit RVB Corp</span>
+          <Icon name="tabler:arrow-right" class="cta-arrow" />
+        </a>
+      </div>
+
+      <div class="contact-links">
+        <a href="https://github.com/petarvidakovic" target="_blank" rel="noopener noreferrer" class="social-link">
+          <Icon name="tabler:brand-github" class="social-icon" />
+          <span>GitHub</span>
+          <Icon name="tabler:external-link" class="external-icon" />
+        </a>
+        <a href="https://linkedin.com/in/petarvidakovic" target="_blank" rel="noopener noreferrer" class="social-link">
+          <Icon name="tabler:brand-linkedin" class="social-icon" />
+          <span>LinkedIn</span>
+          <Icon name="tabler:external-link" class="external-icon" />
+        </a>
+        <a href="mailto:petar@rvbcorp.com" class="social-link">
+          <Icon name="tabler:mail" class="social-icon" />
+          <span>Email</span>
+          <Icon name="tabler:external-link" class="external-icon" />
+        </a>
+      </div>
+    </div>
   </div>
 </WidgetWrapper>
 
@@ -53,23 +85,26 @@ const {
     margin-bottom: 3rem;
   }
 
-  .header-badge {
+  .terminal-prompt {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background: rgba(236, 72, 153, 0.1);
-    border: 1px solid rgba(236, 72, 153, 0.3);
-    border-radius: 50px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(236, 72, 153, 0.2);
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.875rem;
-    font-weight: 500;
-    color: #ec4899;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
-  .badge-icon {
-    width: 1rem;
-    height: 1rem;
+  .prompt {
+    color: #ec4899;
+    font-weight: 600;
+  }
+
+  .command {
+    color: #a855f7;
   }
 
   .section-title {
@@ -88,11 +123,173 @@ const {
     color: #94a3b8;
     margin: 0 auto;
     max-width: 42rem;
+    line-height: 1.6;
+  }
+
+  /* Contact Content */
+  .contact-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .contact-card {
+    background: transparent;
+    border: 1px solid rgba(236, 72, 153, 0.3);
+    border-radius: 4px;
+    padding: 2rem;
+    transition: border-color 0.2s ease;
+  }
+
+  .contact-card:hover {
+    border-color: rgba(236, 72, 153, 0.5);
+  }
+
+  .card-icon {
+    width: 3rem;
+    height: 3rem;
+    background: rgba(236, 72, 153, 0.1);
+    border: 1px solid rgba(236, 72, 153, 0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .rocket-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #ec4899;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem 0;
+  }
+
+  .card-description {
+    font-size: 1rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9375rem;
+    color: #cbd5e1;
+  }
+
+  .check-icon {
+    width: 1rem;
+    height: 1rem;
+    color: #22c55e;
+    flex-shrink: 0;
+  }
+
+  .contact-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #ec4899, #a855f7);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .contact-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
+  }
+
+  .cta-arrow {
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: transform 0.2s ease;
+  }
+
+  .contact-cta:hover .cta-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Social Links */
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .social-link:hover {
+    border-color: rgba(236, 72, 153, 0.5);
+    color: white;
+  }
+
+  .social-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #ec4899;
+    flex-shrink: 0;
+  }
+
+  .social-link span {
+    flex: 1;
+    font-size: 0.9375rem;
+  }
+
+  .external-icon {
+    width: 1rem;
+    height: 1rem;
+    color: #94a3b8;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .contact-content {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 768px) {
     .section-title {
       font-size: 2rem;
+    }
+
+    .contact-card {
+      padding: 1.5rem;
+    }
+
+    .contact-cta {
+      width: 100%;
+      justify-content: center;
     }
   }
 </style>

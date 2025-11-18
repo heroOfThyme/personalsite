@@ -69,12 +69,12 @@ const {
   <div>
     <!-- Section Header -->
     <div class="section-header">
-      <div class="header-badge">
-        <Icon name="tabler:code" class="badge-icon" />
-        <span>Portfolio</span>
+      <div class="terminal-prompt">
+        <span class="prompt">$</span>
+        <span class="command">ls projects/</span>
       </div>
       <h2 class="section-title">Featured Projects</h2>
-      <p class="section-subtitle">Some things I've built recently</p>
+      <p class="section-subtitle">A collection of full-stack applications, iOS apps, and web experiences built with modern frameworks. From Swift & SwiftUI to React, TypeScript, and Astro.</p>
     </div>
 
     <!-- Projects Grid -->
@@ -214,22 +214,26 @@ const {
     margin-bottom: 3rem;
   }
 
-  .header-badge {
+  .terminal-prompt {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(236, 72, 153, 0.2);
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.875rem;
-    font-weight: 500;
-    color: #ec4899;
-    margin-bottom: 1rem;
-    background: transparent;
-    border: none;
-    padding: 0;
+    margin-bottom: 1.5rem;
   }
 
-  .badge-icon {
-    width: 1rem;
-    height: 1rem;
+  .prompt {
+    color: #ec4899;
+    font-weight: 600;
+  }
+
+  .command {
+    color: #a855f7;
   }
 
   .section-title {
@@ -247,6 +251,7 @@ const {
     font-size: 1.125rem;
     color: #94a3b8;
     margin: 0;
+    max-width: 42rem;
   }
 
   /* Projects Grid */
@@ -258,39 +263,33 @@ const {
   }
 
   .project-card {
-    background: radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.05), transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.05), transparent 50%), #0f172a;
-    border: 1px solid rgba(236, 72, 153, 0.2);
-    border-radius: 20px;
+    background: transparent;
+    border: 1px solid rgba(236, 72, 153, 0.3);
+    border-radius: 4px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
     position: relative;
   }
 
   .project-card:hover {
-    border-color: rgba(236, 72, 153, 0.4);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: rgba(236, 72, 153, 0.5);
   }
 
   .featured-project-card {
-    background: radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.05), transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.05), transparent 50%), #0f172a;
-    border: 1px solid rgba(236, 72, 153, 0.2);
-    border-radius: 20px;
+    background: transparent;
+    border: 1px solid rgba(236, 72, 153, 0.3);
+    border-radius: 4px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
     position: relative;
   }
 
   .featured-project-card:hover {
-    border-color: rgba(236, 72, 153, 0.4);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: rgba(236, 72, 153, 0.5);
   }
 
   .project-content {
@@ -541,15 +540,15 @@ const {
 
   /* View All Card */
   .view-all-card {
-    background: radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.1), transparent 70%), #0f172a;
+    background: transparent;
     border: 2px dashed rgba(236, 72, 153, 0.3);
-    border-radius: 20px;
+    border-radius: 4px;
     padding: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     cursor: pointer;
     min-height: 300px;
     position: relative;
@@ -558,8 +557,6 @@ const {
 
   .view-all-card:hover {
     border-color: rgba(236, 72, 153, 0.6);
-    background: radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.15), transparent 70%), #0f172a;
-    transform: translateY(-2px);
   }
 
   .view-all-content {
