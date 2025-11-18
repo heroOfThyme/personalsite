@@ -67,7 +67,8 @@ const currentHash = new URL(Astro.url).hash;
 
       <!-- Navigation -->
       <nav class="header-nav" aria-label="Main navigation">
-        <ul class="nav-list">
+        <!-- Desktop Menu -->
+        <ul class="nav-list hidden md:!flex">
           {
             links.map(({ text, href, links }) => (
               <li class={links?.length ? 'nav-item has-dropdown' : 'nav-item'}>
@@ -104,6 +105,24 @@ const currentHash = new URL(Astro.url).hash;
                     {text}
                   </a>
                 )}
+              </li>
+            ))
+          }
+        </ul>
+
+        <!-- Mobile Menu (shown when BasicScripts removes 'hidden' class from nav) -->
+        <ul class="mobile-menu-list">
+          {
+            links.map(({ text, href }) => (
+              <li>
+                <a
+                  class:list={[
+                    { active: href === currentPath || href === currentHash },
+                  ]}
+                  href={href}
+                >
+                  {text}
+                </a>
               </li>
             ))
           }
@@ -180,6 +199,62 @@ const currentHash = new URL(Astro.url).hash;
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  .mobile-menu-list {
+    display: none;
+  }
+
+  /* Mobile nav is shown when BasicScripts removes 'hidden' class */
+  .header-nav:not(.hidden) .mobile-menu-list {
+    display: flex !important;
+    position: fixed !important;
+    top: 73px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0, 0, 0, 0.98) !important;
+    backdrop-filter: blur(12px) !important;
+    z-index: 9999 !important;
+    overflow-y: auto !important;
+    flex-direction: column !important;
+    padding: 2rem !important;
+    gap: 0.75rem !important;
+    list-style: none !important;
+    margin: 0 !important;
+  }
+
+  .mobile-menu-list li {
+    width: 100% !important;
+    list-style: none !important;
+  }
+
+  .mobile-menu-list a {
+    display: block !important;
+    padding: 1.25rem 1.5rem !important;
+    font-size: 1.125rem !important;
+    font-weight: 600 !important;
+    color: #94a3b8 !important;
+    text-decoration: none !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    background: rgba(15, 23, 42, 0.5) !important;
+    border: 1px solid rgba(168, 85, 247, 0.2) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .mobile-menu-list a:hover {
+    color: #ec4899 !important;
+    background: rgba(168, 85, 247, 0.1) !important;
+    border-color: rgba(168, 85, 247, 0.4) !important;
+    transform: translateX(4px) !important;
+  }
+
+  .mobile-menu-list a.active {
+    color: white !important;
+    background: rgba(168, 85, 247, 0.15) !important;
+    border-color: rgba(168, 85, 247, 0.5) !important;
   }
 
   .nav-item {
@@ -276,6 +351,7 @@ const currentHash = new URL(Astro.url).hash;
     font-weight: 600;
   }
 
+
   /* Actions */
   .header-actions {
     display: flex;
@@ -330,6 +406,11 @@ const currentHash = new URL(Astro.url).hash;
       display: none;
     }
 
+    /* Show nav when BasicScripts removes 'hidden' class */
+    .header-nav:not(.hidden) {
+      display: block !important;
+    }
+
     .header-actions {
       position: fixed;
       bottom: 0;
@@ -378,63 +459,3 @@ const currentHash = new URL(Astro.url).hash;
   }
 </style>
 
-<script>
-  // Add smooth scroll behavior for hash links
-  document.addEventListener('DOMContentLoaded', () => {
-    const links = document.querySelectorAll('a[href^="#"], a[href^="/#"]');
-
-    links.forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (!href) return;
-
-        const hash = href.includes('#') ? href.split('#')[1] : '';
-        if (!hash) return;
-
-        const target = document.getElementById(hash);
-        if (target) {
-          e.preventDefault();
-          const headerOffset = 80;
-          const elementPosition = target.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-
-          // Update URL without scrolling
-          history.pushState(null, '', `#${hash}`);
-        }
-      });
-    });
-
-    // Highlight active nav item based on scroll position
-    const sections = document.querySelectorAll('section[id], div[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '-100px 0px -80% 0px',
-      threshold: 0
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === `#${id}` || href === `/#${id}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
-        }
-      });
-    }, observerOptions);
-
-    sections.forEach(section => observer.observe(section));
-  });
-</script>
