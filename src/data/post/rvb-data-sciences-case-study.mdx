@@ -14,10 +14,6 @@ metadata:
 draft: true
 ---
 
-import { PerformanceMetrics } from '~/components/widgets/PerformanceMetrics';
-import { StackComparison } from '~/components/widgets/StackComparison';
-import { InfoBox } from '~/components/widgets/InfoBox';
-
 # RVB Data Sciences Corp: Building a High-Performance Agency Website with Astro
 
 When establishing RVB Data Sciences Corp in Burlington, Ontario, we needed a website that would showcase our services while demonstrating our technical expertise. This case study examines how we built our agency website using Astro, focusing on performance optimization and developer experience.
@@ -34,32 +30,15 @@ As a technology agency offering development, hosting, and automation solutions, 
 
 ## Tech Stack Selection
 
-<StackComparison
-  frameworks={[
-    {
-      name: 'Next.js',
-      pros: ['Mature ecosystem', 'Strong React foundation'],
-      cons: ['Heavier than needed', 'React overhead for static content'],
-    },
-    {
-      name: 'Gatsby',
-      pros: ['Great image optimization', 'Plugin ecosystem'],
-      cons: ['Build times', 'Complex data layer for simple sites'],
-    },
-    {
-      name: 'Astro',
-      pros: ['Partial hydration', 'Framework-agnostic', 'Performance'],
-      cons: ['Newer ecosystem', 'Fewer plugins'],
-    },
-  ]}
-/>
-
 After evaluating several modern frameworks, we selected Astro for its partial hydration approach ("Islands Architecture"), framework agnosticism, and performance-first philosophy.
 
-<InfoBox type="tip">
-  Astro's approach of only sending JavaScript for interactive components aligned perfectly with our mostly static site
-  with targeted interactive elements.
-</InfoBox>
+| Framework | Pros | Cons |
+|-----------|------|------|
+| **Next.js** | Mature ecosystem, Strong React foundation | Heavier than needed, React overhead for static content |
+| **Gatsby** | Great image optimization, Plugin ecosystem | Build times, Complex data layer for simple sites |
+| **Astro** ✓ | Partial hydration, Framework-agnostic, Performance | Newer ecosystem, Fewer plugins |
+
+> **💡 Tip:** Astro's approach of only sending JavaScript for interactive components aligned perfectly with our mostly static site with targeted interactive elements.
 
 ```astro
 ---
@@ -104,21 +83,20 @@ We implemented several key optimizations:
 - CSS minimization with PostCSS and cssnano
 - Critical CSS inlined in `<head>`
 
-<PerformanceMetrics
-  lighthouse={{
-    performance: 99,
-    accessibility: 100,
-    bestPractices: 100,
-    seo: 100,
-  }}
-  metrics={{
-    fcp: '0.8s',
-    lcp: '1.2s',
-    cls: '0.02',
-    ttfb: '120ms',
-    tti: '1.4s',
-  }}
-/>
+### Performance Results
+
+**Lighthouse Scores:**
+- Performance: 99
+- Accessibility: 100
+- Best Practices: 100
+- SEO: 100
+
+**Core Web Vitals:**
+- First Contentful Paint (FCP): 0.8s
+- Largest Contentful Paint (LCP): 1.2s
+- Cumulative Layout Shift (CLS): 0.02
+- Time to First Byte (TTFB): 120ms
+- Time to Interactive (TTI): 1.4s
 
 ### Deployment Strategy
 
