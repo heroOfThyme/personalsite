@@ -7,7 +7,7 @@ metadata:
     follow: true
 ---
 
-**Last Updated:** March 26, 2025
+**Last Updated:** November 18, 2025
 
 ## Introduction
 
@@ -64,4 +64,4 @@ These Terms shall be governed and construed in accordance with the laws of Ontar
 
 ## Contact Information
 
-If you have any questions about these Terms, please contact me through the contact form on my website.
+If you have any questions about these Terms, please contact me via email or through my social media profiles linked on this website.
