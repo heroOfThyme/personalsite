@@ -4,7 +4,7 @@ layout: '~/layouts/ElementiiMarkdownLayout.astro'
 description: 'Terms of service for using the Elementii app.'
 ---
 
-**Effective Date:** March 25, 2025
+**Effective Date:** November 18, 2025
 
 ## Welcome to Elementii!
 
@@ -68,7 +68,7 @@ We may terminate or suspend access to our App immediately, without prior notice 
 
 If you have any questions about these Terms, please contact us at:
 
-Email: [yourcontactemail@example.com]
+Email: petar@rvbcorp.com
 
 ## Severability
 

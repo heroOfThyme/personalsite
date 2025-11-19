@@ -112,7 +112,7 @@
   }
 
   .link-underline::after {
-    @apply absolute left-0 bottom-0 w-0 h-0.5 bg-indigo-600 dark:bg-indigo-500 content-[''] transition-all duration-300;
+    @apply absolute left-0 bottom-0 w-0 h-0.5 bg-pink-600 dark:bg-pink-500 content-[''] transition-all duration-300;
   }
 
   .link-underline:hover::after {

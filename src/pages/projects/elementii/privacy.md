@@ -4,7 +4,7 @@ layout: '~/layouts/ElementiiMarkdownLayout.astro'
 description: 'Privacy policy for the Elementii app, explaining how we handle your data.'
 ---
 
-**Effective Date:** March 25, 2025
+**Effective Date:** November 18, 2025
 
 ## Introduction
 
@@ -52,7 +52,7 @@ We may update this Privacy Policy from time to time. We will notify you of any c
 
 If you have any questions about this Privacy Policy, please contact us at:
 
-Email: [yourcontactemail@example.com]
+Email: petar@rvbcorp.com
 
 ## International Users
 

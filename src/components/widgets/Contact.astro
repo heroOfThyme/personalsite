@@ -56,24 +56,6 @@ const {
           <Icon name="tabler:arrow-right" class="cta-arrow" />
         </a>
       </div>
-
-      <div class="contact-links">
-        <a href="https://github.com/petarvidakovic" target="_blank" rel="noopener noreferrer" class="social-link">
-          <Icon name="tabler:brand-github" class="social-icon" />
-          <span>GitHub</span>
-          <Icon name="tabler:external-link" class="external-icon" />
-        </a>
-        <a href="https://linkedin.com/in/petarvidakovic" target="_blank" rel="noopener noreferrer" class="social-link">
-          <Icon name="tabler:brand-linkedin" class="social-icon" />
-          <span>LinkedIn</span>
-          <Icon name="tabler:external-link" class="external-icon" />
-        </a>
-        <a href="mailto:petar@rvbcorp.com" class="social-link">
-          <Icon name="tabler:mail" class="social-icon" />
-          <span>Email</span>
-          <Icon name="tabler:external-link" class="external-icon" />
-        </a>
-      </div>
     </div>
   </div>
 </WidgetWrapper>
@@ -128,10 +110,9 @@ const {
 
   /* Contact Content */
   .contact-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 2rem;
-    align-items: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .contact-card {
@@ -139,6 +120,8 @@ const {
     border: 1px solid rgba(236, 72, 153, 0.3);
     border-radius: 4px;
     padding: 2rem;
+    max-width: 600px;
+    width: 100%;
     transition: border-color 0.2s ease;
   }
 
@@ -272,11 +255,6 @@ const {
     flex-shrink: 0;
   }
 
-  @media (max-width: 1024px) {
-    .contact-content {
-      grid-template-columns: 1fr;
-    }
-  }
 
   @media (max-width: 768px) {
     .section-title {

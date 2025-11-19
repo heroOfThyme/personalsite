@@ -1,7 +1,7 @@
 ---
-publishDate: 2025-03-18T00:00:00Z
+publishDate: 2025-09-15T00:00:00Z
 title: 'Three Principles That Simplified My Tech Decisions'
-excerpt: After years of analysis paralysis, I've developed three simple principles that help me make better technology choices for every project.
+excerpt: Three simple principles that cut through the noise and help me make better tech decisions without overthinking.
 image: https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80
 tags:
  - decision-making
@@ -11,62 +11,56 @@ tags:
 
 # Three Principles That Simplified My Tech Decisions
 
-Last month, a junior developer asked me how I decide which technologies to use for a new project. It made me reflect on how my approach has evolved over the years.
+You know that feeling when you're starting a new project and spend 3 hours debating Next.js vs Remix vs SvelteKit vs Astro... only to end up more confused than when you started?
 
-Early in my career, I spent countless hours comparing framework benchmarks, reading heated debates on Reddit, and feeling constant FOMO with each new library release. The pressure to use the "right" or "best" tech stack was paralyzing.
+Yeah, I've been there. Way too many times.
 
-Now, after many projects (and many mistakes), I've developed three principles that have dramatically simplified my decision-making process.
+Early in my career, I'd lose entire days comparing framework benchmarks, reading Reddit arguments, and second-guessing every tech choice. It was exhausting and honestly, kind of stupid.
 
-## 1. Optimize for Clarity, Not Cleverness
+After building enough projects (and making enough mistakes), I finally figured out what actually matters. Here are the three principles that keep me sane:
 
-In a client project last year, I had the choice between:
+## 1. Boring Beats Clever, Every Time
 
-- A cutting-edge approach using the latest meta-framework with partial hydration
-- A slightly "boring" approach using tools the team already knew well
+Last year on a client project, I had to choose between:
+- The shiny new meta-framework everyone's hyping on Twitter
+- The "boring" stack the team already knew
 
-I chose the latter, despite the allure of the new tech. Six months later, when we needed to onboard two new developers and push out urgent fixes, that decision paid off immensely. The learning curve was minimal, and productivity remained high.
+I picked boring. And when we had to onboard two devs mid-project and push urgent fixes? That boring choice saved our asses.
 
-The lesson? **Code that's easy to understand is more valuable than code that's technically impressive.**
+**Nobody gives you points for clever code. They give you points for code that works and doesn't confuse people.**
 
-This doesn't mean avoiding innovation—it means ensuring the complexity serves a purpose beyond intellectual satisfaction.
+Use the cool new tech if it actually solves a problem. But if you're just using it to flex? You're setting yourself up for pain later.
 
-## 2. Choose Tools That Match Your Project Lifespan
+## 2. Match Your Tech to Your Timeline
 
-A common mistake I made early on was choosing technologies as if every project would exist forever. The reality is that different projects have different lifespans:
+Not every project needs to be bulletproof. Some things are meant to die in 3 months.
 
-- Proof-of-concept demos (days/weeks)
-- Marketing campaigns (months)
-- Core business applications (years)
+I used to build every project like it was going to be maintained for 10 years. Full TypeScript, comprehensive test suites, the works. Even for throwaway marketing sites.
 
-For a recent short-term marketing site, I skipped setting up TypeScript and a complex testing suite—decisions I'd never make for a long-term application. The site launched faster, served its purpose perfectly, and was replaced after the campaign ended.
+Now I actually think about how long something needs to last:
+- Quick demo? Plain HTML/CSS is fine
+- Campaign landing page? Keep it simple, ship it fast
+- Core product? Yeah, now we can talk about proper architecture
 
-Now I ask: **What is this project's expected lifespan, and what technical debt is acceptable given that timeframe?**
+**Stop over-engineering things that don't need it.** Your 2-week marketing site doesn't need the same infrastructure as your SaaS app.
 
 ## 3. Start Simple, Add Complexity When It Hurts
 
-My most successful projects share one trait: they started simple and added complexity only when needed.
+Here's my rule: start with the simplest thing that could possibly work, then only add stuff when you actually need it.
 
-For my portfolio site, I began with:
-- Static HTML and CSS
-- Basic JavaScript for interactions
-- Simple form handling
+This site? Started as basic HTML and CSS. Then I added Astro when managing blog posts got annoying. Image optimization came later when load times sucked.
 
-As needs evolved, I added:
-- A static site generator for blog content
-- Light analytics for visitor insights
-- Basic image optimization
+You know what I didn't add?
+- A full CMS (don't need it)
+- Complex state management (it's a static site)
+- A heavy JS framework (why?)
 
-What I didn't add (yet):
-- A full CMS
-- Complex build pipelines
-- Heavy client-side frameworks
+**Solve real problems, not imaginary future ones.** You'll know when you need something because it'll start hurting. Until then, keep it simple.
 
-Each addition solved a specific pain point that had emerged, rather than anticipating problems that might never materialize.
+## Final Thoughts
 
-The principle: **Let real problems drive technical evolution, not hypothetical ones.**
+Following these principles has made my life so much easier. Less decision fatigue, faster shipping, and way less regret six months down the line.
 
-## The Freedom of Constraints
+The best tech stack isn't the newest or the coolest. It's the one that gets you shipping without wanting to throw your laptop out the window.
 
-The most unexpected outcome of following these principles has been increased creativity. By reducing the universe of options and overthinking, I have more mental energy for solving the actual problems at hand.
-
-I'm curious: Do you have your own decision-making principles for technology choices? Has overthinking tech decisions ever slowed down your progress? I'd love to hear your experiences.
+Now go build something.
